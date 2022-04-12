@@ -2,7 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a935b846-48fc-4243-8bd8-7022252bfcd7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/_helpers/auth.interceptor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/0.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/1.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/1.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/2.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/2.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/3.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/3.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/index.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/976bbb23784bd5aabdd3f6985476985e8f6818ba/index.pack.old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ThomasFront" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -28,6 +41,10 @@
     <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -56,6 +73,7 @@
       <option name="presentableId" value="Default" />
       <updated>1649760450872</updated>
       <workItem from="1649760453484" duration="302000" />
+      <workItem from="1649761221003" duration="4101000" />
     </task>
     <servers />
   </component>
