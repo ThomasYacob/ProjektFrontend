@@ -15,6 +15,7 @@ app.get('/', function(req, res) {
 })
 
 app.post('/enroll', function(req, res) {
+    
     console.log(req.body);
     res.status(401).send({"message": "Data received"});
 })

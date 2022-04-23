@@ -84,7 +84,7 @@
 
         <div class="form-group">
             <label>Name</label>
-            <input type="name" required #name="ngModel" [class.is-invalid]="name.invalid && name.touched" class="form-control"
+            <input type="username" required #name="ngModel" [class.is-invalid]="name.invalid && name.touched" class="form-control"
                    name="username" [(ngModel)]="userModel.name">
             <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
         </div>
@@ -111,6 +111,7 @@
 
         <button [disabled]="userForm.form.invalid" class="btn btn-primary" type="submit">Sign up</button>
     </form>
+
 <div id="app">
 
 <!--            <li class="nav-item">-->
