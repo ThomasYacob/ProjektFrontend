@@ -11,15 +11,17 @@ import { EnrollmentService } from './enrollment.service';
 export class AppComponent {
 
   userModel = new User('robert', 'hejsan1s', 'rob@test.com')
+  submitted = false;
+  errorMsg = '';
 
   constructor(private _enrollmentService: EnrollmentService) {}
 
   onSubmit() {
+    this.submitted = true;
     this._enrollmentService.enroll(this.userModel)
         .subscribe(
             data => console.log('Success!', data),
-            error => console.error('Error!', error)
+            error => this.errorMsg = error.statusText
         )
   }
-  
 }
