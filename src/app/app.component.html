@@ -25,6 +25,11 @@
         font-weight: 600;
     }
 
+    .container-fluid {
+        position: relative;
+        top: 70px;
+    }
+
     .toolbar img {
         margin: 0 16px;
     }
@@ -67,41 +72,66 @@
             <path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/>
         </svg>
     </a>
+
+
 </div>
 
+<div class="container-fluid">
+    <form #userForm="ngForm">
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="name" required #name="ngModel" [class.is-invalid]="name.invalid && name.touched" class="form-control"
+                   name="username" [(ngModel)]="userModel.name">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched"
+                   class="form-control" name="password" [(ngModel)]="userModel.password">
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" required #email="ngModel" [class.is-invalid]="email.invalid && email.touched"
+                   class="form-control" name="email" [(ngModel)]="userModel.email">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Sign up</button>
+    </form>
 <div id="app">
 
-            <li class="nav-item">
-                <a href="/home" class="nav-link" routerLink="home">Home </a>
-            </li>
-            <li class="nav-item" *ngIf="showAdminBoard">
-                <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
-            </li>
-            <li class="nav-item" *ngIf="showModeratorBoard">
-                <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
-            </li>
-            <li class="nav-item">
-                <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
-            </li>
+<!--            <li class="nav-item">-->
+<!--                <a href="/home" class="nav-link" routerLink="home">Home </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item" *ngIf="showAdminBoard">-->
+<!--                <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item" *ngIf="showModeratorBoard">-->
+<!--                <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>-->
+<!--            </li>-->
+<!--&lt;!&ndash;        </ul>&ndash;&gt;-->
+<!--        <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">-->
+<!--            <li class="nav-item">-->
+<!--                <a href="/register" class="nav-link" routerLink="register">Sign Up</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a href="/login" class="nav-link" routerLink="login">Login</a>-->
+<!--            </li>-->
 <!--        </ul>-->
-        <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-            <li class="nav-item">
-                <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
-            </li>
-            <li class="nav-item">
-                <a href="/login" class="nav-link" routerLink="login">Login</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-            <li class="nav-item">
-                <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
-            </li>
-            <li class="nav-item">
-                <a href class="nav-link" (click)="logout()">LogOut</a>
-            </li>
-        </ul>
+<!--        <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">-->
+<!--            <li class="nav-item">-->
+<!--                <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a href class="nav-link" (click)="logout()">LogOut</a>-->
+<!--            </li>-->
+<!--        </ul>-->
 
-    <div class="container">
-        <router-outlet></router-outlet>
-    </div>
-</div>
+<!--    <div class="container">-->
+<!--        <router-outlet></router-outlet>-->
+<!--    </div>-->
+<!--</div>-->
