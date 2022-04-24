@@ -16,7 +16,6 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -24,3 +23,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+export const routingComponents = [HomeComponent,LoginComponent,RegisterComponent,ProfileComponent,BoardAdminComponent,BoardModeratorComponent,BoardUserComponent]
+
