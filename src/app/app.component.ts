@@ -10,7 +10,7 @@ import { EnrollmentService } from './enrollment.service';
 })
 export class AppComponent {
 
-  userModel = new User('robert', 'hejsan1s', 'rob@test.com')
+  userModel = new User("","","");
   submitted = false;
   errorMsg = '';
 
