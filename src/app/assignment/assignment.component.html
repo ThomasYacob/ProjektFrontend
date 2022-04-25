@@ -1,0 +1,20 @@
+<div class="form-Container">
+	<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+		<label>
+			Question:
+			<input type="test" formControlName="question" />
+		</label>
+
+		<label>
+			Answer:
+			<input type="test" formControlName="answer" />
+		</label>
+
+		<label>
+			Date:
+			<input type="date" formControlName="dateToBePublished" />
+		</label>
+
+		<button mat-raised-button type="submit">Submit Application</button>
+	</form>
+</div>
