@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { User } from './user';
 import { EnrollmentService } from './enrollment.service';
-
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,7 @@ userModel = new User("","","");
     this.submitted = true;
     this._enrollmentService.enroll(this.userModel)
         .subscribe(
-            data => console.log('Success!', data),
+            response => console.log('Success!', response),
             error => this.errorMsg = error.statusText
         )
   }

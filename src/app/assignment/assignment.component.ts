@@ -7,22 +7,15 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./assignment.component.css']
 })
 export class AssignmentComponent implements OnInit {
-  myForm = new FormGroup({
-    question: new FormControl(''),
-    answer: new FormControl(''),
-    dateToBePublished: new FormControl(''),
 
-  })
+  disableSelect = new FormControl(false);
+  
   constructor() {
   }
   
   ngOnInit() {
-      
   }
 
-  onSubmit(){
-    console.log(this.myForm.value)
-  }
 }
 
 
