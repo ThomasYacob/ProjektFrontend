@@ -1,49 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a935b846-48fc-4243-8bd8-7022252bfcd7" name="Changes" comment="Frontend fixes">
-      <change afterPath="$PROJECT_DIR$/node_modules/.cli-ngcc/ec2ee584620b572c470b6f22707e58433341944ea180f5585d548c5c8cdadb92.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/register/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/0.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/1.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/1.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/10.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/10.pack" afterDir="false" />
+    <list default="true" id="a935b846-48fc-4243-8bd8-7022252bfcd7" name="Changes" comment="create dropdown button done">
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/11.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/11.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/12.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/12.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/13.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/13.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/14.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/14.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/2.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/2.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/3.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/3.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/4.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/4.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/5.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/5.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/6.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/6.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/7.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/7.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/8.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/8.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/9.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/9.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/__ngcc_entry_points__.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/__ngcc_entry_points__.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/async/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/async/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/async/dist/async.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/async/dist/async.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/async/dist/async.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/async/dist/async.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/async/dist/async.min.map" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/async/dist/async.min.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/async/internal/iterator.js" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/async/internal/iterator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/async/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/async/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/assignment/assignment.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/assignment/assignment.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/assignment/assignment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/assignment/assignment.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/assignment/assignment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/assignment/assignment.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/register/register.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/register/register.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/register/register.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/register/register.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +106,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650987036190</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="create dropdown button done">
+      <created>1651065185931</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1651065185931</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +135,7 @@
     <MESSAGE value="TDF done" />
     <MESSAGE value="Login page fixes" />
     <MESSAGE value="Frontend fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Frontend fixes" />
+    <MESSAGE value="create dropdown button done" />
+    <option name="LAST_COMMIT_MESSAGE" value="create dropdown button done" />
   </component>
 </project>
