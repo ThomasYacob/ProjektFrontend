@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a935b846-48fc-4243-8bd8-7022252bfcd7" name="Changes" comment="create dropdown button done">
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/11.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/11.pack" afterDir="false" />
+    <list default="true" id="a935b846-48fc-4243-8bd8-7022252bfcd7" name="Changes" comment="bug fixes">
+      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/0.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/10.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/10.pack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/3.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/3.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/6.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/6.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/7.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/7.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/9.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/9.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/login/login.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +112,21 @@
       <option name="project" value="LOCAL" />
       <updated>1651065185931</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="bug fixes">
+      <created>1651065544136</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1651065544136</updated>
+    </task>
+    <task id="LOCAL-00006" summary="bug fixes">
+      <created>1651065680349</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1651065680349</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,6 +149,7 @@
     <MESSAGE value="Login page fixes" />
     <MESSAGE value="Frontend fixes" />
     <MESSAGE value="create dropdown button done" />
-    <option name="LAST_COMMIT_MESSAGE" value="create dropdown button done" />
+    <MESSAGE value="bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixes" />
   </component>
 </project>
