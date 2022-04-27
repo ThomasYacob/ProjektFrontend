@@ -1,7 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { User } from './user';
 import { EnrollmentService } from './enrollment.service';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-register',
