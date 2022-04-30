@@ -3,15 +3,16 @@ import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { User } from './user'
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EnrollmentService {
 
-  _url = 'http://localhost:8080/user';
+  _url = 'http://localhost:8080/api/user';
   constructor(private _http: HttpClient) { }
-  
+
   enroll(user: User) {
     return this._http.post<any>(this._url, user)
         .pipe(catchError(this.errorHandler))

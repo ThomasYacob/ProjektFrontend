@@ -8,6 +8,9 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { AssignmentComponent } from './assignment/assignment.component';
+import { DailyAssignmentComponent } from './daily-assignment/daily-assignment.component'
+import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment.component'
+import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component'
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -18,6 +21,10 @@ const routes: Routes = [
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
   { path: 'assignment', component:AssignmentComponent},
+  { path: 'daily-assignment', component:DailyAssignmentComponent},
+  { path: 'weekly-assignment', component:WeeklyAssignmentComponent},
+  { path: 'monthly-assignment', component:MonthlyAssignmentComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
 @NgModule({

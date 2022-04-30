@@ -7,23 +7,68 @@
 	/>
 	<span>Framework for competitive assignments</span>
 	<div class="spacer"></div>
-	<button class="btn-primary" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+	<button class="btn-primary" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Icon-button menu">
 		<mat-icon>more_vert</mat-icon>
 	</button>
-	<mat-menu #menu="matMenu">
-		<button mat-menu-item>
-			<span>Home</span>
-		</button>
-<!--		<button mat-menu-item disabled>-->
-		<button mat-menu-item [routerLink]="'./register'">
-			<span>Register</span>
-		</button>
-		<button mat-menu-item [routerLink]="'./login'">
-			<span>Sign in</span>
-		</button>
-		<button mat-menu-item [routerLink]="'./assignment'">
-			<span>Create</span>
-		</button>
+
+		<mat-menu #menu="matMenu">
+
+			<ul class="mat-tab-nav-bar" routerLinkActive="active">
+
+				<li class="mat-list-item">
+					<button mat-menu-item [routerLink]="'./home'">
+						<span>Home</span>
+					</button>
+				</li>
+
+				<li class="mat-list-item" *ngIf="showAdminBoard">
+					<button mat-menu-item [routerLink]="'/admin'">
+						<span>Admin Board</span>
+					</button>
+				</li>
+
+				<li class="mat-list-item" *ngIf="showModeratorBoard">
+					<button mat-menu-item [routerLink]="'/mod'">
+						<span>Moderator Board</span>
+					</button>
+				</li>
+
+				<li class="mat-list-item">
+					<button mat-menu-item [routerLink]="'/user'">
+						<span>User</span>
+					</button>
+				</li>
+
+				<li class="mat-list-item">
+					<button mat-menu-item [routerLink]="'./assignment'">
+						<span>Create</span>
+					</button>
+				</li>
+			</ul>
+
+			<ul class="mat-tab-nav-bar" *ngIf="!isLoggedIn">
+
+				<li class="mat-list-item">
+					<button mat-menu-item [routerLink]="'./register'">
+						<span>Register</span>
+					</button>
+				</li>
+
+				<li class="mat-list-item">
+					<button mat-menu-item [routerLink]="'./login'">
+						<span>Sign in</span>
+					</button>
+				</li>
+			</ul>
+
+			<ul class="mat-tab-nav-bar" *ngIf="isLoggedIn">
+				<li class="mat-list-item">
+					<button mat-menu-item (click)="logout()">
+						<span>Log out</span>
+					</button>
+				</li>
+			</ul>
+
 	</mat-menu>
 <!--	<a-->
 <!--		aria-label="Angular on twitter"-->
@@ -69,10 +114,5 @@
 <!--		</svg>-->
 <!--	</a>-->
 </div>
-
-<!--<div class="container-fluid">-->
-<!--	<app-assignment></app-assignment>-->
-<!--</div>-->
-
 <router-outlet></router-outlet>
 

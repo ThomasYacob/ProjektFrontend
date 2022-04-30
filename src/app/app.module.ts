@@ -22,6 +22,9 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { DailyAssignmentComponent } from './daily-assignment/daily-assignment.component';
+import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment.component';
+import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { MatIconModule } from '@angular/material/icon';
     BoardAdminComponent,
     BoardModeratorComponent,
     BoardUserComponent,
+    DailyAssignmentComponent,
+    WeeklyAssignmentComponent,
+    MonthlyAssignmentComponent,
 
   ],
   imports: [
