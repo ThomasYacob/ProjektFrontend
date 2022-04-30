@@ -3,7 +3,6 @@ import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { User } from './user'
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
