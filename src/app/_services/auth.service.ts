@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    return this.http.get('http://localhost:8080' + `/login`,
+    return this.http.get('http://localhost:8080' + `/api/user/login`,
         { headers: { authorization: this.createBasicAuthToken(username, password) } }).pipe(map((res) => {
       this.username = username;
       this.password = password;
@@ -39,7 +39,7 @@ export class AuthService {
 // import { Injectable } from '@angular/core';
 // import { HttpClient, HttpHeaders } from '@angular/common/http';
 // import { Observable } from 'rxjs';
-// const AUTH_API = 'http://localhost:8080/';
+// const AUTH_API = 'http://localhost:8080/' + '/api/user/login';
 // const httpOptions = {
 //   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 // };
