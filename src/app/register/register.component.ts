@@ -3,6 +3,7 @@ import { User } from './user';
 import { EnrollmentService } from './enrollment.service';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import Validation from "../utils/validation";
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,11 @@ export class RegisterComponent {
   })
     errorMsg = '';
   submitted = false;
-  constructor(private formBuilder: FormBuilder, private _enrollmentService: EnrollmentService) {}
+  constructor(private formBuilder: FormBuilder,
+              private _enrollmentService: EnrollmentService,
+              private router: Router
+    ) {}
+
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       username: [
@@ -55,7 +60,10 @@ export class RegisterComponent {
     }
     this._enrollmentService.enroll(this.form.value)
         .subscribe(
-            response => console.log('Success!', response),
+            response => {
+                console.log('Success!', response)
+                this.router.navigate(['/login']);
+            },
             error => this.errorMsg = error.statusText
         )
     console.log(JSON.stringify(this.form.value, null, 2));
