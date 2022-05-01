@@ -22,6 +22,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DailyAssignmentComponent } from './daily-assignment/daily-assignment.component';
 import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment.component';
 import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component';
@@ -55,7 +56,8 @@ import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignm
     MatCheckboxModule,
     MatChipsModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent],
