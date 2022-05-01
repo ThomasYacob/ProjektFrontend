@@ -1,3 +1,38 @@
 <div class="monthly">
-    <p>monthly-assignment works!</p>
+	<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+		<mat-form-field appearance="outline">
+			<mat-label>Enter the question</mat-label>
+			<input matInput formControlName="question" />
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Enter the answer to the question</mat-label>
+			<input matInput formControlName="answer" />
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Hint 1</mat-label>
+			<input matInput formControlName="hint1" />
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Hint 2</mat-label>
+			<input matInput formControlName="hint2" />
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Hint 3</mat-label>
+			<input matInput formControlName="hint3" />
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Enter a date for publish</mat-label>
+			<input matInput formControlName="dateToBePublished" />
+			<mat-hint>MM/DD/YYYY</mat-hint>
+		</mat-form-field>
+		<br />
+		<p>Selected range: {{ myForm.value | json }}</p>
+		<br />
+		<button mat-raised-button type="submit">Submit Application</button>
+	</form>
 </div>
