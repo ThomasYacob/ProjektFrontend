@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {PostService} from './post.service'
 
 @Component({
   selector: 'app-daily-assignment',
@@ -8,19 +9,45 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 })
 export class DailyAssignmentComponent implements OnInit {
 
+
   myForm = new FormGroup({
     question: new FormControl(''),
-    answer: new FormControl(''),
+    alternative1: new FormControl(''),
+    alternative2: new FormControl(''),
+    alternative3: new FormControl(''),
     dateToBePublished: new FormControl(''),
-
+    rightAlternative: new FormControl(''),
   })
-  constructor() { }
+
+
+  errorMsg = '';
+  submitted = false;
+
+
+  alternative1 = '1'
+  alternative2 = '2'
+  alternative3 = '3'
+
+  constructor(private formBuilder: FormBuilder, private _postService: PostService) { }
 
   ngOnInit(): void {
   }
+  
+  onSubmit(): void{
+    this.submitted = true;
+    if(this.myForm.invalid) {
+      return;
+    }
+    this._postService.enroll(this.myForm.value)
+        .subscribe(
+            response => console.log('Success!', response),
+            error => this.errorMsg = error.statusText
+        )
+    console.log(JSON.stringify(this.myForm.value, null, 2));
+  }
 
-  onSubmit(){
-    console.log(this.myForm.value)
+    get f(): { [key: string]: AbstractControl} {
+    return this.myForm.controls;
   }
 }
 

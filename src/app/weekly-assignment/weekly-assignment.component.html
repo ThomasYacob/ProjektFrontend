@@ -1,3 +1,23 @@
 <div class="weekly">
-    <p>weekly-assignment works!</p>
+	<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+		<mat-form-field appearance="outline">
+			<mat-label>Enter the question</mat-label>
+			<input matInput formControlName="question" />
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Enter the answer to the question</mat-label>
+			<input matInput formControlName="answer" />
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Enter a date for publish</mat-label>
+			<input matInput formControlName="dateToBePublished" />
+			<mat-hint>MM/DD/YYYY</mat-hint>
+		</mat-form-field>
+		<br />
+		<p>Selected range: {{ myForm.value | json }}</p>
+		<br />
+		<button mat-raised-button type="submit">Submit Application</button>
+	</form>
 </div>

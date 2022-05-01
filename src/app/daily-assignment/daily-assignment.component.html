@@ -1,20 +1,48 @@
 <div class="form-Container">
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-        <label>
-            Question:
-            <input placeholder="Question" type="test" formControlName="question" />
-        </label>
-
-        <label>
-            Answer:
-            <input placeholder="Answer" type="test" formControlName="answer" />
-        </label>
-
-        <label>
-            Date:
-            <input type="date" formControlName="dateToBePublished" />
-        </label>
-
-        <button mat-raised-button type="submit">Submit Application</button>
-    </form>
+	<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+		<mat-form-field appearance="outline">
+			<mat-label>Enter the question</mat-label>
+			<input matInput formControlName="question" />
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Enter a date for publish</mat-label>
+			<input matInput formControlName="dateToBePublished" />
+			<mat-hint>MM/DD/YYYY</mat-hint>
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Enter alternative 1</mat-label>
+			<input matInput formControlName="alternative1" />
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Enter alternative 2</mat-label>
+			<input matInput formControlName="alternative2" />
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Enter alternative 3</mat-label>
+			<input matInput formControlName="alternative3" />
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Right alternative</mat-label>
+			<mat-select formControlName="answer" required>
+				<mat-option [value]="alternative1">
+					{{ alternative1 }}
+				</mat-option>
+				<mat-option [value]="alternative2">
+					{{ alternative2 }}
+				</mat-option>
+				<mat-option [value]="alternative3">
+					{{ alternative3 }}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<br />
+		<p>Selected range: {{ myForm.value | json }}</p>
+		<br />
+		<button mat-raised-button type="submit">Submit Application</button>
+	</form>
 </div>
