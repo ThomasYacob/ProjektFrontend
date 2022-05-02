@@ -15,7 +15,7 @@ export class DailyAssignmentComponent implements OnInit {
     alternative1: new FormControl(''),
     alternative2: new FormControl(''),
     alternative3: new FormControl(''),
-    dateToBePublished: new FormControl(''),
+    date: new FormControl(''),
     rightAlternative: new FormControl(''),
   })
 

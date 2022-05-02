@@ -12,8 +12,8 @@ export class PostService {
   _url = 'http://localhost:8080/api/daily';
   constructor(private _http: HttpClient) { }
 
-  enroll(monthly: Daily) {
-    return this._http.post<any>(this._url, Daily)
+  enroll(daily: Daily) {
+    return this._http.post<any>(this._url, daily)
         .pipe(catchError(this.errorHandler))
   }
 
