@@ -17,7 +17,7 @@ export class MonthlyAssignmentComponent implements OnInit {
     hint1: new FormControl(''),
     hint2: new FormControl(''),
     hint3: new FormControl(''),
-    dateToBePublished: new FormControl(''),
+    date: new FormControl(''),
   })
 
   errorMsg = '';
@@ -33,6 +33,7 @@ export class MonthlyAssignmentComponent implements OnInit {
     if(this.myForm.invalid) {
       return;
     }
+    console.log(this.myForm.value)
     this._postService.enroll(this.myForm.value)
         .subscribe(
             response => console.log('Success!', response),

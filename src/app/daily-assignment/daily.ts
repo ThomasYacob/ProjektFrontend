@@ -6,6 +6,6 @@ export class Daily{
         public alternative2 : String,
         public alternative3 : String,
         public rightAlternative : number,
-        public dateToBePublished : Date,
+        public date : Date,
     ){}
 }
