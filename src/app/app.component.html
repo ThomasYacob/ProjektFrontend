@@ -59,6 +59,12 @@
 						<span>Sign in</span>
 					</button>
 				</li>
+
+				<li class="mat-list-item">
+					<button mat-menu-item [routerLink]="'./logout'">
+						<span>Log out</span>
+					</button>
+				</li>
 			</ul>
 
 			<ul class="mat-tab-nav-bar" *ngIf="isLoggedIn">

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -8,6 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
+  USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
   // @ts-ignore
   public username: string;
   // @ts-ignore
@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    return this.http.get('http://localhost:8080' + `/api/user/login`,
+    return this.http.get(`http://localhost:8080/api/user/login`,
         { headers: { authorization: this.createBasicAuthToken(username, password) } }).pipe(map((res) => {
       this.username = username;
       this.password = password;
@@ -32,7 +32,27 @@ export class AuthService {
 
   // @ts-ignore
   registerSuccessfulLogin(username, password) {
-    // save the username to session
+    sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, username)
+  }
+
+  logout() {
+    sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
+    // @ts-ignore
+    this.username = null;
+    // @ts-ignore
+    this.password = null;
+  }
+
+  isUserLoggedIn() {
+    let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME)
+    if (user === null) return false
+    return true
+  }
+
+  getLoggedInUserName() {
+    let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME)
+    if (user === null) return ''
+    return user
   }
 }
 
