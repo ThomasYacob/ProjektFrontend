@@ -74,8 +74,8 @@ export class LoginComponent implements OnInit {
         this.successMessage = 'Login Successful';
         this.ngOnInit();
         // this.roles = this.tokenStorage.getUser().roles;
-        this.router.navigate(['/home']);
-        // this.reloadPage();
+        this.reloadPage();
+        // this.router.navigate(['/home']);
       }, () => {
         this.isLoginFailed = true;
         this.isLoggedIn = false;
@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
     }
 
   reloadPage(): void {
-    window.location.reload();
+    window.location.replace('/home');
   }
 }
 
