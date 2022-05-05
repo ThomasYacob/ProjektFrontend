@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.content = data;
       },
       error: err => {
-        this.content = JSON.parse(err.error).message;
+        // this.content = JSON.parse(err.error).message;
       }
     });
   }
@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   myTimer() {
+
     this.currentDate = new Date();
     this.targetDate = new Date(2022, 5, 5);
     this.cDateMillisecs = this.currentDate.getTime();
@@ -69,14 +70,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.minutes = this.minutes < 10 ? '0' + this.minutes : this.minutes;
     this.seconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;
 
-    // // @ts-ignore
-    // document.getElementById('days').innerText = this.days;
-    // // @ts-ignore
-    // document.getElementById('hours').innerText = this.hours;
-    // // @ts-ignore
-    // document.getElementById('mins').innerText = this.minutes;
-    // // @ts-ignore
-    // document.getElementById('seconds').innerText = this.seconds;
+    // @ts-ignore
+    document.getElementById('days').innerText = this.days;
+    // @ts-ignore
+    document.getElementById('hours').innerText = this.hours;
+    // @ts-ignore
+    document.getElementById('mins').innerText = this.minutes;
+    // @ts-ignore
+    document.getElementById('seconds').innerText = this.seconds;
 
     setInterval(this.myTimer, 1000);
   }
