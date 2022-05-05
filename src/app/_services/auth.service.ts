@@ -30,6 +30,7 @@ export class AuthService {
     return 'Basic ' + window.btoa(username + ":" + password);
   }
 
+
   // @ts-ignore
   registerSuccessfulLogin(username, password) {
     sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, username)
