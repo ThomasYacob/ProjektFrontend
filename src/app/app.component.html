@@ -33,22 +33,22 @@
 					</button>
 				</li>
 
-				<li class="mat-list-item">
+				<li class="mat-list-item" *ngIf="isLoggedIn">
 					<button mat-menu-item [routerLink]="'/user'">
 						<span>User</span>
 					</button>
 				</li>
 
-				<li class="mat-list-item">
+				<li class="mat-list-item" *ngIf="isLoggedIn">
 					<button mat-menu-item [routerLink]="'./assignment'">
 						<span>Create</span>
 					</button>
 				</li>
 			</ul>
 
-			<ul class="mat-tab-nav-bar" *ngIf="!isLoggedIn">
+<!--			<ul class="mat-tab-nav-bar" *ngIf="!isLoggedIn">-->
 
-				<li class="mat-list-item">
+				<li class="mat-list-item" *ngIf="!isLoggedIn">
 					<button mat-menu-item [routerLink]="'./register'">
 						<span>Register</span>
 					</button>
@@ -59,15 +59,15 @@
 						<span>Sign in</span>
 					</button>
 				</li>
-			</ul>
+<!--			</ul>-->
 
-			<ul class="mat-tab-nav-bar" *ngIf="isLoggedIn">
-				<li class="mat-list-item">
+<!--			<ul class="mat-tab-nav-bar" *ngIf="isLoggedIn">-->
+				<li class="mat-list-item" *ngIf="isLoggedIn">
 					<button mat-menu-item (click)="logout()">
 						<span>Log out</span>
 					</button>
 				</li>
-			</ul>
+<!--			</ul>-->
 
 	</mat-menu>
 </div>

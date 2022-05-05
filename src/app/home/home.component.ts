@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   hours: any;
   days: any;
   year: number = 2022;
-  month: number = 4;
+  month: number = 5;
   months = [
     'Jan',
     'Feb',
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   myTimer() {
     this.currentDate = new Date();
-    this.targetDate = new Date(2022, 4, 5);
+    this.targetDate = new Date(2022, 5, 5);
     this.cDateMillisecs = this.currentDate.getTime();
     this.tDateMillisecs = this.targetDate.getTime();
     this.difference = this.tDateMillisecs - this.cDateMillisecs;
@@ -69,14 +69,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.minutes = this.minutes < 10 ? '0' + this.minutes : this.minutes;
     this.seconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;
 
-    // @ts-ignore
-    document.getElementById('days').innerText = this.days;
-    // @ts-ignore
-    document.getElementById('hours').innerText = this.hours;
-    // @ts-ignore
-    document.getElementById('mins').innerText = this.minutes;
-    // @ts-ignore
-    document.getElementById('seconds').innerText = this.seconds;
+    // // @ts-ignore
+    // document.getElementById('days').innerText = this.days;
+    // // @ts-ignore
+    // document.getElementById('hours').innerText = this.hours;
+    // // @ts-ignore
+    // document.getElementById('mins').innerText = this.minutes;
+    // // @ts-ignore
+    // document.getElementById('seconds').innerText = this.seconds;
 
     setInterval(this.myTimer, 1000);
   }
