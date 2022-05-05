@@ -13,13 +13,13 @@
 
 		<mat-menu #menu="matMenu">
 
-			<ul class="mat-tab-nav-bar" routerLinkActive="active">
+<!--			<ul class="mat-list-item" routerLinkActive="active">-->
 
-				<li class="mat-list-item">
+<!--				<li class="mat-list-item">-->
 					<button mat-menu-item [routerLink]="'./home'">
 						<span>Home</span>
 					</button>
-				</li>
+<!--				</li>-->
 
 				<li class="mat-list-item" *ngIf="showAdminBoard">
 					<button mat-menu-item [routerLink]="'/admin'">
@@ -33,41 +33,42 @@
 					</button>
 				</li>
 
-				<li class="mat-list-item">
-					<button mat-menu-item [routerLink]="'/user'">
+<!--				<li class="mat-list-item" *ngIf="isLoggedIn">-->
+					<button mat-menu-item *ngIf="isLoggedIn" [routerLink]="'/user'">
 						<span>User</span>
 					</button>
-				</li>
+<!--				</li>-->
 
-				<li class="mat-list-item">
-					<button mat-menu-item [routerLink]="'./assignment'">
+<!--				<li class="mat-list-item" *ngIf="isLoggedIn">-->
+					<button mat-menu-item *ngIf="isLoggedIn" [routerLink]="'./assignment'">
 						<span>Create</span>
 					</button>
-				</li>
-			</ul>
+<!--				</li>-->
+<!--			</ul>-->
 
-			<ul class="mat-tab-nav-bar" *ngIf="!isLoggedIn">
+<!--			<ul class="mat-tab-nav-bar" *ngIf="!isLoggedIn">-->
 
-				<li class="mat-list-item">
-					<button mat-menu-item [routerLink]="'./register'">
+<!--				<li class="mat-list-item" *ngIf="!isLoggedIn">-->
+					<button mat-menu-item *ngIf="!isLoggedIn" [routerLink]="'./register'">
 						<span>Register</span>
 					</button>
-				</li>
+<!--				</li>-->
 
-				<li class="mat-list-item">
-					<button mat-menu-item [routerLink]="'./login'">
+<!--				<li class="mat-list-item" *ngIf="!isLoggedIn">-->
+					<button mat-menu-item *ngIf="!isLoggedIn" [routerLink]="'./login'">
 						<span>Sign in</span>
 					</button>
-				</li>
-			</ul>
+<!--				</li>-->
+<!--			</ul>-->
 
-			<ul class="mat-tab-nav-bar" *ngIf="isLoggedIn">
-				<li class="mat-list-item">
-					<button mat-menu-item (click)="logout()">
+
+<!--			<ul class="mat-tab-nav-bar" *ngIf="isLoggedIn">-->
+<!--				<li class="mat-list-item" *ngIf="isLoggedIn">-->
+					<button mat-menu-item *ngIf="isLoggedIn" (click)="logout()">
 						<span>Log out</span>
 					</button>
-				</li>
-			</ul>
+<!--				</li>-->
+<!--			</ul>-->
 
 	</mat-menu>
 </div>

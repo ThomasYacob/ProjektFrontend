@@ -1,0 +1,21 @@
+.wrapper {
+    position: relative;
+    top: 70px;
+    max-width: 300px;
+    margin: 0 auto;
+    font: normal 14px sans-serif;
+}
+.wrapper .targe-date {
+    text-align: center;
+}
+.wrapper .description, .wrapper .times {
+    display: flex;
+}
+.wrapper .description > p, .wrapper .times > p {
+    width: 25%;
+    margin: 10px 0 0 0;
+    text-align: center;
+}
+.wrapper .times {
+    font-size: 22px;
+}

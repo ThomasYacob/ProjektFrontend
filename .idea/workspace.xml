@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a935b846-48fc-4243-8bd8-7022252bfcd7" name="Changes" comment="fixes">
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/1.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/1.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/2.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/2.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/3.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/3.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/4.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/4.pack" afterDir="false" />
+    <list default="true" id="a935b846-48fc-4243-8bd8-7022252bfcd7" name="Changes" comment="login page fix">
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/5.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/5.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/6.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/6.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/7.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/7.pack" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/9.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/9.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack.old" afterDir="false" />
     </list>
@@ -30,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="ZaedFrontEnd2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -90,6 +83,7 @@
       <workItem from="1651075116110" duration="769000" />
       <workItem from="1651076256472" duration="7622000" />
       <workItem from="1651399781756" duration="7270000" />
+      <workItem from="1651606468493" duration="1809000" />
     </task>
     <task id="LOCAL-00001" summary="progress">
       <created>1650718001343</created>
@@ -147,7 +141,21 @@
       <option name="project" value="LOCAL" />
       <updated>1651353238137</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="different authorization per role">
+      <created>1651783748811</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1651783748813</updated>
+    </task>
+    <task id="LOCAL-00010" summary="login page fix">
+      <created>1651784845422</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1651784845422</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -173,6 +181,21 @@
     <MESSAGE value="bug fixes" />
     <MESSAGE value="login page fixes" />
     <MESSAGE value="fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixes" />
+    <MESSAGE value="home component timer" />
+    <MESSAGE value="different authorization per role" />
+    <MESSAGE value="login page fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="login page fix" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/app/app.component.html</url>
+          <line>18</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

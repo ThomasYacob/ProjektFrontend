@@ -1,13 +1,14 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent} from './logout/logout.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { BoardUserComponent } from './board-user/board-user.component';
@@ -26,6 +27,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DailyAssignmentComponent } from './daily-assignment/daily-assignment.component';
 import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment.component';
 import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component';
+import {HttpInterceptorService} from "./_services/httpInterceptor.service";
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignm
     DailyAssignmentComponent,
     WeeklyAssignmentComponent,
     MonthlyAssignmentComponent,
+    LogoutComponent,
 
   ],
   imports: [
@@ -59,7 +62,11 @@ import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignm
     MatIconModule,
     MatDatepickerModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
