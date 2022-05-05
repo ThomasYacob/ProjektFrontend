@@ -6,12 +6,6 @@
 		</mat-form-field>
 		<br />
 		<mat-form-field appearance="outline">
-			<mat-label>Enter a date for publish</mat-label>
-			<input matInput formControlName="dateToBePublished" />
-			<mat-hint>MM/DD/YYYY</mat-hint>
-		</mat-form-field>
-		<br />
-		<mat-form-field appearance="outline">
 			<mat-label>Enter alternative 1</mat-label>
 			<input matInput formControlName="alternative1" />
 		</mat-form-field>
@@ -39,6 +33,12 @@
 					{{ alternative3 }}
 				</mat-option>
 			</mat-select>
+		</mat-form-field>
+		<br />
+		<mat-form-field appearance="outline">
+			<mat-label>Enter a date for publish</mat-label>
+			<input matInput formControlName="date" />
+			<mat-hint>YYYY/MM/DD</mat-hint>
 		</mat-form-field>
 		<br />
 		<p>Selected range: {{ myForm.value | json }}</p>

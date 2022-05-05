@@ -15,7 +15,7 @@ export class WeeklyAssignmentComponent implements OnInit {
  myForm = new FormGroup({
     question: new FormControl(''),
     answer: new FormControl(''),
-    dateToBePublished: new FormControl(''),
+    date: new FormControl(''),
   })
   errorMsg = '';
     submitted = false;

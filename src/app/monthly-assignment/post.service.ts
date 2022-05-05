@@ -13,7 +13,7 @@ export class PostService {
   constructor(private _http: HttpClient) { }
 
   enroll(monthly: Monthly) {
-    return this._http.post<any>(this._url, Monthly)
+    return this._http.post<any>(this._url, monthly)
         .pipe(catchError(this.errorHandler))
   }
 
