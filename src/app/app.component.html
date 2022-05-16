@@ -40,7 +40,7 @@
 <!--				</li>-->
 
 <!--				<li class="mat-list-item" *ngIf="isLoggedIn">-->
-					<button mat-menu-item *ngIf="isLoggedIn" [routerLink]="'./assignment'">
+					<button mat-menu-item *ngIf="showAdminBoard || showModeratorBoard" [routerLink]="'./assignment'">
 						<span>Create</span>
 					</button>
 <!--				</li>-->

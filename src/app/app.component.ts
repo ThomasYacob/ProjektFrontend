@@ -83,6 +83,5 @@ export class AppComponent implements OnInit {
     this.showAdminBoard = false;
     this.showModeratorBoard = false;
     this.router.navigate(['./login']);
-    // window.location.reload();
   }
 }
