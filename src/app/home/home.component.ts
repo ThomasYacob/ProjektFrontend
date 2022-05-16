@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.content = data;
       },
       error: err => {
-        // this.content = JSON.parse(err.error).message;
+        this.content = JSON.parse(err.error).message;
       }
     });
   }
