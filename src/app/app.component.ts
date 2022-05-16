@@ -34,6 +34,7 @@ import { TokenStorageService } from './_services/token-storage.service';
 import { AuthService } from './_services/auth.service';
 import {Subscription} from "rxjs";
 import {EventBusService} from "./_shared/event-bus.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -49,7 +50,8 @@ export class AppComponent implements OnInit {
 
   eventBusSub?: Subscription;
 
-  constructor(private tokenStorageService: TokenStorageService, private eventBusService: EventBusService) { }
+  constructor(private tokenStorageService: TokenStorageService, private eventBusService: EventBusService,
+              private router: Router) { }
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
@@ -80,6 +82,7 @@ export class AppComponent implements OnInit {
     this.roles = [];
     this.showAdminBoard = false;
     this.showModeratorBoard = false;
-    window.location.reload();
+    this.router.navigate(['./login']);
+    // window.location.reload();
   }
 }

@@ -21,21 +21,21 @@
 					</button>
 <!--				</li>-->
 
-				<li class="mat-list-item" *ngIf="showAdminBoard">
-					<button mat-menu-item [routerLink]="'/admin'">
+<!--				<li class="mat-list-item" *ngIf="showAdminBoard">-->
+					<button mat-menu-item *ngIf="showAdminBoard" [routerLink]="'/admin'">
 						<span>Admin Board</span>
 					</button>
-				</li>
+<!--				</li>-->
 
-				<li class="mat-list-item" *ngIf="showModeratorBoard">
-					<button mat-menu-item [routerLink]="'/mod'">
+<!--				<li class="mat-list-item" *ngIf="showModeratorBoard">-->
+					<button mat-menu-item *ngIf="showModeratorBoard" [routerLink]="'/mod'">
 						<span>Moderator Board</span>
 					</button>
-				</li>
+<!--				</li>-->
 
 <!--				<li class="mat-list-item" *ngIf="isLoggedIn">-->
-					<button mat-menu-item *ngIf="isLoggedIn" [routerLink]="'/user'">
-						<span>User</span>
+					<button mat-menu-item *ngIf="isLoggedIn" [routerLink]="'./profile'">
+						<span>Profile</span>
 					</button>
 <!--				</li>-->
 
