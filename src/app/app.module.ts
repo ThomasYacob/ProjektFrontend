@@ -27,7 +27,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DailyAssignmentComponent } from './daily-assignment/daily-assignment.component';
 import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment.component';
 import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component';
-import {HttpInterceptorService} from "./_services/httpInterceptor.service";
 
 @NgModule({
   declarations: [
@@ -62,11 +61,7 @@ import {HttpInterceptorService} from "./_services/httpInterceptor.service";
     MatIconModule,
     MatDatepickerModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpInterceptorService,
-    multi: true
-  }],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
