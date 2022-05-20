@@ -1,5 +1,14 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { ProfileComponent } from '../profile/profile.component';
+import { TokenStorageService } from '../_services/token-storage.service';
+import { DailyService } from '../_services/dailyservice';
+import { MonthlyService } from '../_services/monthlyservice';
+import { WeeklyService } from '../_services/weeklyservice';
+import { Monthly } from '../monthly-assignment/monthly';
+import { Daily } from '../daily-assignment/daily';
+import { Weekly } from '../weekly-assignment/weekly';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +16,7 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
+  currentUser: any;
   content?: string;
   currentDate: any;
   targetDate: any;
@@ -19,7 +29,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   days: any;
   year: number = 2022;
   month: number = 5;
-  months = [
+  months: String[] = [
     'Jan',
     'Feb',
     'Mar',
@@ -31,10 +41,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
     'Sept',
     'Oct',
     'Nov',
-    'Dec',
+    'Dec'
   ];
   day: number = 5;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private dailyService: DailyService,private monthlyService: MonthlyService, private weeklyService: WeeklyService) { }
+
+  monthlys: Monthly[] | undefined;
+  dailys: Daily[] | undefined;
+  weeklys: Weekly[] | undefined;
+
+
 
   ngOnInit(): void {
     this.userService.getUserBoard().subscribe({
@@ -45,6 +61,24 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.content = JSON.parse(err.error).message;
       }
     });
+    
+    console.log('All monthly')
+    this.monthlyService.getAllMonthly().subscribe(data => {
+      console.log(data);
+      this.monthlys = data;
+    })
+    console.log('All daily')
+    this.dailyService.getAllDaily().subscribe(data => {
+      console.log(data);
+      this.dailys = data;
+    })
+    console.log('All weekly')
+    this.weeklyService.getAllWeekly().subscribe(data => {
+      console.log(data);
+      this.weeklys = data;
+    })
+    
+
   }
 
   ngAfterViewInit() {
@@ -81,6 +115,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     setInterval(this.myTimer, 1000);
   }
+
 
 }
 

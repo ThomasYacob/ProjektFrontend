@@ -10,19 +10,62 @@
 <!--</ul>-->
 
 <div class="wrapper">
-    <p class="targe-date">
-        Countdown to {{ months[month] + ' ' + day + ', ' + year }}
-    </p>
-    <div class="description">
-        <p>Days</p>
-        <p>Hours</p>
-        <p>Minutes</p>
-        <p>Seconds</p>
-    </div>
-    <div class="times">
-        <p id="days"></p>
-        <p id="hours"></p>
-        <p id="mins"></p>
-        <p id="seconds"></p>
-    </div>
+	<p class="targe-date">
+		Countdown to {{ months[month] + " " + day + ", " + year }}
+	</p>
+	<div class="description">
+		<p>Days</p>
+		<p>Hours</p>
+		<p>Minutes</p>
+		<p>Seconds</p>
+	</div>
+	<div class="times">
+		<p id="days"></p>
+		<p id="hours"></p>
+		<p id="mins"></p>
+		<p id="seconds"></p>
+	</div>
+	
+
+	<div class="monthly">
+		<tr *ngFor="let monthly of monthlys">
+			<td>{{monthly.question}}</td>
+			<td>{{monthly.hint1}}</td>
+			<td>{{monthly.hint2}}</td>
+			<td>{{monthly.hint3}}</td>
+			<td>{{monthly.date}}</td>
+			<td>
+  				<mat-form-field class="example-full-width" appearance="fill">
+    			<mat-label>Answer Monthly</mat-label>
+    			<input matInput placeholder="" value="">
+  				</mat-form-field>
+			</td>
+		</tr>
+	</div>
+	<div class="daily">
+		<tr *ngFor="let daily of dailys">
+			<td>{{daily.question}}</td>
+			<td>{{daily.date}}</td>
+			<td>
+  				<mat-form-field class="example-full-width" appearance="fill">
+    			<mat-label>Answer daily</mat-label>
+    			<input matInput placeholder="" value="">
+  				</mat-form-field>
+			</td>
+		</tr>
+	</div>
+	<div class="weekly">
+		<tr *ngFor="let weekly of weeklys">
+			<td>{{weekly.question}}</td>
+			<td>{{weekly.date}}</td>
+			<td>
+  				<mat-form-field class="example-full-width" appearance="fill">
+    			<mat-label>Answer weekly</mat-label>
+    			<input matInput placeholder="" value="">
+  				</mat-form-field>
+			</td>
+		</tr>
+	</div>
+
+
 </div>
