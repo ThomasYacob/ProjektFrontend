@@ -9,20 +9,24 @@
     <table class="table table-sm table-bordered table-striped">
         <thead>
         <tr>
+            <th>User ID</th>
             <th>Username</th>
             <th>Email</th>
             <th>Password</th>
+            <th>Role</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let user of users">
-            <td>{{user.username}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.password}}</td>
+        <tr *ngFor="let currentUser of users; let role of currentUser.roles">
+            <td>{{currentUser.id}}</td>
+            <td>{{currentUser.username}}</td>
+            <td>{{currentUser.email}}</td>
+            <td>{{currentUser.password}}</td>
+            <td>{{ role }}</td>
             <td>
-                <button class="btn btn-success btn-sm" (click)="onClickUpdate(user.id)"
+                <button class="btn btn-success btn-sm" (click)="onClickUpdate(currentUser.id)"
                         data-toggle="modal" data-target="#updateModal">Update</button>
-                <button class="btn btn-danger btn-sm ml-3" (click)="onClickDelete(user.id)">Delete</button>
+                <button class="btn btn-danger btn-sm ml-3" (click)="onClickDelete(currentUser.id)">Delete</button>
             </td>
         </tr>
         </tbody>
@@ -53,7 +57,7 @@
                             Username is required.
                         </div>
                         <div *ngIf="userUpdateForm.get('username')?.errors?.['minlength']">
-                            Username must be at least 5 characters long.
+                            Username must be at least 6 characters long.
                         </div>
                     </div>
                 </div>

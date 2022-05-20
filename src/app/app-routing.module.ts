@@ -17,7 +17,7 @@ import { ScoreBoardComponent } from './score-board/score-board.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  {path: '', component: LoginComponent},
+  { path: '', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
