@@ -8,5 +8,5 @@ export class userAnswer{
 }
 
   enum typeOfQuestion {
-  Daily = 1 ,Weekly = 2,Monthly = 3
+  Daily = 1, Weekly = 2, Monthly = 3
 }

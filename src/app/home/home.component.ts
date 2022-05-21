@@ -69,10 +69,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   Monthlyanswer? : String = '';
 
-
-
-
-
   ngOnInit(): void {
     this.userService.getUserBoard().subscribe({
       next: data => {
@@ -196,13 +192,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     setInterval(this.myTimer, 1000);
   }
 
-  submit(id: number,typeOfQuestion : number){
+  submit(id: number, typeOfQuestion : number) {
     console.log(this.Monthlyanswer);
     console.log(this.userAnswerService.submitAnswer(this.Monthlyanswer,id, typeOfQuestion));
     this.userAnswerService.getAlluserAnswers;
   }
-
-
 }
 
 
