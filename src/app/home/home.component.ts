@@ -64,9 +64,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   weeklysNotActive?: Weekly[];
 
 
-  dailyAnswer?: String;
-  weeklyAnswer?: String;
-
+  dailyAnswer?: String = '';
+  weeklyAnswer?: String = '';
   Monthlyanswer? : String = '';
 
   ngOnInit(): void {
@@ -192,14 +191,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
     setInterval(this.myTimer, 1000);
   }
 
-  submit(id: number, typeOfQuestion : number) {
-    console.log(this.Monthlyanswer);
-    console.log(this.userAnswerService.submitAnswer(this.Monthlyanswer, id, typeOfQuestion));
-    this.userAnswerService.submitAnswer(this.Monthlyanswer, id, typeOfQuestion).subscribe( responseData => {
+  monthlySubmit(id: number) {
+    this.userAnswerService.submitAnswer(this.Monthlyanswer, id, 2).subscribe( responseData => {
       console.log('Success!', responseData)
     },
         error => error);
-    // this.userAnswerService.getAlluserAnswers();
+
+  }
+  weeklySubmit(id: number) {
+    this.userAnswerService.submitAnswer(this.weeklyAnswer, id, 1).subscribe( responseData => {
+      console.log('Success!', responseData)
+    },
+        error => error);
+  }
+  dailySubmit(id: number) {
+    this.userAnswerService.submitAnswer(this.dailyAnswer, id, 0).subscribe( responseData => {
+      console.log('Success!', responseData)
+    },
+        error => error);
+
   }
 }
 

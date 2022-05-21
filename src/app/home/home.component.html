@@ -45,7 +45,7 @@
 				</mat-form-field>
 			</td>
 			<td>
-				<button mat-button (click)="submit(monthly.id, 2)">Submit</button>
+				<button mat-button (click)="monthlySubmit(monthly.id)">Submit</button>
 			</td>
 		</tr>
 	</div>
@@ -59,8 +59,16 @@
 			<td>
 				<mat-form-field class="example-full-width" appearance="fill">
 					<mat-label>Answer daily</mat-label>
-					<input matInput placeholder="" value="" />
+					<input
+						type="text"
+						[(ngModel)]="dailyAnswer"
+						matInput
+						placeholder=""
+					/>
 				</mat-form-field>
+			</td>
+			<td>
+				<button mat-button (click)="dailySubmit(daily.id)">Submit</button>
 			</td>
 		</tr>
 	</div>
@@ -71,8 +79,16 @@
 			<td>
 				<mat-form-field class="" appearance="fill">
 					<mat-label>Answer weekly</mat-label>
-					<input matInput placeholder="" value="" />
+					<input
+						type="text"
+						[(ngModel)]="weeklyAnswer"
+						matInput
+						placeholder=""
+					/>
 				</mat-form-field>
+			</td>
+			<td>
+				<button mat-button (click)="weeklySubmit(weekly.id)">Submit</button>
 			</td>
 		</tr>
 	</div>
