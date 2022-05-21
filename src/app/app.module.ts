@@ -27,6 +27,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DailyAssignmentComponent } from './daily-assignment/daily-assignment.component';
 import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment.component';
 import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component';
+import { ScoreBoardComponent } from './score-board/score-board.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignm
     WeeklyAssignmentComponent,
     MonthlyAssignmentComponent,
     LogoutComponent,
+    ScoreBoardComponent,
 
   ],
   imports: [

@@ -2,9 +2,9 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { ProfileComponent } from '../profile/profile.component';
 import { TokenStorageService } from '../_services/token-storage.service';
-import { DailyService } from '../_services/dailyservice';
-import { MonthlyService } from '../_services/monthlyservice';
-import { WeeklyService } from '../_services/weeklyservice';
+import { DailyService } from '../_services/daily.service';
+import { MonthlyService } from '../_services/monthly.service';
+import { WeeklyService } from '../_services/weekly.service';
 import { Monthly } from '../monthly-assignment/monthly';
 import { Daily } from '../daily-assignment/daily';
 import { Weekly } from '../weekly-assignment/weekly';
@@ -46,9 +46,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
   day: number = 5;
   constructor(private userService: UserService, private dailyService: DailyService,private monthlyService: MonthlyService, private weeklyService: WeeklyService) { }
 
-  monthlys: Monthly[] | undefined;
-  dailys: Daily[] | undefined;
-  weeklys: Weekly[] | undefined;
+  monthlys?: Monthly[];
+  monthlysActive?: Monthly;
+  monthlysNotActive?: Monthly[];
+  dailys?: Daily[];
+  dailysActive?: Daily;
+  dailysNotActive?: Daily[];
+  weeklys?: Weekly[];
+  weeklysActive?: Weekly;
+  weeklysNotActive?: Weekly[];
 
 
 
@@ -61,22 +67,65 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.content = JSON.parse(err.error).message;
       }
     });
+
+    let month: number = new Date().getMonth();
+    let day: number = new Date().getDay();
+
     
     console.log('All monthly')
     this.monthlyService.getAllMonthly().subscribe(data => {
       console.log(data);
       this.monthlys = data;
     })
+
+    for (let index = 0; index < this.monthlys.length; index++) {
+      const element = this.monthlys[index];
+      if(element.date.getMonth() == month)
+      {
+        this.monthlysActive = element;
+      }
+      else{
+        this.monthlysNotActive[this.monthlysNotActive.length] = element;
+      }
+      
+    }
     console.log('All daily')
     this.dailyService.getAllDaily().subscribe(data => {
       console.log(data);
       this.dailys = data;
     })
+
+
+    for (let index = 0; index < this.dailys.length; index++) {
+      const element = this.dailys[index];
+      if(element.date.getDay() == day)
+      {
+        this.dailysActive = element;
+      }
+      else{
+        this.dailysNotActive[this.dailysNotActive.length] = element;
+      }
+      
+    }
+
     console.log('All weekly')
     this.weeklyService.getAllWeekly().subscribe(data => {
       console.log(data);
       this.weeklys = data;
     })
+
+    for (let index = 0; index < this.weeklys.length; index++) {
+      const element = this.weeklys[index];
+      if(element.date == Date.now)
+      {
+        this.weeklysActive = element;
+      }
+      else{
+        this.weeklysNotActive[this.weeklysNotActive.length] = element;
+      }
+      
+    }
+
     
 
   }
