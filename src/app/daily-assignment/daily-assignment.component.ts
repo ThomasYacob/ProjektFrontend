@@ -34,9 +34,6 @@ export class DailyAssignmentComponent implements OnInit {
   
   onSubmit(): void {
     this.submitted = true;
-    // this.myForm.value.rightAlternative.setValue(this.selectedValue);
-    // this.myForm.controls['rightAlternative'].setValue(this.selectedValue);
-    this.myForm.patchValue({'rightAlternative': this.selectedValue});
     if(this.myForm.invalid) {
       return;
     }

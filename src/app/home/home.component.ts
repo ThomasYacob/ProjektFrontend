@@ -10,6 +10,8 @@ import { Daily } from '../daily-assignment/daily';
 import { Weekly } from '../weekly-assignment/weekly';
 import { data } from 'jquery';
 import { UseranswerService } from '../_services/useranswer.service';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+
 
 
   enum typeOfQuestion {
@@ -23,6 +25,10 @@ import { UseranswerService } from '../_services/useranswer.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
+  myForm = new FormGroup({
+    rightAlternative: new FormControl(''),
+  })
+
   currentUser: any;
   content?: string;
   currentDate: any;
@@ -62,11 +68,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   weeklys?: Weekly[];
   weeklysActive?: Weekly;
   weeklysNotActive?: Weekly[];
-
-
   dailyAnswer?: String = '';
   weeklyAnswer?: String = '';
   Monthlyanswer? : String = '';
+  alternative1 = '1'
+  alternative2 = '2'
+  alternative3 = '3'
 
   ngOnInit(): void {
     this.userService.getUserBoard().subscribe({
@@ -205,7 +212,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         error => error);
   }
   dailySubmit(id: number) {
-    this.userAnswerService.submitAnswer(this.dailyAnswer, id, 0).subscribe( responseData => {
+    var answer = this.myForm.get('rightAlternative')?.value;
+    console.log(answer);
+  
+    this.userAnswerService.submitAnswer(answer, id, 0).subscribe( responseData => {
       console.log('Success!', responseData)
     },
         error => error);

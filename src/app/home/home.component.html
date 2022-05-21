@@ -53,19 +53,26 @@
 		<tr *ngFor="let daily of dailys">
 			<td>{{ daily.question }}</td>
 			<td>{{ daily.date }}</td>
-			<td>{{ daily.alternative1}}</td>
-			<td>{{ daily.alternative2}}</td>
-			<td>{{ daily.alternative3}}</td>
+			<td>{{ daily.alternative1 }}</td>
+			<td>{{ daily.alternative2 }}</td>
+			<td>{{ daily.alternative3 }}</td>
 			<td>
-				<mat-form-field class="example-full-width" appearance="fill">
-					<mat-label>Answer daily</mat-label>
-					<input
-						type="text"
-						[(ngModel)]="dailyAnswer"
-						matInput
-						placeholder=""
-					/>
-				</mat-form-field>
+				<form [formGroup]="myForm">
+					<mat-form-field class="example-full-width" appearance="fill">
+						<mat-label>Answer daily</mat-label>
+						<mat-select formControlName="rightAlternative" required>
+							<mat-option [value]="alternative1">
+								{{ alternative1 }}
+							</mat-option>
+							<mat-option [value]="alternative2">
+								{{ alternative2 }}
+							</mat-option>
+							<mat-option [value]="alternative3">
+								{{ alternative3 }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</form>
 			</td>
 			<td>
 				<button mat-button (click)="dailySubmit(daily.id)">Submit</button>
