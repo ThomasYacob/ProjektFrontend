@@ -70,6 +70,12 @@
 <!--				</li>-->
 <!--			</ul>-->
 
+					<button mat-menu-item *ngIf="isLoggedIn" [routerLink]="'./score-board'">
+						<span>Scoreboard</span>
+					</button>
+
+
+
 	</mat-menu>
 </div>
 <router-outlet></router-outlet>

@@ -85,6 +85,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.monthlysActive = element;
       }
       else{
+        
         this.monthlysNotActive[this.monthlysNotActive.length] = element;
       }
       
