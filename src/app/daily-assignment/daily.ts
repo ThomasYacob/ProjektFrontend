@@ -7,5 +7,6 @@ export class Daily{
         public alternative3 : String,
         public rightAlternative : number,
         public date : Date,
+        public id: number
     ){}
 }

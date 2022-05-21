@@ -29,6 +29,7 @@ import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment
 import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component';
 import { ScoreBoardComponent } from './score-board/score-board.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

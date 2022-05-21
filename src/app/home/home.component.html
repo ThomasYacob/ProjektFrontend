@@ -35,10 +35,13 @@
 			<td>{{monthly.hint3}}</td>
 			<td>{{monthly.date}}</td>
 			<td>
-  				<mat-form-field class="example-full-width" appearance="fill">
-    			<mat-label>Answer Monthly</mat-label>
-    			<input matInput placeholder="" value="">
+    			<mat-form-field appearance="fill">
+    			<mat-label>Answer weekly</mat-label>
+    			<input type = text [(ngModel)] = "Monthlyanswer" matInput placeholder="" >
   				</mat-form-field>
+			</td>
+			<td>
+				<button mat-button (click)="submit(monthly.id,1)">Submit</button>
 			</td>
 		</tr>
 	</div>

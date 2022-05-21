@@ -6,5 +6,6 @@ export class Monthly{
         public hint2: String,
         public hint3: String,
         public date : Date,
+        public id: number,
     ){}
 }

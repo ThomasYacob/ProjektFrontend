@@ -9,6 +9,13 @@ import { Monthly } from '../monthly-assignment/monthly';
 import { Daily } from '../daily-assignment/daily';
 import { Weekly } from '../weekly-assignment/weekly';
 import { data } from 'jquery';
+import { UseranswerService } from '../_services/useranswer.service';
+
+
+  enum typeOfQuestion {
+  Daily = 1 ,Weekly = 2,Monthly = 3
+}
+
 
 @Component({
   selector: 'app-home',
@@ -44,7 +51,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     'Dec'
   ];
   day: number = 5;
-  constructor(private userService: UserService, private dailyService: DailyService,private monthlyService: MonthlyService, private weeklyService: WeeklyService) { }
+  constructor(private userService: UserService, private dailyService: DailyService,private monthlyService: MonthlyService, private weeklyService: WeeklyService, private userAnswerService: UseranswerService) { }
 
   monthlys?: Monthly[];
   monthlysActive?: Monthly;
@@ -55,6 +62,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   weeklys?: Weekly[];
   weeklysActive?: Weekly;
   weeklysNotActive?: Weekly[];
+
+
+  dailyAnswer?: String;
+  weeklyAnswer?: String;
+
+  Monthlyanswer? : String = '';
+
+
 
 
 
@@ -78,7 +93,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.monthlys = data;
     })
 
-    for (let index = 0; index < this.monthlys.length; index++) {
+    /*if(this.monthlys){
+    for (let index = 0; index < this.monthlysNotActive!.length; index++) {
+      
       const element = this.monthlys[index];
       if(element.date.getMonth() == month)
       {
@@ -86,28 +103,37 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
       else{
         
-        this.monthlysNotActive[this.monthlysNotActive.length] = element;
+        
+        this.monthlysNotActive![this.monthlysNotActive!.length] = element;
       }
       
     }
+    }*/
+    
+    console.log("hej");
+    console.log(this.monthlysActive);
+    console.log(this.monthlysNotActive);
     console.log('All daily')
+
+
     this.dailyService.getAllDaily().subscribe(data => {
       console.log(data);
       this.dailys = data;
     })
-
-
-    for (let index = 0; index < this.dailys.length; index++) {
-      const element = this.dailys[index];
+    /*    
+    for (let index = 0; index < this.dailys!.length; index++) {
+      
+      const element = this.dailys![index];
       if(element.date.getDay() == day)
       {
         this.dailysActive = element;
       }
       else{
-        this.dailysNotActive[this.dailysNotActive.length] = element;
+        
+        this.dailysNotActive![this.dailysNotActive!.length] = element;
       }
       
-    }
+    }*/
 
     console.log('All weekly')
     this.weeklyService.getAllWeekly().subscribe(data => {
@@ -115,17 +141,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.weeklys = data;
     })
 
+    /*// @ts-nocheck
     for (let index = 0; index < this.weeklys.length; index++) {
+      // @ts-nocheck
       const element = this.weeklys[index];
+      // @ts-nocheck
       if(element.date == Date.now)
       {
         this.weeklysActive = element;
       }
       else{
+        // @ts-ignore
         this.weeklysNotActive[this.weeklysNotActive.length] = element;
       }
       
-    }
+    }*/
 
     
 
@@ -166,8 +196,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
     setInterval(this.myTimer, 1000);
   }
 
+  submit(id: number,typeOfQuestion : number){
+    console.log(this.Monthlyanswer);
+    console.log(this.userAnswerService.submitAnswer(this.Monthlyanswer,id, typeOfQuestion));
+    this.userAnswerService.getAlluserAnswers;
+  }
+
 
 }
+
+
 
 
 
