@@ -19,22 +19,24 @@ export class DailyAssignmentComponent implements OnInit {
     rightAlternative: new FormControl(''),
   })
 
-
   errorMsg = '';
   submitted = false;
-
 
   alternative1 = '1'
   alternative2 = '2'
   alternative3 = '3'
+  selectedValue: string | undefined
 
   constructor(private formBuilder: FormBuilder, private _postService: PostService) { }
 
   ngOnInit(): void {
   }
   
-  onSubmit(): void{
+  onSubmit(): void {
     this.submitted = true;
+    // this.myForm.value.rightAlternative.setValue(this.selectedValue);
+    // this.myForm.controls['rightAlternative'].setValue(this.selectedValue);
+    this.myForm.patchValue({'rightAlternative': this.selectedValue});
     if(this.myForm.invalid) {
       return;
     }

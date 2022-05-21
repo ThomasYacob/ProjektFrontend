@@ -180,22 +180,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.minutes = this.minutes < 10 ? '0' + this.minutes : this.minutes;
     this.seconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;
 
-    // @ts-ignore
-    document.getElementById('days').innerText = this.days;
-    // @ts-ignore
-    document.getElementById('hours').innerText = this.hours;
-    // @ts-ignore
-    document.getElementById('mins').innerText = this.minutes;
-    // @ts-ignore
-    document.getElementById('seconds').innerText = this.seconds;
+    // // @ts-ignore
+    // document.getElementById('days').innerText = this.days;
+    // // @ts-ignore
+    // document.getElementById('hours').innerText = this.hours;
+    // // @ts-ignore
+    // document.getElementById('mins').innerText = this.minutes;
+    // // @ts-ignore
+    // document.getElementById('seconds').innerText = this.seconds;
 
     setInterval(this.myTimer, 1000);
   }
 
   submit(id: number, typeOfQuestion : number) {
     console.log(this.Monthlyanswer);
-    console.log(this.userAnswerService.submitAnswer(this.Monthlyanswer,id, typeOfQuestion));
-    this.userAnswerService.getAlluserAnswers;
+    console.log(this.userAnswerService.submitAnswer(this.Monthlyanswer, id, typeOfQuestion));
+    this.userAnswerService.submitAnswer(this.Monthlyanswer, id, typeOfQuestion).subscribe( responseData => {
+      console.log('Success!', responseData)
+    },
+        error => error);
+    // this.userAnswerService.getAlluserAnswers();
   }
 }
 

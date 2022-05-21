@@ -18,7 +18,7 @@ const httpOptions = {
 })
 export class UseranswerService {
 
-  private API_URL = 'http://localhost:8080/api/user/';
+  private API_URL = 'http://localhost:8080/api/user';
 
   constructor(private http: HttpClient ,private token: TokenStorageService) { }
   private currentUser?: any;
@@ -26,19 +26,19 @@ export class UseranswerService {
 
   submitAnswer(answer : any, id : number, typeOfQuestion : typeOfQuestion) : Observable<any>{
     this.currentUser = this.token.getUser();
-    var email = this.currentUser.email;
-
+    var userId = this.currentUser.id;
 
     let dateString = "" + new Date().getFullYear() + new Date().getMonth() + new Date().getDay();
-    
-    console.log(this.API_URL + email + '/' + 'userAnswers');
-    var userAnswerObj = new userAnswer(answer,typeOfQuestion,id,dateString);
-    return this.http.post<any>(this.API_URL + email + '/' + 'userAnswers',userAnswerObj)
+
+    console.log(`${this.API_URL}/${userId}/userAnswers`);
+    var userAnswerObj = new userAnswer(answer, typeOfQuestion, userId, dateString);
+
+    return this.http.post<any>(`${this.API_URL}/${userId}/userAnswers`, userAnswerObj)
     .pipe(catchError(this.handleError));
   }
 
   getAlluserAnswers(){
-    return this.http.get<userAnswer[]>(this.API_URL + '/' + 'userAnswers');
+    return this.http.get<userAnswer[]>(`${this.API_URL}/userAnswers`);
   }
 
   private handleError(httpError: HttpErrorResponse) {
