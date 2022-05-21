@@ -25,50 +25,55 @@
 		<p id="mins"></p>
 		<p id="seconds"></p>
 	</div>
-	
 
 	<div class="monthly">
 		<tr *ngFor="let monthly of monthlys">
-			<td>{{monthly.question}}</td>
-			<td>{{monthly.hint1}}</td>
-			<td>{{monthly.hint2}}</td>
-			<td>{{monthly.hint3}}</td>
-			<td>{{monthly.date}}</td>
+			<td>{{ monthly.question }}</td>
+			<td>{{ monthly.hint1 }}</td>
+			<td>{{ monthly.hint2 }}</td>
+			<td>{{ monthly.hint3 }}</td>
+			<td>{{ monthly.date }}</td>
 			<td>
-    			<mat-form-field appearance="fill">
-    			<mat-label>Answer weekly</mat-label>
-    			<input type = text [(ngModel)] = "Monthlyanswer" matInput placeholder="" >
-  				</mat-form-field>
+				<mat-form-field appearance="fill">
+					<mat-label>Answer Monthly</mat-label>
+					<input
+						type="text"
+						[(ngModel)]="Monthlyanswer"
+						matInput
+						placeholder=""
+					/>
+				</mat-form-field>
 			</td>
 			<td>
-				<button mat-button (click)="submit(monthly.id,1)">Submit</button>
+				<button mat-button (click)="submit(monthly.id, 2)">Submit</button>
 			</td>
 		</tr>
 	</div>
 	<div class="daily">
 		<tr *ngFor="let daily of dailys">
-			<td>{{daily.question}}</td>
-			<td>{{daily.date}}</td>
+			<td>{{ daily.question }}</td>
+			<td>{{ daily.date }}</td>
+			<td>{{ daily.alternative1}}</td>
+			<td>{{ daily.alternative2}}</td>
+			<td>{{ daily.alternative3}}</td>
 			<td>
-  				<mat-form-field class="example-full-width" appearance="fill">
-    			<mat-label>Answer daily</mat-label>
-    			<input matInput placeholder="" value="">
-  				</mat-form-field>
+				<mat-form-field class="example-full-width" appearance="fill">
+					<mat-label>Answer daily</mat-label>
+					<input matInput placeholder="" value="" />
+				</mat-form-field>
 			</td>
 		</tr>
 	</div>
 	<div class="weekly">
 		<tr *ngFor="let weekly of weeklys">
-			<td>{{weekly.question}}</td>
-			<td>{{weekly.date}}</td>
+			<td>{{ weekly.question }}</td>
+			<td>{{ weekly.date }}</td>
 			<td>
-  				<mat-form-field class="" appearance="fill">
-    			<mat-label>Answer weekly</mat-label>
-    			<input matInput placeholder="" value="">
-  				</mat-form-field>
+				<mat-form-field class="" appearance="fill">
+					<mat-label>Answer weekly</mat-label>
+					<input matInput placeholder="" value="" />
+				</mat-form-field>
 			</td>
 		</tr>
 	</div>
-
-
 </div>

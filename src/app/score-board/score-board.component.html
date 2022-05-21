@@ -11,11 +11,15 @@
         </thead>
         <tbody>
         <tr *ngFor="let scoreboard of scoreboards">
-            <td>{{scoreboard.email}}</td>
+           
             <td>{{scoreboard.dailyScore}}</td>
             <td>{{scoreboard.weeklyScore}}</td>
             <td>{{scoreboard.monthlyScore}}</td>
         </tr>
+        <tr *ngFor="let user of users">
+            <td>{{user.username}}</td>
+        </tr>
+        
         </tbody>
     </table>
 </div>

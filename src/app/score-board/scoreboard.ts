@@ -4,6 +4,6 @@ export class Scoreboard{
         public dailyScore: number,
         public weeklyScore: number,
         public monthlyScore: number,
-        public email: String
+        public userName: String, 
     ){}
 }

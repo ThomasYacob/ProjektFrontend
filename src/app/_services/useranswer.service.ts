@@ -24,16 +24,15 @@ export class UseranswerService {
   private currentUser?: any;
   private currentDate?: any;
 
-  submitAnswer(answer : any, id : number, typeOfQuestion : typeOfQuestion) : Observable<any>{
+  submitAnswer(answer : any, questionId : number, typeOfQuestion : typeOfQuestion) : Observable<any>{
     this.currentUser = this.token.getUser();
     var userId = this.currentUser.id;
-
-    let dateString = "" + new Date().getFullYear() + new Date().getMonth() + new Date().getDay();
-
-    console.log(`${this.API_URL}/${userId}/userAnswers`);
-    var userAnswerObj = new userAnswer(answer, typeOfQuestion, userId, dateString);
-
-    return this.http.post<any>(`${this.API_URL}/${userId}/userAnswers`, userAnswerObj)
+    return this.http.post<userAnswer>(`${this.API_URL}/${userId}/userAnswers`, {
+      answer,
+      typeOfQuestion,
+      userId,
+      questionId
+    })
     .pipe(catchError(this.handleError));
   }
 
