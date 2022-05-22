@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a935b846-48fc-4243-8bd8-7022252bfcd7" name="Changes" comment="docker">
+    <list default="true" id="a935b846-48fc-4243-8bd8-7022252bfcd7" name="Changes" comment="fixes">
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/0.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/1.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/1.pack" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/10.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/10.pack" afterDir="false" />
@@ -25,6 +25,7 @@
       <change beforePath="$PROJECT_DIR$/src/app/daily-assignment/daily-assignment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/daily-assignment/daily-assignment.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/home/home.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/monthly-assignment/monthly-assignment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/monthly-assignment/monthly-assignment.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/monthly-assignment/monthly-assignment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/monthly-assignment/monthly-assignment.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/score-board/score-board.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/score-board/score-board.component.html" afterDir="false" />
@@ -116,7 +117,7 @@
       <workItem from="1652968139564" duration="8865000" />
       <workItem from="1653033312128" duration="15601000" />
       <workItem from="1653122591570" duration="598000" />
-      <workItem from="1653242398189" duration="12791000" />
+      <workItem from="1653242398189" duration="13091000" />
     </task>
     <task id="LOCAL-00001" summary="progress">
       <created>1650718001343</created>
@@ -230,7 +231,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653247888073</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="fixes">
+      <created>1653257957458</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1653257957458</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,11 +265,11 @@
     <MESSAGE value="home component timer" />
     <MESSAGE value="different authorization per role" />
     <MESSAGE value="login page fix" />
-    <MESSAGE value="fixes" />
     <MESSAGE value="JWT WORKS" />
     <MESSAGE value="Frontend fixes" />
     <MESSAGE value="administration fixes" />
     <MESSAGE value="docker" />
-    <option name="LAST_COMMIT_MESSAGE" value="docker" />
+    <MESSAGE value="fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixes" />
   </component>
 </project>
