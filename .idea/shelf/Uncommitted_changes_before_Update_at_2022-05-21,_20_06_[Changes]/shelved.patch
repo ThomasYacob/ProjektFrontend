@@ -1,0 +1,115 @@
+Index: src/app/score-board/score-board.component.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { Component, OnInit } from '@angular/core';\nimport { ScoreboardService } from '../_services/scoreboard.service';\nimport { Scoreboard } from './scoreboard';\nimport { UserService } from '../_services/user.service';\nimport { User } from '../register/user';\n\n@Component({\n  selector: 'app-score-board',\n  templateUrl: './score-board.component.html',\n  styleUrls: ['./score-board.component.css']\n})\nexport class ScoreBoardComponent implements OnInit {\n\n  constructor(private scoreBoardService:ScoreboardService, private userService: UserService) { }\n\n  scoreboards?: Scoreboard[];\n  users: User[] | undefined;\n\n\n\n  ngOnInit(): void {\n    console.log('All scoreboards')\n    this.scoreBoardService.getAllScoreBoard().subscribe(data =>{\n      console.log(data)\n      this.scoreboards = data\n    })\n\n      console.log('All users ')\n        this.userService.getAllUsers().subscribe(data => {\n            console.log(data);\n            this.users = data;\n        })\n  \n    \n  }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/score-board/score-board.component.ts b/src/app/score-board/score-board.component.ts
+--- a/src/app/score-board/score-board.component.ts	(revision 26b3fec49ef87e54c23717f1c0130d589a9d177a)
++++ b/src/app/score-board/score-board.component.ts	(date 1653151274067)
+@@ -3,6 +3,8 @@
+ import { Scoreboard } from './scoreboard';
+ import { UserService } from '../_services/user.service';
+ import { User } from '../register/user';
++import {TokenStorageService} from "../_services/token-storage.service";
++
+ 
+ @Component({
+   selector: 'app-score-board',
+@@ -10,11 +12,13 @@
+   styleUrls: ['./score-board.component.css']
+ })
+ export class ScoreBoardComponent implements OnInit {
++  currentUser: any;
+ 
+-  constructor(private scoreBoardService:ScoreboardService, private userService: UserService) { }
++  constructor(private scoreBoardService:ScoreboardService, private userService: UserService, private token :TokenStorageService) { }
+ 
+   scoreboards?: Scoreboard[];
+   users: User[] | undefined;
++  // user: User | undefined;
+ 
+ 
+ 
+@@ -30,8 +34,7 @@
+             console.log(data);
+             this.users = data;
+         })
+-  
+-    
++    this.currentUser = this.token.getUser();
+   }
+ 
+ }
+Index: src/app/score-board/score-board.component.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><div class=\"row\">\n    <h2>User Details</h2>\n    <table class=\"table table-sm table-bordered table-striped\">\n        <thead>\n        <tr>\n            <th>Username</th>\n            <th>Dailyscore</th>\n            <th>weeklyscore</th>\n            <th>Monthlyscore</th>\n        </tr>\n        </thead>\n        <tbody>\n        <tr *ngFor=\"let scoreboard of scoreboards\">\n           \n            <td>{{scoreboard.dailyScore}}</td>\n            <td>{{scoreboard.weeklyScore}}</td>\n            <td>{{scoreboard.monthlyScore}}</td>\n        </tr>\n        <tr *ngFor=\"let user of users\">\n            <td>{{user.username}}</td>\n        </tr>\n        \n        </tbody>\n    </table>\n</div>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/score-board/score-board.component.html b/src/app/score-board/score-board.component.html
+--- a/src/app/score-board/score-board.component.html	(revision 26b3fec49ef87e54c23717f1c0130d589a9d177a)
++++ b/src/app/score-board/score-board.component.html	(date 1653153950599)
+@@ -10,15 +10,17 @@
+         </tr>
+         </thead>
+         <tbody>
+-        <tr *ngFor="let scoreboard of scoreboards">
+-           
++        <tr *ngFor="let currentUser of users; ">
++           <td> {{ currentUser.username }} </td>
++<!--            <td> {{ }} </td>-->
++<!--            <td> {{scoreboard.weeklyScore}} </td>-->
++<!--            <td> {{scoreboard.monthlyScore}} </td>-->
++        </tr>
++        <td *ngFor="let scoreboard of scoreboards">
+             <td>{{scoreboard.dailyScore}}</td>
+             <td>{{scoreboard.weeklyScore}}</td>
+             <td>{{scoreboard.monthlyScore}}</td>
+-        </tr>
+-        <tr *ngFor="let user of users">
+-            <td>{{user.username}}</td>
+-        </tr>
++        </td>
+         
+         </tbody>
+     </table>
+Index: src/app/board-admin/board-admin.component.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {Component, OnInit, ViewChild} from '@angular/core';\nimport { UserService } from '../_services/user.service';\nimport { EventBusService } from '../_shared/event-bus.service';\nimport { EventData } from '../_shared/event.class';\nimport {User} from \"../register/user\";\nimport {FormControl, FormGroup, Validators} from \"@angular/forms\";\nimport {TokenStorageService} from \"../_services/token-storage.service\";\n\n@Component({\n  selector: 'app-board-admin',\n  templateUrl: './board-admin.component.html',\n  styleUrls: ['./board-admin.component.css']\n})\nexport class BoardAdminComponent implements OnInit {\n  content?: string;\n  currentUser: any;\n\n  constructor(private userService: UserService, private token: TokenStorageService, private eventBusService: EventBusService) { }\n\n  // ngOnInit(): void {\n  //   this.userService.getAdminBoard().subscribe(\n  //       data => {\n  //         this.content = data;\n  //       },\n  //       err => {\n  //         this.content = err.error.message || err.error || err.message;\n  //\n  //         if (err.status === 403)\n  //           this.eventBusService.emit(new EventData('logout', null));\n  //       }\n  //   );\n  // }\n\n    users: User[] | undefined;\n    user: User | undefined;\n    deleteMsg:string = \"\";\n    // @ts-ignore\n    @ViewChild('closebutton') closebutton;\n\n\n    ngOnInit(): void {\n        console.log('All users ')\n        this.userService.getAllUsers().subscribe(data => {\n            console.log(data);\n            this.users = data;\n        })\n        this.currentUser = this.token.getUser();\n    }\n\n    // onClickDelete(): void {\n    //     this.userService.deleteUser(this.currentUser.id)\n    //         .subscribe({\n    //             next: (res) => {\n    //                 console.log(res);\n    //             },\n    //             error: (e) => console.error(e)\n    //         });\n    // }\n\n    onClickDelete(userId: number) {\n        this.userService.deleteUser(userId)\n            .subscribe(responseData => {\n                this.deleteMsg = 'Successfully deleted';\n                this.userService.getAllUsers().subscribe(data => {\n                    console.log(data);\n                    this.users = data;\n                })\n            }, (error: string) => {\n                this.deleteMsg = error;\n            });\n    }\n\n    onClickUpdate(userId: number) {\n        this.userService.getUserById(userId)\n            .subscribe(responseData => {\n                this.user = responseData;\n                console.log(this.user);\n                this.prepareUpdateForm();\n            });\n    }\n\n    userUpdateForm = new FormGroup({\n        username: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),\n        email: new FormControl('', [Validators.required, Validators.email]),\n        password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(40)])\n    })\n\n\n\n    prepareUpdateForm() {\n        this.userUpdateForm.setValue({\n            username: this.user?.username,\n            email: this.user?.email,\n            password: this.user?.password\n        });\n    }\n\n    onSubmit() {\n        // @ts-ignore\n        let user = new User();\n        // let user = new User(<number>this.user?.id, <string>this.user?.username, <string>this.user?.email, <string>this.user?.password);\n        user.username = this.userUpdateForm.value.username;\n        user.email = this.userUpdateForm.value.email;\n        user.password = this.userUpdateForm.value.password;\n        this.userService.updateUser(user).subscribe(responseData => {\n                this.closebutton.nativeElement.click();\n                this.userService.getAllUsers().subscribe(data => {\n                    this.users = data;\n                })\n            },\n            (error: any) => console.log(error));\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/board-admin/board-admin.component.ts b/src/app/board-admin/board-admin.component.ts
+--- a/src/app/board-admin/board-admin.component.ts	(revision 26b3fec49ef87e54c23717f1c0130d589a9d177a)
++++ b/src/app/board-admin/board-admin.component.ts	(date 1653151123422)
+@@ -1,7 +1,6 @@
+ import {Component, OnInit, ViewChild} from '@angular/core';
+ import { UserService } from '../_services/user.service';
+ import { EventBusService } from '../_shared/event-bus.service';
+-import { EventData } from '../_shared/event.class';
+ import {User} from "../register/user";
+ import {FormControl, FormGroup, Validators} from "@angular/forms";
+ import {TokenStorageService} from "../_services/token-storage.service";
+Index: src/app/score-board/scoreboard.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>export class Scoreboard{\n    constructor(\n        public scoreid : number,\n        public dailyScore: number,\n        public weeklyScore: number,\n        public monthlyScore: number,\n        public userName: String, \n    ){}\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/score-board/scoreboard.ts b/src/app/score-board/scoreboard.ts
+--- a/src/app/score-board/scoreboard.ts	(revision 26b3fec49ef87e54c23717f1c0130d589a9d177a)
++++ b/src/app/score-board/scoreboard.ts	(date 1653151313472)
+@@ -4,6 +4,6 @@
+         public dailyScore: number,
+         public weeklyScore: number,
+         public monthlyScore: number,
+-        public userName: String, 
++        // public username: String,
+     ){}
+ }
+\ No newline at end of file
