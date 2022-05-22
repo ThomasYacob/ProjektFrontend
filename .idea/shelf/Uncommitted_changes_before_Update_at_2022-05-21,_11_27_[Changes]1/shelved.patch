@@ -1,0 +1,78 @@
+Index: src/app/home/home.component.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { Component, OnInit, AfterViewInit } from '@angular/core';\nimport { UserService } from '../_services/user.service';\nimport { ProfileComponent } from '../profile/profile.component';\nimport { TokenStorageService } from '../_services/token-storage.service';\nimport { DailyService } from '../_services/daily.service';\nimport { MonthlyService } from '../_services/monthly.service';\nimport { WeeklyService } from '../_services/weekly.service';\nimport { Monthly } from '../monthly-assignment/monthly';\nimport { Daily } from '../daily-assignment/daily';\nimport { Weekly } from '../weekly-assignment/weekly';\nimport { data } from 'jquery';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.css']\n})\nexport class HomeComponent implements OnInit, AfterViewInit {\n  currentUser: any;\n  content?: string;\n  currentDate: any;\n  targetDate: any;\n  cDateMillisecs: any;\n  tDateMillisecs: any;\n  difference: any;\n  seconds: any;\n  minutes: any;\n  hours: any;\n  days: any;\n  year: number = 2022;\n  month: number = 5;\n  months: String[] = [\n    'Jan',\n    'Feb',\n    'Mar',\n    'April',\n    'May',\n    'June',\n    'July',\n    'Aug',\n    'Sept',\n    'Oct',\n    'Nov',\n    'Dec'\n  ];\n  day: number = 5;\n  constructor(private userService: UserService, private dailyService: DailyService,private monthlyService: MonthlyService, private weeklyService: WeeklyService) { }\n\n  monthlys?: Monthly[];\n  monthlysActive?: Monthly;\n  monthlysNotActive?: Monthly[];\n  dailys?: Daily[];\n  dailysActive?: Daily;\n  dailysNotActive?: Daily[];\n  weeklys?: Weekly[];\n  weeklysActive?: Weekly;\n  weeklysNotActive?: Weekly[];\n\n\n\n  ngOnInit(): void {\n    this.userService.getUserBoard().subscribe({\n      next: data => {\n        this.content = data;\n      },\n      error: err => {\n        this.content = JSON.parse(err.error).message;\n      }\n    });\n\n    let month: number = new Date().getMonth();\n    let day: number = new Date().getDay();\n\n    \n    console.log('All monthly')\n    this.monthlyService.getAllMonthly().subscribe(data => {\n      console.log(data);\n      this.monthlys = data;\n    })\n\n    for (let index = 0; index < this.monthlys.length; index++) {\n      const element = this.monthlys[index];\n      if(element.date.getMonth() == month)\n      {\n        this.monthlysActive = element;\n      }\n      else{\n        this.monthlysNotActive[this.monthlysNotActive.length] = element;\n      }\n      \n    }\n    console.log('All daily')\n    this.dailyService.getAllDaily().subscribe(data => {\n      console.log(data);\n      this.dailys = data;\n    })\n\n\n    for (let index = 0; index < this.dailys.length; index++) {\n      const element = this.dailys[index];\n      if(element.date.getDay() == day)\n      {\n        this.dailysActive = element;\n      }\n      else{\n        this.dailysNotActive[this.dailysNotActive.length] = element;\n      }\n      \n    }\n\n    console.log('All weekly')\n    this.weeklyService.getAllWeekly().subscribe(data => {\n      console.log(data);\n      this.weeklys = data;\n    })\n\n    for (let index = 0; index < this.weeklys.length; index++) {\n      const element = this.weeklys[index];\n      if(element.date == Date.now)\n      {\n        this.weeklysActive = element;\n      }\n      else{\n        this.weeklysNotActive[this.weeklysNotActive.length] = element;\n      }\n      \n    }\n\n    \n\n  }\n\n  ngAfterViewInit() {\n    this.myTimer();\n  }\n\n  myTimer() {\n\n    this.currentDate = new Date();\n    this.targetDate = new Date(2022, 5, 5);\n    this.cDateMillisecs = this.currentDate.getTime();\n    this.tDateMillisecs = this.targetDate.getTime();\n    this.difference = this.tDateMillisecs - this.cDateMillisecs;\n    this.seconds = Math.floor(this.difference / 1000);\n    this.minutes = Math.floor(this.seconds / 60);\n    this.hours = Math.floor(this.minutes / 60);\n    this.days = Math.floor(this.hours / 24);\n\n    this.hours %= 24;\n    this.minutes %= 60;\n    this.seconds %= 60;\n    this.hours = this.hours < 10 ? '0' + this.hours : this.hours;\n    this.minutes = this.minutes < 10 ? '0' + this.minutes : this.minutes;\n    this.seconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;\n\n    // // @ts-ignore\n    // document.getElementById('days').innerText = this.days;\n    // // @ts-ignore\n    // document.getElementById('hours').innerText = this.hours;\n    // // @ts-ignore\n    // document.getElementById('mins').innerText = this.minutes;\n    // // @ts-ignore\n    // document.getElementById('seconds').innerText = this.seconds;\n\n    setInterval(this.myTimer, 1000);\n  }\n\n\n}\n\n\n\n// import { Component, OnInit } from '@angular/core';\n// import { UserService } from '../_services/user.service';\n// import {User} from \"../register/user\";\n// import {first} from \"rxjs\";\n//\n// @Component({\n//   selector: 'app-home',\n//   templateUrl: './home.component.html',\n//   styleUrls: ['./home.component.css']\n// })\n//\n// export class HomeComponent implements OnInit {\n//   currentUser: User;\n//   users = [];\n//\n//   constructor(\n//       private authenticationService: AuthenticationService,\n//       private userService: UserService\n//   ) {\n//     this.currentUser = this.authenticationService.currentUserValue;\n//   }\n//\n//   ngOnInit() {\n//     this.loadAllUsers();\n//   }\n//\n//   deleteUser(username: string) {\n//     this.userService.delete(username)\n//         .pipe(first())\n//         .subscribe(() => this.loadAllUsers());\n//   }\n//\n//   private loadAllUsers() {\n//     this.userService.getAll()\n//         .pipe(first())\n//         .subscribe(users => this.users = users);\n//   }\n// }
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/home/home.component.ts b/src/app/home/home.component.ts
+--- a/src/app/home/home.component.ts	(revision 0ae6a0d7daafed706aa707853b5d0a922e651001)
++++ b/src/app/home/home.component.ts	(date 1653125102890)
+@@ -73,54 +73,64 @@
+ 
+     
+     console.log('All monthly')
+-    this.monthlyService.getAllMonthly().subscribe(data => {
++    this.monthlyService.getAllMonthly().subscribe((data: Monthly[] | undefined) => {
+       console.log(data);
+       this.monthlys = data;
+     })
+ 
++    // @ts-ignore
+     for (let index = 0; index < this.monthlys.length; index++) {
++      // @ts-ignore
+       const element = this.monthlys[index];
+       if(element.date.getMonth() == month)
+       {
+         this.monthlysActive = element;
+       }
+       else{
++        // @ts-ignore
+         this.monthlysNotActive[this.monthlysNotActive.length] = element;
+       }
+       
+     }
+     console.log('All daily')
+-    this.dailyService.getAllDaily().subscribe(data => {
++    this.dailyService.getAllDaily().subscribe((data: Daily[] | undefined) => {
+       console.log(data);
+       this.dailys = data;
+     })
+ 
+ 
++    // @ts-ignore
+     for (let index = 0; index < this.dailys.length; index++) {
++      // @ts-ignore
+       const element = this.dailys[index];
+       if(element.date.getDay() == day)
+       {
+         this.dailysActive = element;
+       }
+       else{
++        // @ts-ignore
+         this.dailysNotActive[this.dailysNotActive.length] = element;
+       }
+       
+     }
+ 
+     console.log('All weekly')
+-    this.weeklyService.getAllWeekly().subscribe(data => {
++    this.weeklyService.getAllWeekly().subscribe((data: Weekly[] | undefined) => {
+       console.log(data);
+       this.weeklys = data;
+     })
+ 
++    // @ts-ignore
+     for (let index = 0; index < this.weeklys.length; index++) {
++      // @ts-ignore
+       const element = this.weeklys[index];
++      // @ts-ignore
+       if(element.date == Date.now)
+       {
+         this.weeklysActive = element;
+       }
+       else{
++        // @ts-ignore
+         this.weeklysNotActive[this.weeklysNotActive.length] = element;
+       }
+       

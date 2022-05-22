@@ -19,3 +19,18 @@
 .wrapper .times {
     font-size: 22px;
 }
+
+.monthly {
+    position: relative;
+    top: 80px;
+}
+
+.weekly {
+    position: relative;
+    top: 100px;
+}
+
+.daily {
+    position: relative;
+    top: 100px;
+}

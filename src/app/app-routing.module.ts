@@ -12,11 +12,12 @@ import { AssignmentComponent } from './assignment/assignment.component';
 import { DailyAssignmentComponent } from './daily-assignment/daily-assignment.component'
 import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment.component'
 import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component'
+import { ScoreBoardComponent } from './score-board/score-board.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  {path: '', component: LoginComponent},
+  { path: '', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'assignment', component:AssignmentComponent},
   { path: 'daily-assignment', component:DailyAssignmentComponent},
   { path: 'weekly-assignment', component:WeeklyAssignmentComponent},
+  { path: 'score-board', component:ScoreBoardComponent},
   { path: 'monthly-assignment', component:MonthlyAssignmentComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];

@@ -11,6 +11,7 @@ import { EventData } from '../_shared/event.class';
 export class BoardUserComponent implements OnInit {
   content?: string;
 
+
   constructor(private userService: UserService, private eventBusService: EventBusService) { }
 
   ngOnInit(): void {
@@ -27,3 +28,4 @@ export class BoardUserComponent implements OnInit {
     );
   }
 }
+
