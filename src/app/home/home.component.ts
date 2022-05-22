@@ -186,14 +186,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.minutes = this.minutes < 10 ? '0' + this.minutes : this.minutes;
     this.seconds = this.seconds < 10 ? '0' + this.seconds : this.seconds;
 
-    // // @ts-ignore
-    // document.getElementById('days').innerText = this.days;
-    // // @ts-ignore
-    // document.getElementById('hours').innerText = this.hours;
-    // // @ts-ignore
-    // document.getElementById('mins').innerText = this.minutes;
-    // // @ts-ignore
-    // document.getElementById('seconds').innerText = this.seconds;
+    // @ts-ignore
+    document.getElementById('days').innerText = this.days;
+    // @ts-ignore
+    document.getElementById('hours').innerText = this.hours;
+    // @ts-ignore
+    document.getElementById('mins').innerText = this.minutes;
+    // @ts-ignore
+    document.getElementById('seconds').innerText = this.seconds;
 
     setInterval(this.myTimer, 1000);
   }

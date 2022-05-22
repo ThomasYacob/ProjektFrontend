@@ -3,6 +3,7 @@ import { ScoreboardService } from '../_services/scoreboard.service';
 import { Scoreboard } from './scoreboard';
 import { UserService } from '../_services/user.service';
 import { User } from '../register/user';
+import {TokenStorageService} from "../_services/token-storage.service";
 
 @Component({
   selector: 'app-score-board',
@@ -11,11 +12,12 @@ import { User } from '../register/user';
 })
 export class ScoreBoardComponent implements OnInit {
 
-  constructor(private scoreBoardService:ScoreboardService, private userService: UserService) { }
+  constructor(private scoreBoardService: ScoreboardService, private userService: UserService,
+              private token: TokenStorageService) { }
 
-  scoreboards?: Scoreboard[];
+  scoreboards: Scoreboard[] | undefined;
   users: User[] | undefined;
-
+  currentUser: any;
 
 
   ngOnInit(): void {
@@ -30,8 +32,8 @@ export class ScoreBoardComponent implements OnInit {
             console.log(data);
             this.users = data;
         })
-  
-    
+
+    this.currentUser = this.token.getUser();
   }
 
 }

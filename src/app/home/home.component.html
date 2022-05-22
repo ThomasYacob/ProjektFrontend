@@ -26,12 +26,25 @@
 		<p id="seconds"></p>
 	</div>
 
+<!--	<div class="monthly">-->
+<!--		<th *ngFor="let monthly of monthlys">-->
+<!--			{{ monthly.question }}-->
+<!--		</th>-->
+<!--		<th *ngFor="let monthly of monthlys">-->
+<!--			<input-->
+<!--				type="text"-->
+<!--				[(ngModel)]="Monthlyanswer"-->
+<!--				matInput-->
+<!--				placeholder=""-->
+<!--				/>-->
+<!--		</th>-->
+<!--	</div>-->
 	<div class="monthly">
 		<tr *ngFor="let monthly of monthlys">
 			<td>{{ monthly.question }}</td>
-			<td>{{ monthly.hint1 }}</td>
-			<td>{{ monthly.hint2 }}</td>
-			<td>{{ monthly.hint3 }}</td>
+<!--			<td>{{ monthly.hint1 }}</td>-->
+<!--			<td>{{ monthly.hint2 }}</td>-->
+<!--			<td>{{ monthly.hint3 }}</td>-->
 			<td>{{ monthly.date }}</td>
 			<td>
 				<mat-form-field appearance="fill">
@@ -45,17 +58,16 @@
 				</mat-form-field>
 			</td>
 			<td>
-				<button mat-button (click)="monthlySubmit(monthly.id)">Submit</button>
+				<button class="btn btn-success btn-sm" (click)="dailySubmit(monthly.id)">Submit</button>
+
+				<!--				<button mat-button (click)="monthlySubmit(monthly.id)">Submit</button>-->
 			</td>
 		</tr>
 	</div>
 	<div class="daily">
 		<tr *ngFor="let daily of dailys">
-			<td>{{ daily.question }}</td>
-			<td>{{ daily.date }}</td>
-			<td>{{ daily.alternative1 }}</td>
-			<td>{{ daily.alternative2 }}</td>
-			<td>{{ daily.alternative3 }}</td>
+			<th>{{ daily.question }}</th>
+<!--			<th>{{ daily.date }}</th>-->
 			<td>
 				<form [formGroup]="myForm">
 					<mat-form-field class="example-full-width" appearance="fill">
@@ -75,7 +87,8 @@
 				</form>
 			</td>
 			<td>
-				<button mat-button (click)="dailySubmit(daily.id)">Submit</button>
+<!--				<button mat-button (click)="dailySubmit(daily.id)">Submit</button>-->
+				<button class="btn btn-success btn-sm" (click)="dailySubmit(daily.id)">Submit</button>
 			</td>
 		</tr>
 	</div>
@@ -94,8 +107,11 @@
 					/>
 				</mat-form-field>
 			</td>
+
+<!--			<spacer type="horizontal" width="100"></spacer>-->
 			<td>
-				<button mat-button (click)="weeklySubmit(weekly.id)">Submit</button>
+				<button class="btn btn-success btn-sm" (click)="dailySubmit(weekly.id)">Submit</button>
+				<!--				<button mat-button (click)="weeklySubmit(weekly.id)">Submit</button>-->
 			</td>
 		</tr>
 	</div>

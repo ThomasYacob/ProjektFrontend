@@ -42,11 +42,16 @@ export class DailyAssignmentComponent implements OnInit {
             response => console.log('Success!', response),
             error => this.errorMsg = error.statusText
         )
+    this.reloadPage();
     console.log(JSON.stringify(this.myForm.value, null, 2));
   }
 
     get f(): { [key: string]: AbstractControl} {
     return this.myForm.controls;
+  }
+
+  reloadPage(): void {
+    window.location.replace('/assignment');
   }
 }
 

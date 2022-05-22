@@ -22,15 +22,16 @@
 
 .monthly {
     position: relative;
-    top: 80px;
+    /*top: 20px;*/
+    /*right: 235px;*/
 }
 
 .weekly {
     position: relative;
-    top: 100px;
+    /*top: 100px;*/
 }
 
 .daily {
     position: relative;
-    top: 100px;
+    /*top: 100px;*/
 }

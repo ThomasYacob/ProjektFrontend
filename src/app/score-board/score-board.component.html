@@ -5,21 +5,38 @@
         <tr>
             <th>Username</th>
             <th>Dailyscore</th>
-            <th>weeklyscore</th>
+            <th>Weeklyscore</th>
             <th>Monthlyscore</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let scoreboard of scoreboards">
 
-            <td>{{scoreboard.dailyScore}}</td>
-            <td>{{scoreboard.weeklyScore}}</td>
-            <td>{{scoreboard.monthlyScore}}</td>
-        </tr>
-        <tr *ngFor="let user of users">
-            <td>{{user.username}}</td>
-        </tr>
-        
+
+<!--        <ng-container ngFor="let user of users;index as i">-->
+<!--            <ng-container ngFor="let scoreboard of scoreboards;index as j>-->
+<!--            <ng-container *ngIf="i===j">-->
+<!--                {{}}-->
+<!--                <ng-container>-->
+<!--                </ng-container>-->
+<!--            </ng-container>-->
+<!--        -->
+<!--        <tr *ngFor="let scoreboard of scoreboards ; let users of currentUser.username">-->
+<!--            <td>{{currentUser.username}}</td>-->
+<!--            <td>{{scoreboard.dailyScore}}</td>-->
+<!--            <td>{{scoreboard.weeklyScore}}</td>-->
+<!--            <td>{{scoreboard.monthlyScore}}</td>-->
+<!--        </tr>-->
+
+    <tr *ngFor="let scoreboard of scoreboards">
+
+        <td>{{scoreboard.dailyScore}}</td>
+        <td>{{scoreboard.weeklyScore}}</td>
+        <td>{{scoreboard.monthlyScore}}</td>
+    </tr>
+    <tr *ngFor="let user of users">
+        <td>{{user.username}}</td>
+    </tr>
+
         </tbody>
     </table>
 </div>

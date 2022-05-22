@@ -39,11 +39,16 @@ export class MonthlyAssignmentComponent implements OnInit {
             response => console.log('Success!', response),
             error => this.errorMsg = error.statusText
         )
-    console.log(JSON.stringify(this.myForm.value, null, 2));
+      this.reloadPage();
+      console.log(JSON.stringify(this.myForm.value, null, 2));
   }
 
     get f(): { [key: string]: AbstractControl} {
     return this.myForm.controls;
   }
+
+    reloadPage(): void {
+        window.location.replace('/assignment');
+    }
 
 }

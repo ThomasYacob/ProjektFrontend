@@ -13,68 +13,41 @@
 
 		<mat-menu #menu="matMenu">
 
-<!--			<ul class="mat-list-item" routerLinkActive="active">-->
+			<button mat-menu-item [routerLink]="'./home'">
+				<span>Home</span>
+			</button>
 
-<!--				<li class="mat-list-item">-->
-					<button mat-menu-item [routerLink]="'./home'">
-						<span>Home</span>
-					</button>
-<!--				</li>-->
+			<button mat-menu-item *ngIf="isLoggedIn" [routerLink]="'./profile'">
+				<span>Profile</span>
+			</button>
 
-<!--				<li class="mat-list-item" *ngIf="showAdminBoard">-->
-					<button mat-menu-item *ngIf="showAdminBoard" [routerLink]="'/admin'">
-						<span>Admin Board</span>
-					</button>
-<!--				</li>-->
+			<button mat-menu-item *ngIf="showAdminBoard || showModeratorBoard" [routerLink]="'./assignment'">
+				<span>Create</span>
+			</button>
 
-<!--				<li class="mat-list-item" *ngIf="showModeratorBoard">-->
-					<button mat-menu-item *ngIf="showModeratorBoard" [routerLink]="'/mod'">
-						<span>Moderator Board</span>
-					</button>
-<!--				</li>-->
+			<button mat-menu-item *ngIf="isLoggedIn" [routerLink]="'./score-board'">
+				<span>Scoreboard</span>
+			</button>
 
-<!--				<li class="mat-list-item" *ngIf="isLoggedIn">-->
-					<button mat-menu-item *ngIf="isLoggedIn" [routerLink]="'./profile'">
-						<span>Profile</span>
-					</button>
-<!--				</li>-->
+			<button mat-menu-item *ngIf="showAdminBoard" [routerLink]="'/admin'">
+				<span>Admin Board</span>
+			</button>
 
-<!--				<li class="mat-list-item" *ngIf="isLoggedIn">-->
-					<button mat-menu-item *ngIf="showAdminBoard || showModeratorBoard" [routerLink]="'./assignment'">
-						<span>Create</span>
-					</button>
-<!--				</li>-->
-<!--			</ul>-->
+			<button mat-menu-item *ngIf="showModeratorBoard" [routerLink]="'/mod'">
+				<span>Moderator Board</span>
+			</button>
 
-<!--			<ul class="mat-tab-nav-bar" *ngIf="!isLoggedIn">-->
+			<button mat-menu-item *ngIf="!isLoggedIn" [routerLink]="'./register'">
+				<span>Register</span>
+			</button>
 
-<!--				<li class="mat-list-item" *ngIf="!isLoggedIn">-->
-					<button mat-menu-item *ngIf="!isLoggedIn" [routerLink]="'./register'">
-						<span>Register</span>
-					</button>
-<!--				</li>-->
+			<button mat-menu-item *ngIf="!isLoggedIn" [routerLink]="'./login'">
+				<span>Sign in</span>
+			</button>
 
-<!--				<li class="mat-list-item" *ngIf="!isLoggedIn">-->
-					<button mat-menu-item *ngIf="!isLoggedIn" [routerLink]="'./login'">
-						<span>Sign in</span>
-					</button>
-<!--				</li>-->
-<!--			</ul>-->
-
-
-<!--			<ul class="mat-tab-nav-bar" *ngIf="isLoggedIn">-->
-<!--				<li class="mat-list-item" *ngIf="isLoggedIn">-->
-					<button mat-menu-item *ngIf="isLoggedIn" (click)="logout()">
-						<span>Log out</span>
-					</button>
-<!--				</li>-->
-<!--			</ul>-->
-
-					<button mat-menu-item *ngIf="isLoggedIn" [routerLink]="'./score-board'">
-						<span>Scoreboard</span>
-					</button>
-
-
+			<button mat-menu-item *ngIf="isLoggedIn" (click)="logout()">
+				<span>Log out</span>
+			</button>
 
 	</mat-menu>
 </div>
