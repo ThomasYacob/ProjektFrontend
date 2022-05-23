@@ -20,18 +20,62 @@
     font-size: 22px;
 }
 
-.monthly {
+.daily {
     position: relative;
-    /*top: 20px;*/
-    /*right: 235px;*/
+    bottom: 40px;
+    right: 542px;
+}
+
+.btn-d {
+    position: relative;
+    bottom: 7px;
+    left: 20px;
+}
+
+.dailyc {
+    position: relative;
+    bottom: 15px;
+    right: 5px;
 }
 
 .weekly {
     position: relative;
-    /*top: 100px;*/
+    bottom: 30px;
+    right: 542px;
 }
 
-.daily {
+.btn-w {
     position: relative;
-    /*top: 100px;*/
+    bottom: 8px;
+    left: 40px;
+}
+
+.weeklyc {
+    position: relative;
+    bottom: 24px;
+    right: 7px;
+}
+
+.weeklyform {
+    position: relative;
+    /*bottom: 24px;*/
+    left: 20px;
+}
+
+.monthly {
+    position: relative;
+    bottom: 20px;
+    right: 550px;
+}
+
+.btn-m {
+    position: relative;
+    bottom: 8px;
+    left: 25px;
+}
+
+.monthlyc {
+    position: relative;
+    bottom: 15px;
+    left: 0px;
 }

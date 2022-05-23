@@ -30,15 +30,19 @@ export class BoardAdminComponent implements OnInit {
   //       }
   //   );
   // }
-
+    roles: string[] = [];
     users: User[] | undefined;
     user: User | undefined;
     deleteMsg:string = "";
+    // this.roles = [];
     // @ts-ignore
     @ViewChild('closebutton') closebutton;
 
 
     ngOnInit(): void {
+        const user = this.token.getUser();
+        this.roles = user.roles
+
         console.log('All users ')
         this.userService.getAllUsers().subscribe(data => {
             console.log(data);
@@ -68,6 +72,7 @@ export class BoardAdminComponent implements OnInit {
             }, (error: string) => {
                 this.deleteMsg = error;
             });
+        // window.location.reload();
     }
 
     onClickUpdate(userId: number) {

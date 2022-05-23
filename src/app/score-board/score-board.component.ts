@@ -15,7 +15,8 @@ export class ScoreBoardComponent implements OnInit {
   constructor(private scoreBoardService: ScoreboardService, private userService: UserService,
               private token: TokenStorageService) { }
 
-  scoreboards: Scoreboard[] | undefined;
+  // @ts-ignore
+  scoreboards: Scoreboard[];
   users: User[] | undefined;
   currentUser: any;
 

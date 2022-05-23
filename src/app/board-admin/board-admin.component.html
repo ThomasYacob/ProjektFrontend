@@ -24,11 +24,51 @@
             <td>{{currentUser.password}}</td>
             <td>{{ role }}</td>
             <td>
+
+<!--    <ng-container *ngFor="let currentUser of users ; index as i">-->
+<!--        <ng-container *ngFor="let role of roles ; index as j">-->
+<!--            <ng-container *ngIf="i===j">-->
+<!--                <th> {{ currentUser.id }} </th>-->
+<!--                <th> {{ currentUser.username }} </th>-->
+<!--                <th> {{ currentUser.email }} </th>-->
+<!--                <th> {{ currentUser.password}} </th>-->
+<!--                <th> {{ role }}  </th>-->
+<!--                <tr></tr>-->
+<!--            </ng-container>-->
+<!--        </ng-container>-->
+<!--    </ng-container>-->
+
+<!--        <tr *ngFor="let currentUser of users ; index as i">-->
+<!--        <tr *ngFor="let role of roles ; index as j">-->
+<!--        <tr *ngIf="i===j">-->
+<!--            <td>{{ currentUser.id }}</td>-->
+<!--            <td>{{ currentUser.username }}</td>-->
+<!--            <td>{{ currentUser.email }}</td>-->
+<!--            <td>{{ currentUser.password }}</td>-->
+<!--            <td>{{ roles }}</td>-->
+<!--            <td></td>-->
+<!--        </tr>-->
+<!--        </tr>-->
+<!--        </tr>-->
+
+
+        <!--    <ng-container *ngFor="let currentUser of users ; index as i">-->
+        <!--        <ng-container *ngFor="let role of roles ; index as j">-->
+        <!--            <ng-container *ngIf="i===j">-->
+        <!--                <th> {{ currentUser.id }} </th>-->
+        <!--                <th> {{ currentUser.username }} </th>-->
+        <!--                <th> {{ currentUser.email }} </th>-->
+        <!--                <th> {{ currentUser.password}} </th>-->
+        <!--                <th> {{ role }}  </th>-->
+        <!--                <tr></tr>-->
+        <!--            </ng-container>-->
+        <!--        </ng-container>-->
+        <!--    </ng-container>-->
+
                 <button class="btn btn-success btn-sm" (click)="onClickUpdate(currentUser.id)"
                         data-toggle="modal" data-target="#updateModal">Update</button>
                 <button class="btn btn-danger btn-sm ml-3" (click)="onClickDelete(currentUser.id)">Delete</button>
-            </td>
-        </tr>
+
         </tbody>
     </table>
 </div>

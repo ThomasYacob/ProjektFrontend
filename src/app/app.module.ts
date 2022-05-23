@@ -28,6 +28,7 @@ import { DailyAssignmentComponent } from './daily-assignment/daily-assignment.co
 import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment.component';
 import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component';
 import { ScoreBoardComponent } from './score-board/score-board.component';
+import {MatTableModule} from "@angular/material/table";
 
 
 @NgModule({
@@ -48,22 +49,23 @@ import { ScoreBoardComponent } from './score-board/score-board.component';
     ScoreBoardComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatMenuModule,
-    MatIconModule,
-    MatDatepickerModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        MatChipsModule,
+        MatMenuModule,
+        MatIconModule,
+        MatDatepickerModule,
+        MatTableModule
+    ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

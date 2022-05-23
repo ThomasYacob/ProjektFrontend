@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   dailyAnswer?: String = '';
   weeklyAnswer?: String = '';
   Monthlyanswer? : String = '';
-  alternative1 = '1'
+  alternative1 = this
   alternative2 = '2'
   alternative3 = '3'
 
