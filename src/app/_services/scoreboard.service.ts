@@ -6,7 +6,7 @@ import {catchError} from "rxjs/operators";
 import { Scoreboard } from '../score-board/scoreboard';
 import { TokenStorageService } from './token-storage.service';
 import { User } from '../register/user';
-const API_URL = 'http://localhost:8080/api/scoreboard/';
+const API_BASE_URL = 'http://localhost:8081/api/';
 
 
 
@@ -19,12 +19,12 @@ export class ScoreboardService {
   currentUser?: any;
 
   getAllScoreBoard(){
-    return this.http.get<Scoreboard[]>(API_URL + 'all');
+    return this.http.get<Scoreboard[]>(API_BASE_URL + 'scoreboard'+ '/all');
   }
 
   getUserScoreBoard(){
     this.currentUser = this.token.getUser;
-    return this.http.get<Scoreboard[]>(API_URL + this.currentUser.email);
+    return this.http.get<Scoreboard[]>(API_BASE_URL + 'scoreboard/' + this.currentUser.email);
   }
 
    

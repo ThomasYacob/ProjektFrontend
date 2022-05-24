@@ -3,17 +3,18 @@ import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Weekly } from './weekly';
+const API_BASE_URL = 'http://localhost:8081/api/';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  _url = 'http://localhost:8080/api/weekly';
   constructor(private _http: HttpClient) { }
 
   enroll(weekly: Weekly) {
-    return this._http.post<any>(this._url, weekly)
+    return this._http.post<any>(API_BASE_URL + 'weekly', weekly)
         .pipe(catchError(this.errorHandler))
   }
 

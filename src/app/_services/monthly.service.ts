@@ -4,7 +4,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from "rxjs/operators";
 import { Monthly } from '../monthly-assignment/monthly';
-const API_URL = 'http://localhost:8080/api/monthly/';
+const API_BASE_URL = 'http://localhost:8081/api/';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,11 +13,11 @@ export class MonthlyService{
   constructor(private http: HttpClient) { }
 
   getAllMonthly(){
-      return this.http.get<Monthly[]>(API_URL + 'all');
+      return this.http.get<Monthly[]>(API_BASE_URL + 'monthly' + '/all');
   }
 
     deleteMonthly(id: number):Observable<{}> {
-    return this.http.delete('${this.API_URL}/${id}')
+    return this.http.delete(API_BASE_URL+'monthly'+'/${id}')
         .pipe(catchError(this.handleError));
   }
 

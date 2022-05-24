@@ -3,52 +3,51 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {User} from "../register/user";
 import {catchError} from "rxjs/operators";
-const API_URL = 'http://localhost:8080/api/user/';
+const API_BASE_URL = 'http://localhost:8081/api/';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private API_URL = 'http://localhost:8080/api/user';
 
   constructor(private http: HttpClient) { }
 
   getPublicContent(): Observable<any> {
-    return this.http.get(API_URL + 'all', { responseType: 'text' })
+    return this.http.get(API_BASE_URL+ 'user' + '/all', { responseType: 'text' })
         .pipe(catchError(this.handleError));
   }
 
   getUserBoard(): Observable<any> {
-    return this.http.get(API_URL + 'user', { responseType: 'text' })
+    return this.http.get(API_BASE_URL+ 'user', { responseType: 'text' })
     .pipe(catchError(this.handleError));
   }
 
   getContentCreatorBoard(): Observable<any> {
-    return this.http.get(API_URL + 'contentCreator', { responseType: 'text' })
+    return this.http.get(API_BASE_URL+ 'user' + '/contentCreator', { responseType: 'text' })
         .pipe(catchError(this.handleError));
   }
 
   getAdminBoard(): Observable<any> {
-    return this.http.get(API_URL + 'admin', { responseType: 'text' })
+    return this.http.get(API_BASE_URL+ 'user' + '/admin', { responseType: 'text' })
         .pipe(catchError(this.handleError));
   }
 
   getAllUsers(): Observable<any> {
-    return this.http.get<User[]>(`${this.API_URL}/all`)
+    return this.http.get<User[]>(`${API_BASE_URL}user/all`)
         .pipe(catchError(this.handleError));
   }
 
   deleteUser(id: number):Observable<{}> {
-    return this.http.delete(`${this.API_URL}/${id}`)
+    return this.http.delete(`${API_BASE_URL}user/${id}`)
         .pipe(catchError(this.handleError));
   }
 
   updateUser(user: User) {
-    return this.http.put(`${this.API_URL}/updateuser`, user)
+    return this.http.put(`${API_BASE_URL}user/updateuser`, user)
         .pipe(catchError(this.handleError));
   }
 
   getUserById(id: number) {
-    return this.http.get<User>(`${this.API_URL}/${id}`)
+    return this.http.get<User>(`${API_BASE_URL}user/${id}`)
         .pipe(catchError(this.handleError));
   }
 

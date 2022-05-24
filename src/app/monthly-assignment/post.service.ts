@@ -3,17 +3,19 @@ import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Monthly } from './monthly';
+const API_BASE_URL = 'http://localhost:8081/api/';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  _url = 'http://localhost:8080/api/monthly';
+  
   constructor(private _http: HttpClient) { }
 
   enroll(monthly: Monthly) {
-    return this._http.post<any>(this._url, monthly)
+    return this._http.post<any>(API_BASE_URL+'monthly', monthly)
         .pipe(catchError(this.errorHandler))
   }
 
