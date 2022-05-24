@@ -51,6 +51,11 @@ export class UserService {
         .pipe(catchError(this.handleError));
   }
 
+  registerUser(user : User){
+    return this.http.post<any>(API_BASE_URL + 'user', user)
+        .pipe(catchError(this.handleError))
+  }
+
   private handleError(httpError: HttpErrorResponse) {
     if(httpError.error instanceof ErrorEvent) {
       console.error('An error occurred:', httpError.error.message);

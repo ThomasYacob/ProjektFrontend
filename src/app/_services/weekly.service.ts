@@ -14,11 +14,16 @@ export class WeeklyService{
   constructor(private http: HttpClient) { }
 
   getAllWeekly(){
-      return this.http.get<Weekly[]>(API_BASE_URL+ 'daily' +'/all');
+      return this.http.get<Weekly[]>(API_BASE_URL+ 'weekly' +'/all');
   }
 
     deleteWeekly(id: number):Observable<{}> {
-    return this.http.delete('${API_BASE_URL}/daily/${id}')
+    return this.http.delete('${API_BASE_URL}/weekly/${id}')
+        .pipe(catchError(this.handleError));
+  }
+
+  createWeekly(weekly : Weekly){
+    return this.http.post<any>(API_BASE_URL + 'weekly',weekly)
         .pipe(catchError(this.handleError));
   }
 

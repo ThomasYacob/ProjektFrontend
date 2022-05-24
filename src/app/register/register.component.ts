@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { User } from './user';
-import { EnrollmentService } from './enrollment.service';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import Validation from "../utils/validation";
 import { Router } from '@angular/router'
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +21,7 @@ export class RegisterComponent {
     errorMsg = '';
   submitted = false;
   constructor(private formBuilder: FormBuilder,
-              private _enrollmentService: EnrollmentService,
+              private userService: UserService,
               private router: Router
     ) {}
 
@@ -58,7 +58,7 @@ export class RegisterComponent {
     if(this.form.invalid) {
       return;
     }
-    this._enrollmentService.enroll(this.form.value)
+    this.userService.registerUser(this.form.value)
         .subscribe(
             response => {
                 console.log('Success!', response)

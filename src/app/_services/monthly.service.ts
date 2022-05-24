@@ -21,6 +21,11 @@ export class MonthlyService{
         .pipe(catchError(this.handleError));
   }
 
+  createMonthly(monthly : Monthly){
+    return this.http.post<any>(API_BASE_URL + 'monthly',monthly)
+      .pipe(catchError(this.handleError));
+  }
+
   
   private handleError(httpError: HttpErrorResponse) {
     if(httpError.error instanceof ErrorEvent) {

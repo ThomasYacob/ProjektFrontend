@@ -16,8 +16,13 @@ export class DailyService{
       return this.http.get<Daily[]>(API_BASE_URL + 'daily'+'/all');
   }
 
-    deleteDaily(id: number):Observable<{}> {
+  deleteDaily(id: number):Observable<{}> {
     return this.http.delete(API_BASE_URL +'daily'+'/${id}')
+        .pipe(catchError(this.handleError));
+  }
+
+  createDaily(daily : Daily){
+    return this.http.post<any>(API_BASE_URL + 'daily', daily)
         .pipe(catchError(this.handleError));
   }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {PostService} from './post.service'
+import { Router } from '@angular/router';
+import { DailyService } from '../_services/daily.service';
+
 
 @Component({
   selector: 'app-daily-assignment',
@@ -27,7 +29,7 @@ export class DailyAssignmentComponent implements OnInit {
   alternative3 = '3'
   selectedValue: string | undefined
 
-  constructor(private formBuilder: FormBuilder, private _postService: PostService) { }
+  constructor(private formBuilder: FormBuilder, private dailyService : DailyService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -37,22 +39,22 @@ export class DailyAssignmentComponent implements OnInit {
     if(this.myForm.invalid) {
       return;
     }
-    this._postService.enroll(this.myForm.value)
+    this.dailyService.createDaily(this.myForm.value)
         .subscribe(
-            response => console.log('Success!', response),
+            Response =>{
+              console.log('Success', Response)
+              this.router.navigate(['/assignment']);
+            },
             error => this.errorMsg = error.statusText
         )
-    this.reloadPage();
     console.log(JSON.stringify(this.myForm.value, null, 2));
+    
   }
 
     get f(): { [key: string]: AbstractControl} {
     return this.myForm.controls;
   }
 
-  reloadPage(): void {
-    window.location.replace('/assignment');
-  }
 }
 
 
