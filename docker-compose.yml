@@ -84,9 +84,10 @@ version: '3.7'
 services:
   # # App backend service
   app-server:
+    container_name: app-server
     # Configuration for building the docker image for the backend service
     build:
-      context: /Users/thomas/Documents/ProjektBackend # Use an image built from the specified dockerfile in the `ProjektBackend` directory.
+      context: ./ProjektBackend # Use an image built from the specified dockerfile in the `ProjektBackend` directory.
       dockerfile: Dockerfile
     ports:
       - "8080:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
@@ -105,11 +106,12 @@ services:
 
   # Frontend Service
   app-client:
+    container_name: app-client
     build:
-      context: /Users/thomas/Documents/ProjektFrontend # Use an image built from the specified dockerfile in the `ProjektFrontend` directory.
+      context: ./ProjektFrontend # Use an image built from the specified dockerfile in the `ProjektFrontend` directory.
       dockerfile: Dockerfile
       args:
-        API_BASE_URL: http://127.0.0.1:8080/
+        API_BASE_URL: http://localhost:8081/api/
     ports:
       - "8081:80" # Map the exposed port 80 on the container to port 8081 on the host machine
     restart: always
@@ -122,9 +124,12 @@ services:
   # Database Service (Mysql)
   db:
     image: mysql:8.0
+    container_name: db
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
     restart: always
     volumes:
-      - ".:/sqldb:rw"
+      - "sqlData:/var/lib/mysql"
     ports:
       - "3306:3306"
     environment:
@@ -139,55 +144,57 @@ services:
 networks:
   backend:
   frontend:
+volumes:
+  sqlData:
 
-#version: '3'
-#
-#services:
-#  database:
-#    image: mysql
-#    container_name: database
-#    environment:
-#      MYSQL_ROOT_PASSWORD: root
-#      MYSQL_DATABASE: Giesecke&Devrient
-#      MYSQL_USER: root
-#      MYSQL_PASSWORD: Root123.
-#    ports:
-#      - 3306:3306
-#    volumes:
-#      - dockerAngularSpringDatabaseData:/var/lib/mysql
-#    networks:
-#      - backendNetwork
-#
-#  spring-boot-ems:
-#    image: openjdk:12
-#    container_name: spring-boot-ems
-#    ports:
-#      - 8080:8080
-#    depends_on:
-#      - database
-#    volumes:
-#      - ./spring-boot-ems/target/backend-0.0.1-SNAPSHOT.jar
-#    command: ["java", "-jar", "backend-0.0.1-SNAPSHOT.jar"]
-#    networks:
-#      - backendNetwork
-#      - frontendNetwork
-#
-#  angular:
-#    image: nginx:alpine
-#    container_name: angular
-#    ports:
-#      - 4200:80
-#    depends_on:
-#      - spring-boot-ems
-#    volumes:
-#      - ./nginx.conf:/etc/nginx/nginx.conf
-#      - ./angular/dist/angular/:/usr/share/nginx/html
-#    networks:
-#      - frontendNetwork
-#
-#volumes:
-#  dockerAngularSpringDatabaseData:
-#
-#networks:
-#  backendNetwork:
-#  frontendNetwork:
+    #version: '3'
+    #
+    #services:
+    #  database:
+    #    image: mysql
+    #    container_name: database
+    #    environment:
+    #      MYSQL_ROOT_PASSWORD: root
+    #      MYSQL_DATABASE: Giesecke&Devrient
+    #      MYSQL_USER: root
+    #      MYSQL_PASSWORD: Root123.
+    #    ports:
+    #      - 3306:3306
+    #    volumes:
+    #      - dockerAngularSpringDatabaseData:/var/lib/mysql
+    #    networks:
+    #      - backendNetwork
+    #
+    #  spring-boot-ems:
+    #    image: openjdk:12
+    #    container_name: spring-boot-ems
+    #    ports:
+    #      - 8080:8080
+    #    depends_on:
+    #      - database
+    #    volumes:
+    #      - ./spring-boot-ems/target/backend-0.0.1-SNAPSHOT.jar
+    #    command: ["java", "-jar", "backend-0.0.1-SNAPSHOT.jar"]
+    #    networks:
+    #      - backendNetwork
+    #      - frontendNetwork
+    #
+    #  angular:
+    #    image: nginx:alpine
+    #    container_name: angular
+    #    ports:
+    #      - 4200:80
+    #    depends_on:
+    #      - spring-boot-ems
+    #    volumes:
+    #      - ./nginx.conf:/etc/nginx/nginx.conf
+    #      - ./angular/dist/angular/:/usr/share/nginx/html
+    #    networks:
+    #      - frontendNetwork
+    #
+    #volumes:
+    #  dockerAngularSpringDatabaseData:
+    #
+    #networks:
+    #  backendNetwork:
+    #  frontendNetwork:

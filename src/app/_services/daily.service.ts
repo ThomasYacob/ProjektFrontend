@@ -4,7 +4,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from "rxjs/operators";
 import { Daily } from '../daily-assignment/daily';
-const API_URL = 'http://localhost:8080/api/daily/';
+const API_BASE_URL = 'http://localhost:8081/api/';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,11 +13,11 @@ export class DailyService{
   constructor(private http: HttpClient) { }
 
   getAllDaily(){
-      return this.http.get<Daily[]>(API_URL + 'all');
+      return this.http.get<Daily[]>(API_BASE_URL + 'daily'+'/all');
   }
 
     deleteDaily(id: number):Observable<{}> {
-    return this.http.delete('${this.API_URL}/${id}')
+    return this.http.delete(API_BASE_URL +'daily'+'/${id}')
         .pipe(catchError(this.handleError));
   }
 

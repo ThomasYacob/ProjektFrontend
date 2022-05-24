@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import {Observable} from "rxjs";
+const API_BASE_URL = 'http://localhost:8081/api/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,19 +20,22 @@ export class AuthService {
   // @ts-ignore
   public password: string;
 
+    
+
+
   constructor(private http: HttpClient) {
 
   }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post('http://localhost:8080' + `/api/user/login`, {
+    return this.http.post(API_BASE_URL + `user/login`, {
       username,
       password
     }, httpOptions);
   }
 
   refreshToken(token: string) {
-    return this.http.post('http://localhost:8080' + '/api/user/refreshtoken', {
+    return this.http.post(API_BASE_URL + 'user/refreshtoken', {
       refreshToken: token
     }, httpOptions);
   }

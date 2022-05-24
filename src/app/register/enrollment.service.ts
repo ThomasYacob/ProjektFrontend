@@ -3,17 +3,17 @@ import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { User } from './user'
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+const API_BASE_URL = 'http://localhost:8081/api/';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class EnrollmentService {
-
-  _url = 'http://localhost:8080/api/user';
   constructor(private _http: HttpClient) { }
 
   enroll(user: User) {
-    return this._http.post<any>(this._url, user)
+    return this._http.post<any>(API_BASE_URL + 'user', user)
         .pipe(catchError(this.errorHandler))
   }
 

@@ -4,7 +4,8 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from "rxjs/operators";
 import { Weekly } from '../weekly-assignment/weekly';
-const API_URL = 'http://localhost:8080/api/weekly/';
+import { Daily } from '../daily-assignment/daily';
+const API_BASE_URL = 'http://localhost:8081/api/';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,11 +14,11 @@ export class WeeklyService{
   constructor(private http: HttpClient) { }
 
   getAllWeekly(){
-      return this.http.get<Weekly[]>(API_URL + 'all');
+      return this.http.get<Weekly[]>(API_BASE_URL+ 'daily' +'/all');
   }
 
     deleteWeekly(id: number):Observable<{}> {
-    return this.http.delete('${this.API_URL}/${id}')
+    return this.http.delete('${API_BASE_URL}/daily/${id}')
         .pipe(catchError(this.handleError));
   }
 

@@ -4,6 +4,8 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from "rxjs/operators";
 import { TokenStorageService } from './token-storage.service';
 import { userAnswer } from './userAnswer';
+const API_BASE_URL = 'http://localhost:8081/api/';
+
 
 
   enum typeOfQuestion {
@@ -18,7 +20,6 @@ const httpOptions = {
 })
 export class UseranswerService {
 
-  private API_URL = 'http://localhost:8080/api/user';
 
   constructor(private http: HttpClient ,private token: TokenStorageService) { }
   private currentUser?: any;
@@ -27,7 +28,7 @@ export class UseranswerService {
   submitAnswer(answer : any, questionId : number, typeOfQuestion : typeOfQuestion) : Observable<any>{
     this.currentUser = this.token.getUser();
     var userId = this.currentUser.id;
-    return this.http.post<userAnswer>(`${this.API_URL}/${userId}/userAnswers`, {
+    return this.http.post<userAnswer>(`${API_BASE_URL}/user/${userId}/userAnswers`, {
       answer,
       typeOfQuestion,
       userId,
@@ -37,7 +38,7 @@ export class UseranswerService {
   }
 
   getAlluserAnswers(){
-    return this.http.get<userAnswer[]>(`${this.API_URL}/userAnswers`);
+    return this.http.get<userAnswer[]>(`${API_BASE_URL}/user/userAnswers`);
   }
 
   private handleError(httpError: HttpErrorResponse) {
