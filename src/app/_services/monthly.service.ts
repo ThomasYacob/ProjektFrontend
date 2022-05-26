@@ -26,6 +26,14 @@ export class MonthlyService{
       .pipe(catchError(this.handleError));
   }
 
+  getCurrentMonthly(){
+    return this.http.get<Monthly>(API_BASE_URL + 'monthly' + '/activeMonthly')
+  }
+  
+  getMonthlyInactive(){
+    return this.http.get<Monthly[]>(API_BASE_URL + 'monthly' + '/inactiveMonthlys')
+  }
+
   
   private handleError(httpError: HttpErrorResponse) {
     if(httpError.error instanceof ErrorEvent) {

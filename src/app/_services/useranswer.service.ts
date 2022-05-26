@@ -28,7 +28,7 @@ export class UseranswerService {
   submitAnswer(answer : any, questionId : number, typeOfQuestion : typeOfQuestion) : Observable<any>{
     this.currentUser = this.token.getUser();
     var userId = this.currentUser.id;
-    return this.http.post<userAnswer>(`${API_BASE_URL}/user/${userId}/userAnswers`, {
+    return this.http.post<userAnswer>(`${API_BASE_URL}user/${userId}/userAnswers`, {
       answer,
       typeOfQuestion,
       userId,

@@ -26,6 +26,14 @@ export class DailyService{
         .pipe(catchError(this.handleError));
   }
 
+  getCurrentDaily(){
+    return this.http.get<Daily[]>(API_BASE_URL + 'daily' + '/activeDaily')
+  }
+
+  getDailyInactive(){
+    return this.http.get<Daily[]>(API_BASE_URL + 'daily' + '/inactiveDailys')
+  }
+
   
   private handleError(httpError: HttpErrorResponse) {
     if(httpError.error instanceof ErrorEvent) {

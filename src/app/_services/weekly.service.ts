@@ -27,6 +27,10 @@ export class WeeklyService{
         .pipe(catchError(this.handleError));
   }
 
+  getCurrentWeekly(){
+    return this.http.get<Weekly>(API_BASE_URL + 'weekly' + '/getWeekly');
+  }
+
   
   private handleError(httpError: HttpErrorResponse) {
     if(httpError.error instanceof ErrorEvent) {

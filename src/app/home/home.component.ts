@@ -14,6 +14,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "
 
 
 
+
   enum typeOfQuestion {
   Daily = 1 ,Weekly = 2,Monthly = 3
 }
@@ -63,7 +64,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   monthlysActive?: Monthly;
   monthlysNotActive?: Monthly[];
   dailys?: Daily[];
-  dailysActive?: Daily;
+  dailysActive?: Daily[];
   dailysNotActive?: Daily[];
   weeklys?: Weekly[];
   weeklysActive?: Weekly;
@@ -85,8 +86,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       }
     });
 
-    let month: number = new Date().getMonth();
-    let day: number = new Date().getDay();
+  
 
     
     console.log('All monthly')
@@ -95,26 +95,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.monthlys = data;
     })
 
-    /*if(this.monthlys){
-    for (let index = 0; index < this.monthlysNotActive!.length; index++) {
-      
-      const element = this.monthlys[index];
-      if(element.date.getMonth() == month)
-      {
-        this.monthlysActive = element;
-      }
-      else{
-        
-        
-        this.monthlysNotActive![this.monthlysNotActive!.length] = element;
-      }
-      
-    }
-    }*/
-    
-    console.log("hej");
-    console.log(this.monthlysActive);
-    console.log(this.monthlysNotActive);
+
+    this.monthlyService.getCurrentMonthly().subscribe(data => {
+      this.monthlysActive = data;
+    })
+
+    this.monthlyService.getMonthlyInactive().subscribe(data => {
+      this.monthlysNotActive = data;
+    })
     console.log('All daily')
 
 
@@ -122,20 +110,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
       console.log(data);
       this.dailys = data;
     })
-    /*    
-    for (let index = 0; index < this.dailys!.length; index++) {
-      
-      const element = this.dailys![index];
-      if(element.date.getDay() == day)
-      {
-        this.dailysActive = element;
-      }
-      else{
-        
-        this.dailysNotActive![this.dailysNotActive!.length] = element;
-      }
-      
-    }*/
+
+    this.dailyService.getCurrentDaily().subscribe(data =>{
+      this.dailysActive = data;
+    })
+
+    this.dailyService.getDailyInactive().subscribe(data =>{
+      this.dailysNotActive = data;
+    })
+    
 
     console.log('All weekly')
     this.weeklyService.getAllWeekly().subscribe(data => {
@@ -143,21 +126,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.weeklys = data;
     })
 
-    /*// @ts-nocheck
-    for (let index = 0; index < this.weeklys.length; index++) {
-      // @ts-nocheck
-      const element = this.weeklys[index];
-      // @ts-nocheck
-      if(element.date == Date.now)
-      {
-        this.weeklysActive = element;
-      }
-      else{
-        // @ts-ignore
-        this.weeklysNotActive[this.weeklysNotActive.length] = element;
-      }
-      
-    }*/
+    
 
     
 

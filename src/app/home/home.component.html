@@ -26,84 +26,14 @@
 		<p id="seconds"></p>
 	</div>
 
-<!--	<div class="daily">-->
-<!--		<h3>Daily question</h3>-->
-<!--		<tr *ngFor="let daily of dailys">-->
-<!--			{{ daily.question }}-->
-
-<!--			<form [formGroup]="myForm">-->
-<!--				<mat-form-field class="example-full-width" appearance="fill">-->
-<!--&lt;!&ndash;					<mat-label>Answer daily</mat-label>&ndash;&gt;-->
-<!--					<mat-select formControlName="rightAlternative" required>-->
-<!--						<mat-option [value]="alternative1">-->
-<!--							{{ alternative1 }}-->
-<!--						</mat-option><-->
-
-<!--						<mat-option [value]="alternative2">-->
-<!--							{{ alternative2 }}-->
-<!--						</mat-option>-->
-
-<!--						<mat-option [value]="alternative3">-->
-<!--							{{ alternative3 }}-->
-<!--						</mat-option>-->
-
-<!--					</mat-select>-->
-<!--				</mat-form-field>-->
-<!--			</form>-->
-<!--&lt;!&ndash;			<input type="text"&ndash;&gt;-->
-<!--&lt;!&ndash;				   [(ngModel)]="dailyAnswer"&ndash;&gt;-->
-<!--&lt;!&ndash;				   matInput&ndash;&gt;-->
-<!--&lt;!&ndash;				   placeholder=""/>&ndash;&gt;-->
-<!--			<td>-->
-<!--				<button mat-button (click)="dailySubmit(daily.id)">Submit</button>-->
-
-<!--				&lt;!&ndash;				<button class="btn btn-success btn-m" (click)="dailySubmit(monthly.id)">Submit</button>&ndash;&gt;-->
-<!--&lt;!&ndash;				<button class="mat-button-toggle-standalone btn-m" (click)="dailySubmit(daily.id)">Submit</button>&ndash;&gt;-->
-<!--				&lt;!&ndash;				<button class=""&ndash;&gt;-->
-<!--			</td>-->
-<!--		</tr>-->
-<!--	</div>-->
-
-<!--	<div class="weekly">-->
-<!--		<h3>Weekly question</h3>-->
-<!--		<tr *ngFor="let weekly of weeklys">-->
-<!--			{{ weekly.question }}-->
-
-<!--			<input type="text"-->
-<!--				   [(ngModel)]="weeklyAnswer"-->
-<!--				   matInput-->
-<!--				   placeholder=""/>-->
-<!--			<td>-->
-<!--				&lt;!&ndash;				<button class="btn btn-success btn-m" (click)="dailySubmit(monthly.id)">Submit</button>&ndash;&gt;-->
-<!--				<button class="mat-button-toggle-standalone btn-m" (click)="dailySubmit(weekly.id)">Submit</button>-->
-<!--				&lt;!&ndash;				<button class=""&ndash;&gt;-->
-<!--			</td>-->
-<!--		</tr>-->
-<!--	</div>-->
-
-
-<!--	<div class="monthly">-->
-<!--		<h3>Monthly question</h3>-->
-<!--		<tr *ngFor="let monthly of monthlys">-->
-<!--			{{ monthly.question }}-->
-
-<!--			<input type="text"-->
-<!--					[(ngModel)]="Monthlyanswer"-->
-<!--					matInput-->
-<!--					placeholder=""/>-->
-<!--			<td>-->
-<!--&lt;!&ndash;				<button class="btn btn-success btn-m" (click)="dailySubmit(monthly.id)">Submit</button>&ndash;&gt;-->
-<!--				<button class="mat-button-toggle-standalone btn-m" (click)="dailySubmit(monthly.id)">Submit</button>-->
-<!--&lt;!&ndash;				<button class=""&ndash;&gt;-->
-<!--			</td>-->
-<!--		</tr>-->
-<!--	</div>-->
-
-	<div class="daily">
-		<h3>Daily questions</h3>
-		<tr *ngFor="let daily of dailys">
+	<div class="dailyActive">
+		<h3>Daily Active</h3>
+		<tr *ngFor="let daily of dailysActive">
 			<th class="dailyc">{{ daily.question }}</th>
-<!--			<th>{{ daily.date }}</th>-->
+			<th>{{ daily.date }}</th>
+			<th class="dailyAlt1">{{ daily.alternative1 }}</th>
+			<th class="dailyAlt2">{{ daily.alternative2 }}</th>
+			<th class="dailyAlt3">{{ daily.alternative3 }}</th>
 			<td>
 				<form [formGroup]="myForm">
 					<mat-form-field class="dailyform" appearance="fill">
@@ -123,11 +53,23 @@
 				</form>
 			</td>
 			<td>
-				<button class="btn btn-success btn-d" (click)="dailySubmit(daily.id)">Submit</button>
+				<button class="btn btn-success btn-d" (click)="dailySubmit(daily.id)">
+					Submit
+				</button>
 			</td>
 		</tr>
 	</div>
 
+	<div class="dailyActive">
+		<h3>Daily Active</h3>
+		<tr *ngFor="let daily of dailysNotActive">
+			<th class="dailyc">{{ daily.question }}</th>
+			<th>{{ daily.date }}</th>
+			<th class="dailyAlt1">{{ daily.alternative1 }}</th>
+			<th class="dailyAlt2">{{ daily.alternative2 }}</th>
+			<th class="dailyAlt3">{{ daily.alternative3 }}</th>
+		</tr>
+	</div>
 
 	<div class="weekly">
 		<h3>Weekly questions</h3>
@@ -135,7 +77,7 @@
 			<th class="weeklyc">
 				{{ weekly.question }}
 			</th>
-<!--			<td>{{ weekly.date }}</td>-->
+			<!--			<td>{{ weekly.date }}</td>-->
 			<td>
 				<mat-form-field class="weeklyform" appearance="fill">
 					<mat-label>Answer weekly</mat-label>
@@ -149,35 +91,38 @@
 			</td>
 
 			<td>
-				<button class="btn btn-success btn-w" (click)="dailySubmit(weekly.id)">Submit</button>
+				<button class="btn btn-success btn-w" (click)="dailySubmit(weekly.id)">
+					Submit
+				</button>
 			</td>
 		</tr>
 	</div>
 
-		<div class="monthly">
-			<h3>Monthly questions</h3>
-			<tr *ngFor="let monthly of monthlys">
-				<th class="monthlyc">{{ monthly.question }}</th>
-	<!--			<td>{{ monthly.hint1 }}</td>-->
-	<!--			<td>{{ monthly.hint2 }}</td>-->
-	<!--			<td>{{ monthly.hint3 }}</td>-->
-<!--				<td>{{ monthly.date }}</td>-->
-				<td>
-					<mat-form-field appearance="fill">
-						<mat-label>Answer Monthly</mat-label>
-						<input
-							type="text"
-							[(ngModel)]="Monthlyanswer"
-							matInput
-							placeholder=""
-						/>
-					</mat-form-field>
-				</td>
-				<td>
-					<button class="btn btn-success btn-m" (click)="dailySubmit(monthly.id)">Submit</button>
-				</td>
-			</tr>
-		</div>
-
+	<div class="monthly">
+		<h3>Monthly questions</h3>
+		<tr *ngFor="let monthly of monthlys">
+			<th class="monthlyc">{{ monthly.question }}</th>
+			<!--			<td>{{ monthly.hint1 }}</td>-->
+			<!--			<td>{{ monthly.hint2 }}</td>-->
+			<!--			<td>{{ monthly.hint3 }}</td>-->
+			<!--				<td>{{ monthly.date }}</td>-->
+			<td>
+				<mat-form-field appearance="fill">
+					<mat-label>Answer Monthly</mat-label>
+					<input
+						type="text"
+						[(ngModel)]="Monthlyanswer"
+						matInput
+						placeholder=""
+					/>
+				</mat-form-field>
+			</td>
+			<td>
+				<button class="btn btn-success btn-m" (click)="dailySubmit(monthly.id)">
+					Submit
+				</button>
+			</td>
+		</tr>
 	</div>
+</div>
 <!--</div>-->
