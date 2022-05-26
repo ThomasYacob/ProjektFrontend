@@ -21,6 +21,14 @@
 				<span>Profile</span>
 			</button>
 
+			<button mat-menu-item *ngIf="showAdminBoard || showModeratorBoard" [routerLink]="'./assignmentmoderator'">
+					<span>Moderate assignment</span>
+			</button>
+
+			<button mat-menu-item *ngIf="showAdminBoard || showModeratorBoard" [routerLink]="'./answermoderator'">
+					<span>Moderate answers</span>
+			</button>
+
 			<button mat-menu-item *ngIf="showAdminBoard || showModeratorBoard" [routerLink]="'./assignment'">
 				<span>Create</span>
 			</button>

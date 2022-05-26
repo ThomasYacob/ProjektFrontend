@@ -29,6 +29,8 @@ import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment
 import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component';
 import { ScoreBoardComponent } from './score-board/score-board.component';
 import {MatTableModule} from "@angular/material/table";
+import { AssignmentModeratorComponent } from './assignment-moderator/assignment-moderator.component';
+import { AnswerModeratorComponent } from './answer-moderator/answer-moderator.component';
 
 
 @NgModule({
@@ -47,6 +49,8 @@ import {MatTableModule} from "@angular/material/table";
     MonthlyAssignmentComponent,
     LogoutComponent,
     ScoreBoardComponent,
+    AssignmentModeratorComponent,
+    AnswerModeratorComponent,
 
   ],
     imports: [

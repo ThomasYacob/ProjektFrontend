@@ -9,10 +9,12 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { AssignmentComponent } from './assignment/assignment.component';
-import { DailyAssignmentComponent } from './daily-assignment/daily-assignment.component'
-import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment.component'
-import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component'
+import { DailyAssignmentComponent } from './daily-assignment/daily-assignment.component';
+import { WeeklyAssignmentComponent } from './weekly-assignment/weekly-assignment.component';
+import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignment.component';
 import { ScoreBoardComponent } from './score-board/score-board.component';
+import { AssignmentModeratorComponent } from './assignment-moderator/assignment-moderator.component';
+import { AnswerModeratorComponent } from './answer-moderator/answer-moderator.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -29,6 +31,8 @@ const routes: Routes = [
   { path: 'weekly-assignment', component:WeeklyAssignmentComponent},
   { path: 'score-board', component:ScoreBoardComponent},
   { path: 'monthly-assignment', component:MonthlyAssignmentComponent},
+  { path: 'assignmentmoderator', component:AssignmentModeratorComponent},
+  { path: 'answermoderator', component:AnswerModeratorComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
