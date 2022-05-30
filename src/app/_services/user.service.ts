@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {User} from "../register/user";
 import {catchError} from "rxjs/operators";
+import { UserUserName } from '../register/userUserName';
 const API_BASE_URL = 'http://localhost:8081/api/';
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,11 @@ export class UserService {
   registerUser(user : User){
     return this.http.post<any>(API_BASE_URL + 'user', user)
         .pipe(catchError(this.handleError))
+  }
+
+  getUserWithoutPassword(){
+    return this.http.get<String[]>(`${API_BASE_URL}user/getAll`)
+          .pipe(catchError(this.handleError));
   }
 
   private handleError(httpError: HttpErrorResponse) {

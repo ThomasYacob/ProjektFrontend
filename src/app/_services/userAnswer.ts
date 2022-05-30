@@ -1,9 +1,14 @@
+import { User } from "../register/user";
+
 export class userAnswer{
     constructor(
         public answer : String,
         public typeOfQuestion: typeOfQuestion,
-        questionId: number,
-        dateString: String,
+        public questionId: number,
+        public dateString: String,
+        corrected : String,
+        public userAnswerid: number,
+        public user : User,
     ){}
 }
 

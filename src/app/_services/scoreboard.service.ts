@@ -27,6 +27,11 @@ export class ScoreboardService {
     return this.http.get<Scoreboard[]>(API_BASE_URL + 'scoreboard/' + this.currentUser.email);
   }
 
+  updateScore(userId:String, type: number, points : number ){
+    return this.http.put<any>(API_BASE_URL + 'scoreboard/' + 'alterScoreBoard/' + userId + '/' + type,points)
+    .pipe(catchError(this.handleError));
+  }
+
    
   private handleError(httpError: HttpErrorResponse) {
     if(httpError.error instanceof ErrorEvent) {

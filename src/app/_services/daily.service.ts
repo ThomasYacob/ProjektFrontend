@@ -27,7 +27,7 @@ export class DailyService{
   }
 
   getCurrentDaily(){
-    return this.http.get<Daily[]>(API_BASE_URL + 'daily' + '/activeDaily')
+    return this.http.get<Daily>(API_BASE_URL + 'daily' + '/activeDaily')
   }
 
   getDailyInactive(){

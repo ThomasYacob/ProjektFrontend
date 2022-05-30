@@ -4,6 +4,7 @@ import { Scoreboard } from './scoreboard';
 import { UserService } from '../_services/user.service';
 import { User } from '../register/user';
 import {TokenStorageService} from "../_services/token-storage.service";
+import { UserUserName } from '../register/userUserName';
 
 @Component({
   selector: 'app-score-board',
@@ -17,7 +18,7 @@ export class ScoreBoardComponent implements OnInit {
 
   // @ts-ignore
   scoreboards: Scoreboard[];
-  users: User[] | undefined;
+  users: String[] | undefined;
   currentUser: any;
 
 
@@ -28,8 +29,9 @@ export class ScoreBoardComponent implements OnInit {
       this.scoreboards = data
     })
 
+
       console.log('All users ')
-        this.userService.getAllUsers().subscribe(data => {
+        this.userService.getUserWithoutPassword().subscribe(data => {
             console.log(data);
             this.users = data;
         })

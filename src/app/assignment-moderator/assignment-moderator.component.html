@@ -1,16 +1,70 @@
-<div>
-    <h2>Uncorrected</h2>
+
+
+<div class = "top">
+    <h2>Monthly Questions</h2>
     <table class="table table-sm table-bordered table-striped">
         <thead>
             <tr>
-                <th>Answer</th>
+                <th>Question</th>
                 <th>Question Id</th>
-                <th>Date Submitted</th>
-                <th>Points To give</th>
+                <th>Answer</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
-            
+            <tr *ngFor="let monthly of monthly">
+                <td>{{monthly.question}}</td>
+                <td>{{monthly.id}}</td>
+                <td>{{monthly.answer}}</td>
+                <td>{{monthly.date}}</td>
+                <td><button class="btn btn-danger btn-sm ml-3" (click)="onClickDelete(monthly.id,1)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class = "top">
+    <h2>Daily Questions</h2>
+    <table class="table table-sm table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Question Id</th>
+                <th>Answer</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let daily of daily">
+                <td>{{daily.question}}</td>
+                <td>{{daily.id}}</td>
+                <td>{{daily.rightAlternative}}</td>
+                <td>{{daily.date}}</td>
+                <td><button class="btn btn-danger btn-sm ml-3" (click)="onClickDelete(daily.id,2)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <h2>Weekly Questions</h2>
+    <table class="table table-sm table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Question Id</th>
+                <th>Answer</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let weekly of weekly">
+                <td>{{weekly.question}}</td>
+                <td>{{weekly.id}}</td>
+                <td>{{weekly.answer}}</td>
+                <td>{{weekly.date}}</td>
+                <td><button class="btn btn-danger btn-sm ml-3" (click)="onClickDelete(weekly.id,3)">Delete</button></td>
+            </tr>
         </tbody>
     </table>
 </div>

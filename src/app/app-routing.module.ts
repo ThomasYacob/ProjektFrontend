@@ -31,8 +31,8 @@ const routes: Routes = [
   { path: 'weekly-assignment', component:WeeklyAssignmentComponent},
   { path: 'score-board', component:ScoreBoardComponent},
   { path: 'monthly-assignment', component:MonthlyAssignmentComponent},
-  { path: 'assignmentmoderator', component:AssignmentModeratorComponent},
-  { path: 'answermoderator', component:AnswerModeratorComponent},
+  { path: 'assignment-moderator', component:AssignmentModeratorComponent},
+  { path: 'answer-moderator', component:AnswerModeratorComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
