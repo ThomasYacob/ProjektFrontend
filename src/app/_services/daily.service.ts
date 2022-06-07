@@ -17,7 +17,7 @@ export class DailyService{
   }
 
   deleteDaily(id: number):Observable<{}> {
-    return this.http.delete(API_BASE_URL +'daily'+'/${id}')
+    return this.http.delete(API_BASE_URL +'daily/'+id)
         .pipe(catchError(this.handleError));
   }
 

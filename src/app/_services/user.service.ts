@@ -38,16 +38,16 @@ export class UserService {
   }
 
   deleteUser(id: number):Observable<{}> {
-    return this.http.delete(`${API_BASE_URL}user/${id}`)
+    return this.http.delete(API_BASE_URL +'user/'+id)
         .pipe(catchError(this.handleError));
   }
 
-  updateUser(user: User) {
-    return this.http.put(`${API_BASE_URL}user/updateuser`, user)
+  updateUser(id: number, value: any): Observable<Object> {
+    return this.http.put(`${API_BASE_URL}user/${id}`, value)
         .pipe(catchError(this.handleError));
   }
 
-  getUserById(id: number) {
+  getUserById(id: number | undefined) {
     return this.http.get<User>(`${API_BASE_URL}user/${id}`)
         .pipe(catchError(this.handleError));
   }

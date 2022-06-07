@@ -19,7 +19,7 @@ export class WeeklyService{
   }
 
     deleteWeekly(id: number):Observable<{}> {
-    return this.http.delete('${API_BASE_URL}/weekly/${id}')
+    return this.http.delete('${API_BASE_URL}/weekly/' + id)
         .pipe(catchError(this.handleError));
   }
 

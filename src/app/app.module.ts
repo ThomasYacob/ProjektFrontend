@@ -31,6 +31,7 @@ import { ScoreBoardComponent } from './score-board/score-board.component';
 import {MatTableModule} from "@angular/material/table";
 import { AssignmentModeratorComponent } from './assignment-moderator/assignment-moderator.component';
 import { AnswerModeratorComponent } from './answer-moderator/answer-moderator.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { AnswerModeratorComponent } from './answer-moderator/answer-moderator.co
     ScoreBoardComponent,
     AssignmentModeratorComponent,
     AnswerModeratorComponent,
+    UserUpdateComponent,
 
   ],
     imports: [
