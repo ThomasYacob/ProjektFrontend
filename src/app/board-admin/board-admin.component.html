@@ -12,114 +12,23 @@
             <th>User ID</th>
             <th>Username</th>
             <th>Email</th>
-            <th>Password</th>
             <th>Role</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let currentUser of users; let role of currentUser.roles">
-            <td>{{currentUser.id}}</td>
-            <td>{{currentUser.username}}</td>
-            <td>{{currentUser.email}}</td>
-            <td>{{currentUser.password}}</td>
-            <td>{{ role }}</td>
-            <td>
-
-<!--    <ng-container *ngFor="let currentUser of users ; index as i">-->
-<!--        <ng-container *ngFor="let role of roles ; index as j">-->
-<!--            <ng-container *ngIf="i===j">-->
-<!--                <th> {{ currentUser.id }} </th>-->
-<!--                <th> {{ currentUser.username }} </th>-->
-<!--                <th> {{ currentUser.email }} </th>-->
-<!--                <th> {{ currentUser.password}} </th>-->
-<!--                <th> {{ role }}  </th>-->
-<!--                <tr></tr>-->
-<!--            </ng-container>-->
-<!--        </ng-container>-->
-<!--    </ng-container>-->
-
-<!--        <tr *ngFor="let currentUser of users ; index as i">-->
-<!--        <tr *ngFor="let role of roles ; index as j">-->
-<!--        <tr *ngIf="i===j">-->
-<!--            <td>{{ currentUser.id }}</td>-->
-<!--            <td>{{ currentUser.username }}</td>-->
-<!--            <td>{{ currentUser.email }}</td>-->
-<!--            <td>{{ currentUser.password }}</td>-->
-<!--            <td>{{ roles }}</td>-->
-<!--            <td></td>-->
-<!--        </tr>-->
-<!--        </tr>-->
-<!--        </tr>-->
-
-
-        <!--    <ng-container *ngFor="let currentUser of users ; index as i">-->
-        <!--        <ng-container *ngFor="let role of roles ; index as j">-->
-        <!--            <ng-container *ngIf="i===j">-->
-        <!--                <th> {{ currentUser.id }} </th>-->
-        <!--                <th> {{ currentUser.username }} </th>-->
-        <!--                <th> {{ currentUser.email }} </th>-->
-        <!--                <th> {{ currentUser.password}} </th>-->
-        <!--                <th> {{ role }}  </th>-->
-        <!--                <tr></tr>-->
-        <!--            </ng-container>-->
-        <!--        </ng-container>-->
-        <!--    </ng-container>-->
-
-                <button class="btn btn-success btn-sm" (click)="onClickUpdate(currentUser.id)"
-                        data-toggle="modal" data-target="#updateModal">Update</button>
-                <button class="btn btn-danger btn-sm ml-3" (click)="onClickDelete(currentUser.id)">Delete</button>
-
+        <ng-container *ngFor="let currentUser of users">
+            <ng-container *ngFor="let role of roles">
+                    <th> {{ currentUser.id }} </th>
+                    <th> {{ currentUser.username }} </th>
+                    <th> {{ currentUser.email }} </th>
+                    <th> {{ role }} </th>
+                    <td>
+                        <button class="btn btn-success btn-sm" (click)="updateUser(currentUser.id)">Update</button>
+                        <button class="btn btn-danger btn-sm ml-3" (click)="onClickDelete(currentUser.id)">Delete</button>
+                    </td>
+                    <tr>
+            </ng-container>
+        </ng-container>
         </tbody>
     </table>
-</div>
-
-<div class="modal" id="updateModal" data-backdrop="static" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Update User</h5>
-                <button type="button" class="close" #closebutton data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form class="form-sm" [formGroup]="userUpdateForm" (ngSubmit)="onSubmit()">
-                <div class="modal-body"></div>
-                <div class="form-group">
-                    <label for="id">User ID</label>
-                    <input type="text" class="form-control" id="id"
-                           formControlName="id">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username"
-                           formControlName="username">
-                    <div class="alert alert-danger" *ngIf="userUpdateForm.get('username')?.invalid
-                                        && userUpdateForm.get('username')?.touched">
-                        <div *ngIf="userUpdateForm.get('username')?.errors?.['required']">
-                            Username is required.
-                        </div>
-                        <div *ngIf="userUpdateForm.get('username')?.errors?.['minlength']">
-                            Username must be at least 6 characters long.
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email"
-                           formControlName="email">
-                    <div class="alert alert-danger" *ngIf="userUpdateForm.get('email')?.invalid
-                                        && userUpdateForm?.get('email')?.touched">
-                        <div *ngIf="userUpdateForm?.get('email')?.errors?.['required']">
-                            Email is required.
-                        </div>
-                        <div *ngIf="userUpdateForm?.get('email')?.errors?.['minlength']">
-                            Email must be at least 3 characters long.
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-            </form>
-        </div>
-    </div>
 </div>

@@ -25,7 +25,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the main application
-COPY . ./
+COPY . .
 
 # Arguments
 ARG configuration=production

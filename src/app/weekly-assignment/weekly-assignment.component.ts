@@ -3,6 +3,7 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "
 import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { DailyService } from '../_services/daily.service';
 import { Router } from '@angular/router';
+import { WeeklyService } from '../_services/weekly.service';
 
 
 
@@ -22,7 +23,7 @@ export class WeeklyAssignmentComponent implements OnInit {
   errorMsg = '';
     submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private dailyService : DailyService, private router : Router) { }
+  constructor(private formBuilder: FormBuilder, private weekly : WeeklyService, private router : Router) { }
 
 
  ngOnInit(): void {
@@ -33,7 +34,7 @@ export class WeeklyAssignmentComponent implements OnInit {
     if(this.myForm.invalid) {
       return;
     }
-    this.dailyService.createDaily(this.myForm.value)
+    this.weekly.createWeekly(this.myForm.value)
         .subscribe(
             Response =>{
               console.log('Success', Response)

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {User} from "../register/user";
+import {User} from "../user";
 import {catchError} from "rxjs/operators";
 const API_BASE_URL = 'http://localhost:8081/api/';
 @Injectable({
@@ -41,12 +41,12 @@ export class UserService {
         .pipe(catchError(this.handleError));
   }
 
-  updateUser(user: User) {
-    return this.http.put(`${API_BASE_URL}user/updateuser`, user)
+  updateUser(id: number, value: any): Observable<Object> {
+    return this.http.put(`${API_BASE_URL}user/${id}`, value)
         .pipe(catchError(this.handleError));
   }
 
-  getUserById(id: number) {
+  getUserById(id: number | undefined) {
     return this.http.get<User>(`${API_BASE_URL}user/${id}`)
         .pipe(catchError(this.handleError));
   }
@@ -54,6 +54,11 @@ export class UserService {
   registerUser(user : User){
     return this.http.post<any>(API_BASE_URL + 'user', user)
         .pipe(catchError(this.handleError))
+  }
+
+  getUserWithoutPassword(){
+    return this.http.get<String[]>(`${API_BASE_URL}user/getAll`)
+          .pipe(catchError(this.handleError));
   }
 
   private handleError(httpError: HttpErrorResponse) {

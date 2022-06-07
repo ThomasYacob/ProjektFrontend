@@ -1,1 +1,43 @@
-<p>answer-moderator works!</p>
+<div class="uncorrected">
+	<h2>Uncorrected answers</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Answer</th>
+				<th>Type of quesiton</th>
+				<th>QuestionId</th>
+				<th>Date submitted</th>
+				<th>Points to give</th>
+				<th>Submit</th>
+			</tr>
+		</thead>
+	<tbody>
+		<tr *ngFor="let answers of userAnswers">
+			<td>{{ answers.answer }}</td>
+			<td>{{ answers.typeOfQuestion }}</td>
+			<td>{{ answers.questionId }}</td>
+			<td>{{ answers.dateString }}</td>
+			<td>
+				<form [formGroup]="myForm">
+					<mat-form-field appearance="outline">
+						<mat-label>Input points to give</mat-label>
+						<input matInput formControlName="pointsToAdd" />
+					</mat-form-field>
+				</form>
+			</td>
+			<td>
+				<button
+					class="btn btn-success btn-m"
+					(click)="
+						correctQuestion(
+							answers.user.username,
+							answers.userAnswerid,
+							answers.typeOfQuestion
+						)
+					"
+				>Submit</button>
+			</td>
+		</tr>
+	</tbody>
+    </table>
+</div>

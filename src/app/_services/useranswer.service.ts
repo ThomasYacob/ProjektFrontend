@@ -7,7 +7,6 @@ import { userAnswer } from './userAnswer';
 const API_BASE_URL = 'http://localhost:8081/api/';
 
 
-
   enum typeOfQuestion {
   Daily = 1 ,Weekly = 2,Monthly = 3
 }
@@ -38,7 +37,15 @@ export class UseranswerService {
   }
 
   getAlluserAnswers(){
-    return this.http.get<userAnswer[]>(`${API_BASE_URL}/user/userAnswers`);
+    return this.http.get<userAnswer[]>(`${API_BASE_URL}user/userAnswers`);
+  }
+  getAlluserAnswersUncorrected(){
+    return this.http.get<userAnswer[]>(API_BASE_URL + "userAnswers/uncorrected");
+  }
+
+  setTocorrected(userAnswerid : number){
+    return this.http.put(API_BASE_URL+ "userAnswers/" + userAnswerid, null)
+    .pipe(catchError(this.handleError));
   }
 
   private handleError(httpError: HttpErrorResponse) {

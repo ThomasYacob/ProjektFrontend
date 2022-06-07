@@ -6,6 +6,7 @@ import {catchError} from "rxjs/operators";
 import { Weekly } from '../weekly-assignment/weekly';
 import { Daily } from '../daily-assignment/daily';
 const API_BASE_URL = 'http://localhost:8081/api/';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +19,7 @@ export class WeeklyService{
   }
 
     deleteWeekly(id: number):Observable<{}> {
-    return this.http.delete('${API_BASE_URL}/weekly/${id}')
+    return this.http.delete('${API_BASE_URL}/weekly/' + id)
         .pipe(catchError(this.handleError));
   }
 

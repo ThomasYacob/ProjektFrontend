@@ -17,7 +17,7 @@ export class MonthlyService{
   }
 
     deleteMonthly(id: number):Observable<{}> {
-    return this.http.delete(API_BASE_URL+'monthly'+'/${id}')
+    return this.http.delete(API_BASE_URL+'monthly/'+ id)
         .pipe(catchError(this.handleError));
   }
 

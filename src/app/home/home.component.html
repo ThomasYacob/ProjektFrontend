@@ -1,13 +1,11 @@
-<!--<h1>Hi {{currenUser.username}}!</h1>-->
-<!--<h3>All registered users:</h3>-->
 
-<!--<ul>-->
-<!--        <li *ngFor="let user of users">-->
-<!--                {{user.username}}-->
-<!--                - <a (click)="deleteUser(user.username)"-->
-<!--                     class="text-danger">Delete</a>-->
-<!--        </li>-->
-<!--</ul>-->
+
+<div class="row" *ngIf="submitMsg !== ''">
+    <div class="alert alert-info alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{submitMsg}}
+    </div>
+</div>
 
 <div class="wrapper">
 	<p class="targe-date">
@@ -27,47 +25,44 @@
 	</div>
 
 	<div class="dailyActive">
-		<h3>Daily Active</h3>
-		<tr *ngFor="let daily of dailysActive">
-			<th class="dailyc">{{ daily.question }}</th>
-			<th>{{ daily.date }}</th>
-			<th class="dailyAlt1">{{ daily.alternative1 }}</th>
-			<th class="dailyAlt2">{{ daily.alternative2 }}</th>
-			<th class="dailyAlt3">{{ daily.alternative3 }}</th>
+		<h3>Todays question</h3>
+		<tr *ngIf="dailysActive != undefined">
+			<th class="dailyc">{{ dailysActive.question }}</th>
+			<th>{{ dailysActive.date }}</th>
 			<td>
 				<form [formGroup]="myForm">
 					<mat-form-field class="dailyform" appearance="fill">
 						<mat-label>Answer daily</mat-label>
 						<mat-select formControlName="rightAlternative" required>
 							<mat-option [value]="alternative1">
-								{{ daily.alternative1 }}
+								{{ dailysActive.alternative1 }}
 							</mat-option>
 							<mat-option [value]="alternative2">
-								{{ daily.alternative2 }}
+								{{ dailysActive.alternative2 }}
 							</mat-option>
 							<mat-option [value]="alternative3">
-								{{ daily.alternative3 }}
+								{{ dailysActive.alternative3 }}
 							</mat-option>
 						</mat-select>
 					</mat-form-field>
 				</form>
 			</td>
 			<td>
-				<button class="btn btn-success btn-d" (click)="dailySubmit(daily.id)">
+				<button
+					class="btn btn-success btn-d"
+					(click)="dailySubmit(dailysActive.id)"
+				>
 					Submit
 				</button>
 			</td>
 		</tr>
 	</div>
 
-	<div class="dailyActive">
-		<h3>Daily Active</h3>
+	<div class="dailyNotActive">
+		<h3>Upcoming/Expired Dailys</h3>
 		<tr *ngFor="let daily of dailysNotActive">
 			<th class="dailyc">{{ daily.question }}</th>
 			<th>{{ daily.date }}</th>
-			<th class="dailyAlt1">{{ daily.alternative1 }}</th>
-			<th class="dailyAlt2">{{ daily.alternative2 }}</th>
-			<th class="dailyAlt3">{{ daily.alternative3 }}</th>
 		</tr>
 	</div>
 
@@ -91,7 +86,7 @@
 			</td>
 
 			<td>
-				<button class="btn btn-success btn-w" (click)="dailySubmit(weekly.id)">
+				<button class="btn btn-success btn-w" (click)="weeklySubmit(weekly.id)">
 					Submit
 				</button>
 			</td>
@@ -118,11 +113,11 @@
 				</mat-form-field>
 			</td>
 			<td>
-				<button class="btn btn-success btn-m" (click)="dailySubmit(monthly.id)">
+				<button class="btn btn-success btn-m" (click)="monthlySubmit(monthly.id)">
 					Submit
 				</button>
 			</td>
 		</tr>
 	</div>
 </div>
-<!--</div>-->
+

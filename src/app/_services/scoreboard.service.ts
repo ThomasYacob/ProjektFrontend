@@ -5,7 +5,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from "rxjs/operators";
 import { Scoreboard } from '../score-board/scoreboard';
 import { TokenStorageService } from './token-storage.service';
-import { User } from '../register/user';
+import { User } from '../user';
 const API_BASE_URL = 'http://localhost:8081/api/';
 
 
@@ -25,6 +25,11 @@ export class ScoreboardService {
   getUserScoreBoard(){
     this.currentUser = this.token.getUser;
     return this.http.get<Scoreboard[]>(API_BASE_URL + 'scoreboard/' + this.currentUser.email);
+  }
+
+  updateScore(userId:String, type: number, points : number ){
+    return this.http.put<any>(API_BASE_URL + 'scoreboard/' + 'alterScoreBoard/' + userId + '/' + type,points)
+    .pipe(catchError(this.handleError));
   }
 
    

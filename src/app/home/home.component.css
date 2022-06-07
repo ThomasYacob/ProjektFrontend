@@ -20,7 +20,13 @@
     font-size: 22px;
 }
 
-.daily {
+.dailyActive {
+    position: relative;
+    bottom: 50px;
+    right: 542px;
+}
+
+.dailyActive {
     position: relative;
     bottom: 40px;
     right: 542px;
@@ -78,4 +84,10 @@
     position: relative;
     bottom: 15px;
     left: 0px;
+}
+
+.row {
+    position: relative;
+    top: 70px;
+    left: 20px;
 }

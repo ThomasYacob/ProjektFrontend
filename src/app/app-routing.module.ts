@@ -15,6 +15,8 @@ import { MonthlyAssignmentComponent } from './monthly-assignment/monthly-assignm
 import { ScoreBoardComponent } from './score-board/score-board.component';
 import { AssignmentModeratorComponent } from './assignment-moderator/assignment-moderator.component';
 import { AnswerModeratorComponent } from './answer-moderator/answer-moderator.component';
+import { UserUpdateComponent } from './user-update/user-update.component'
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -31,8 +33,9 @@ const routes: Routes = [
   { path: 'weekly-assignment', component:WeeklyAssignmentComponent},
   { path: 'score-board', component:ScoreBoardComponent},
   { path: 'monthly-assignment', component:MonthlyAssignmentComponent},
-  { path: 'assignmentmoderator', component:AssignmentModeratorComponent},
-  { path: 'answermoderator', component:AnswerModeratorComponent},
+  { path: 'assignment-moderator', component:AssignmentModeratorComponent},
+  { path: 'answer-moderator', component:AnswerModeratorComponent},
+    { path: 'users/:id', component: UserUpdateComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

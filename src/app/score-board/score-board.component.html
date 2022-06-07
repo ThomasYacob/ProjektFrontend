@@ -1,45 +1,26 @@
 <div class="row" xmlns="http://www.w3.org/1999/html">
-    <h2>User Details</h2>
-    <table class="table table-sm table-bordered table-striped">
-        <thead>
-        <tr>
-            <th>Username</th>
-            <th>Dailyscore</th>
-            <th>Weeklyscore</th>
-            <th>Monthlyscore</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        <ng-container *ngFor="let currentUser of users ; index as i">
-            <ng-container *ngFor="let scoreboard of scoreboards ; index as j">
-                <ng-container *ngIf="i===j">
-                    <th> {{ currentUser.username }} </th>
-                    <th> {{ scoreboard.dailyScore }} </th>
-                    <th> {{ scoreboard.weeklyScore }} </th>
-                    <th> {{ scoreboard.monthlyScore }} </th>
-                    <tr></tr>
-                </ng-container>
-            </ng-container>
-        </ng-container>
-
-<!--        <tr *ngFor="let scoreboard of scoreboards ; let users of currentUser.username">-->
-<!--            <td>{{currentUser.username}}</td>-->
-<!--            <td>{{scoreboard.dailyScore}}</td>-->
-<!--            <td>{{scoreboard.weeklyScore}}</td>-->
-<!--            <td>{{scoreboard.monthlyScore}}</td>-->
-<!--        </tr>-->
-
-<!--    <tr *ngFor="let scoreboard of scoreboards">-->
-
-<!--        <td>{{scoreboard.dailyScore}}</td>-->
-<!--        <td>{{scoreboard.weeklyScore}}</td>-->
-<!--        <td>{{scoreboard.monthlyScore}}</td>-->
-<!--    </tr>-->
-<!--    <tr *ngFor="let user of users">-->
-<!--        <td>{{user.username}}</td>-->
-<!--    </tr>-->
-
-        </tbody>
-    </table>
+	<h2>User Details</h2>
+	<table class="table table-sm table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Username</th>
+				<th>Dailyscore</th>
+				<th>Weeklyscore</th>
+				<th>Monthlyscore</th>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-container *ngFor="let currentUser of users; index as i">
+				<ng-container *ngFor="let scoreboard of scoreboards; index as j" >
+					<ng-container *ngIf="i === j">
+						<th>{{ currentUser }}</th>
+						<th>{{ scoreboard.dailyScore }}</th>
+						<th>{{ scoreboard.weeklyScore }}</th>
+						<th>{{ scoreboard.monthlyScore }}</th>
+						<tr></tr>
+					</ng-container>
+				</ng-container>
+			</ng-container>
+		</tbody>
+	</table>
 </div>

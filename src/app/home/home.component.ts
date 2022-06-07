@@ -12,9 +12,6 @@ import { data } from 'jquery';
 import { UseranswerService } from '../_services/useranswer.service';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
-
-
-
   enum typeOfQuestion {
   Daily = 1 ,Weekly = 2,Monthly = 3
 }
@@ -64,7 +61,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   monthlysActive?: Monthly;
   monthlysNotActive?: Monthly[];
   dailys?: Daily[];
-  dailysActive?: Daily[];
+  dailysActive?: Daily;
   dailysNotActive?: Daily[];
   weeklys?: Weekly[];
   weeklysActive?: Weekly;
@@ -72,9 +69,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   dailyAnswer?: String = '';
   weeklyAnswer?: String = '';
   Monthlyanswer? : String = '';
-  alternative1 = this
+  alternative1 = '1'
   alternative2 = '2'
   alternative3 = '3'
+  submitMsg?: String = '';
 
   ngOnInit(): void {
     this.userService.getUserBoard().subscribe({
@@ -114,6 +112,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.dailyService.getCurrentDaily().subscribe(data =>{
       this.dailysActive = data;
     })
+    console.log("Active Dailys");
+    console.log(this.dailysActive);
 
     this.dailyService.getDailyInactive().subscribe(data =>{
       this.dailysNotActive = data;
@@ -170,15 +170,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
   monthlySubmit(id: number) {
     this.userAnswerService.submitAnswer(this.Monthlyanswer, id, 2).subscribe( responseData => {
       console.log('Success!', responseData)
+      this.submitMsg = 'Success!'
     },
-        error => error);
-
+        (error : string)=>{
+          this.submitMsg = 'Answer already submitted';
+        });
+        
+    
   }
   weeklySubmit(id: number) {
     this.userAnswerService.submitAnswer(this.weeklyAnswer, id, 1).subscribe( responseData => {
       console.log('Success!', responseData)
+      this.submitMsg = 'Success!'
     },
-        error => error);
+        (error : string)=>{
+          this.submitMsg = 'Answer already submitted';
+        });
+    
   }
   dailySubmit(id: number) {
     var answer = this.myForm.get('rightAlternative')?.value;
@@ -186,9 +194,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   
     this.userAnswerService.submitAnswer(answer, id, 0).subscribe( responseData => {
       console.log('Success!', responseData)
+      this.submitMsg = 'Success!'
     },
-        error => error);
-
+        (error : string)=>{
+          this.submitMsg = 'Answer already submitted';
+        });
+        
   }
 }
 
