@@ -11,8 +11,9 @@ services:
       context: ../ProjektBackend # Use an image built from the specified dockerfile in the `ProjektBackend` directory.
       dockerfile: Dockerfile
     hostname: serverJavaSpring
-    ports:
-      - "8080:8080"
+    # If you want to access the documentation through localhost:8080/documentation
+#    ports:
+#      - "8080:8080"
     restart: always
     depends_on:
       - db # This service depends on mysql. Start that first.

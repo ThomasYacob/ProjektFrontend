@@ -12,23 +12,23 @@
             <th>User ID</th>
             <th>Username</th>
             <th>Email</th>
-            <th>Role</th>
+<!--            <th>Role</th>-->
         </tr>
         </thead>
         <tbody>
         <ng-container *ngFor="let currentUser of users">
-            <ng-container *ngFor="let role of roles">
+<!--            <ng-container *ngFor="let role of roles">-->
                     <th> {{ currentUser.id }} </th>
                     <th> {{ currentUser.username }} </th>
                     <th> {{ currentUser.email }} </th>
-                    <th> {{ role }} </th>
+<!--                    <th> {{ role }} </th>-->
                     <td>
                         <button class="btn btn-success btn-sm" (click)="updateUser(currentUser.id)">Update</button>
                         <button class="btn btn-danger btn-sm ml-3" (click)="onClickDelete(currentUser.id)">Delete</button>
                     </td>
                     <tr>
             </ng-container>
-        </ng-container>
+<!--        </ng-container>-->
         </tbody>
     </table>
 </div>

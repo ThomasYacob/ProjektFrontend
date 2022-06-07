@@ -13,7 +13,7 @@
 
 		<mat-menu #menu="matMenu">
 
-			<button mat-menu-item [routerLink]="'./home'">
+			<button mat-menu-item *ngIf="isLoggedIn"[routerLink]="'./home'">
 				<span>Home</span>
 			</button>
 
@@ -25,9 +25,9 @@
 					<span>Moderate assignment</span>
 			</button>
 
-			<button mat-menu-item *ngIf="showAdminBoard || showModeratorBoard" [routerLink]="'./answer-moderator'">
-					<span>Moderate answers</span>
-			</button>
+<!--			<button mat-menu-item *ngIf="showAdminBoard || showModeratorBoard" [routerLink]="'./answer-moderator'">-->
+<!--					<span>Moderate answers</span>-->
+<!--			</button>-->
 
 			<button mat-menu-item *ngIf="showAdminBoard || showModeratorBoard" [routerLink]="'./assignment'">
 				<span>Create</span>

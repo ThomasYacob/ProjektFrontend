@@ -1,5 +1,4 @@
 
-
 <div class="row" *ngIf="submitMsg !== ''">
     <div class="alert alert-info alert-dismissible">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -7,24 +6,26 @@
     </div>
 </div>
 
+<!--<div class="wrapper">-->
+<!--	<p class="targe-date">-->
+<!--		Countdown to {{ months[month] + " " + day + ", " + year }}-->
+<!--	</p>-->
+<!--	<div class="description">-->
+<!--		<p>Days</p>-->
+<!--		<p>Hours</p>-->
+<!--		<p>Minutes</p>-->
+<!--		<p>Seconds</p>-->
+<!--	</div>-->
+<!--	<div class="times">-->
+<!--		<p id="days"></p>-->
+<!--		<p id="hours"></p>-->
+<!--		<p id="mins"></p>-->
+<!--		<p id="seconds"></p>-->
+<!--	</div>-->
 <div class="wrapper">
-	<p class="targe-date">
-		Countdown to {{ months[month] + " " + day + ", " + year }}
-	</p>
-	<div class="description">
-		<p>Days</p>
-		<p>Hours</p>
-		<p>Minutes</p>
-		<p>Seconds</p>
-	</div>
-	<div class="times">
-		<p id="days"></p>
-		<p id="hours"></p>
-		<p id="mins"></p>
-		<p id="seconds"></p>
-	</div>
-
 	<div class="dailyActive">
+		<br>
+		<br>
 		<h3>Todays question</h3>
 		<tr *ngIf="dailysActive != undefined">
 			<th class="dailyc">{{ dailysActive.question }}</th>
