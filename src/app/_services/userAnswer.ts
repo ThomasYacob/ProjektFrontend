@@ -1,4 +1,4 @@
-import { User } from "../register/user";
+import { User } from "../user";
 
 export class userAnswer{
     constructor(

@@ -1,156 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="@localhost">
+<dataSource name="@localhost [2]">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.32">
     <root id="1">
-      <DefaultCasing>mixed/mixed</DefaultCasing>
+      <DefaultCasing>exact</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
-      <Grants>|root||Admin||ALTER|G
-|root||root|localhost|ALTER|G
-|root||Admin||ALTER ROUTINE|G
-|root||root|localhost|ALTER ROUTINE|G
-|root||Admin||APPLICATION_PASSWORD_ADMIN|G
-|root||root|localhost|APPLICATION_PASSWORD_ADMIN|G
-|root||Admin||AUDIT_ABORT_EXEMPT|G
-|root||mysql.infoschema|localhost|AUDIT_ABORT_EXEMPT|G
-|root||mysql.session|localhost|AUDIT_ABORT_EXEMPT|G
-|root||mysql.sys|localhost|AUDIT_ABORT_EXEMPT|G
-|root||root|localhost|AUDIT_ABORT_EXEMPT|G
-|root||Admin||AUDIT_ADMIN|G
-|root||root|localhost|AUDIT_ADMIN|G
-|root||Admin||AUTHENTICATION_POLICY_ADMIN|G
-|root||root|localhost|AUTHENTICATION_POLICY_ADMIN|G
-|root||Admin||BACKUP_ADMIN|G
-|root||mysql.session|localhost|BACKUP_ADMIN|G
-|root||root|localhost|BACKUP_ADMIN|G
-|root||Admin||BINLOG_ADMIN|G
-|root||root|localhost|BINLOG_ADMIN|G
-|root||Admin||BINLOG_ENCRYPTION_ADMIN|G
-|root||root|localhost|BINLOG_ENCRYPTION_ADMIN|G
-|root||Admin||CLONE_ADMIN|G
-|root||mysql.session|localhost|CLONE_ADMIN|G
-|root||root|localhost|CLONE_ADMIN|G
-|root||Admin||CONNECTION_ADMIN|G
-|root||mysql.session|localhost|CONNECTION_ADMIN|G
-|root||root|localhost|CONNECTION_ADMIN|G
-|root||Admin||CREATE|G
-|root||root|localhost|CREATE|G
-|root||Admin||CREATE ROLE|G
-|root||root|localhost|CREATE ROLE|G
-|root||Admin||CREATE ROUTINE|G
-|root||root|localhost|CREATE ROUTINE|G
-|root||Admin||CREATE TABLESPACE|G
-|root||root|localhost|CREATE TABLESPACE|G
-|root||Admin||CREATE TEMPORARY TABLES|G
-|root||root|localhost|CREATE TEMPORARY TABLES|G
-|root||Admin||CREATE USER|G
-|root||root|localhost|CREATE USER|G
-|root||Admin||CREATE VIEW|G
-|root||root|localhost|CREATE VIEW|G
-|root||Admin||DELETE|G
-|root||root|localhost|DELETE|G
-|root||Admin||DROP|G
-|root||root|localhost|DROP|G
-|root||Admin||DROP ROLE|G
-|root||root|localhost|DROP ROLE|G
-|root||Admin||ENCRYPTION_KEY_ADMIN|G
-|root||root|localhost|ENCRYPTION_KEY_ADMIN|G
-|root||Admin||EVENT|G
-|root||root|localhost|EVENT|G
-|root||Admin||EXECUTE|G
-|root||root|localhost|EXECUTE|G
-|root||Admin||FILE|G
-|root||root|localhost|FILE|G
-|root||Admin||FLUSH_OPTIMIZER_COSTS|G
-|root||root|localhost|FLUSH_OPTIMIZER_COSTS|G
-|root||Admin||FLUSH_STATUS|G
-|root||root|localhost|FLUSH_STATUS|G
-|root||Admin||FLUSH_TABLES|G
-|root||root|localhost|FLUSH_TABLES|G
-|root||Admin||FLUSH_USER_RESOURCES|G
-|root||root|localhost|FLUSH_USER_RESOURCES|G
-|root||Admin||GROUP_REPLICATION_ADMIN|G
-|root||root|localhost|GROUP_REPLICATION_ADMIN|G
-|root||Admin||GROUP_REPLICATION_STREAM|G
-|root||root|localhost|GROUP_REPLICATION_STREAM|G
-|root||Admin||INDEX|G
-|root||root|localhost|INDEX|G
-|root||Admin||INNODB_REDO_LOG_ARCHIVE|G
-|root||root|localhost|INNODB_REDO_LOG_ARCHIVE|G
-|root||Admin||INNODB_REDO_LOG_ENABLE|G
-|root||root|localhost|INNODB_REDO_LOG_ENABLE|G
-|root||Admin||INSERT|G
-|root||root|localhost|INSERT|G
-|root||Admin||LOCK TABLES|G
-|root||root|localhost|LOCK TABLES|G
-|root||Admin||PASSWORDLESS_USER_ADMIN|G
-|root||root|localhost|PASSWORDLESS_USER_ADMIN|G
-|root||Admin||PERSIST_RO_VARIABLES_ADMIN|G
-|root||mysql.session|localhost|PERSIST_RO_VARIABLES_ADMIN|G
-|root||root|localhost|PERSIST_RO_VARIABLES_ADMIN|G
-|root||Admin||PROCESS|G
-|root||root|localhost|PROCESS|G
-|root||Admin||REFERENCES|G
-|root||root|localhost|REFERENCES|G
-|root||Admin||RELOAD|G
-|root||root|localhost|RELOAD|G
-|root||Admin||REPLICATION CLIENT|G
-|root||root|localhost|REPLICATION CLIENT|G
-|root||Admin||REPLICATION SLAVE|G
-|root||root|localhost|REPLICATION SLAVE|G
-|root||Admin||REPLICATION_APPLIER|G
-|root||root|localhost|REPLICATION_APPLIER|G
-|root||Admin||REPLICATION_SLAVE_ADMIN|G
-|root||root|localhost|REPLICATION_SLAVE_ADMIN|G
-|root||Admin||RESOURCE_GROUP_ADMIN|G
-|root||root|localhost|RESOURCE_GROUP_ADMIN|G
-|root||Admin||RESOURCE_GROUP_USER|G
-|root||root|localhost|RESOURCE_GROUP_USER|G
-|root||Admin||ROLE_ADMIN|G
-|root||root|localhost|ROLE_ADMIN|G
-|root||Admin||SELECT|G
-|root||mysql.infoschema|localhost|SELECT|G
-|root||root|localhost|SELECT|G
-|root||Admin||SERVICE_CONNECTION_ADMIN|G
-|root||root|localhost|SERVICE_CONNECTION_ADMIN|G
-|root||Admin||SESSION_VARIABLES_ADMIN|G
-|root||mysql.session|localhost|SESSION_VARIABLES_ADMIN|G
-|root||root|localhost|SESSION_VARIABLES_ADMIN|G
-|root||Admin||SET_USER_ID|G
-|root||root|localhost|SET_USER_ID|G
-|root||Admin||SHOW DATABASES|G
-|root||root|localhost|SHOW DATABASES|G
-|root||Admin||SHOW VIEW|G
-|root||root|localhost|SHOW VIEW|G
-|root||Admin||SHOW_ROUTINE|G
-|root||root|localhost|SHOW_ROUTINE|G
-|root||Admin||SHUTDOWN|G
-|root||mysql.session|localhost|SHUTDOWN|G
-|root||root|localhost|SHUTDOWN|G
-|root||Admin||SUPER|G
-|root||mysql.session|localhost|SUPER|G
-|root||root|localhost|SUPER|G
-|root||Admin||SYSTEM_USER|G
-|root||mysql.infoschema|localhost|SYSTEM_USER|G
-|root||mysql.session|localhost|SYSTEM_USER|G
-|root||mysql.sys|localhost|SYSTEM_USER|G
-|root||root|localhost|SYSTEM_USER|G
-|root||Admin||SYSTEM_VARIABLES_ADMIN|G
-|root||mysql.session|localhost|SYSTEM_VARIABLES_ADMIN|G
-|root||root|localhost|SYSTEM_VARIABLES_ADMIN|G
-|root||Admin||TABLE_ENCRYPTION_ADMIN|G
-|root||root|localhost|TABLE_ENCRYPTION_ADMIN|G
-|root||Admin||TRIGGER|G
-|root||root|localhost|TRIGGER|G
-|root||Admin||UPDATE|G
-|root||root|localhost|UPDATE|G
-|root||Admin||XA_RECOVER_ADMIN|G
-|root||root|localhost|XA_RECOVER_ADMIN|G
-|root||Admin||grant option|G
-|root||root|localhost|grant option|G
-performance_schema|schema||mysql.session|localhost|SELECT|G
-sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
-      <ServerVersion>8.0.28</ServerVersion>
+      <Grants>giesecke&amp;devrient|schema||admin||ALTER|G
+giesecke&amp;devrient|schema||admin||ALTER ROUTINE|G
+giesecke&amp;devrient|schema||admin||CREATE|G
+giesecke&amp;devrient|schema||admin||CREATE ROUTINE|G
+giesecke&amp;devrient|schema||admin||CREATE TEMPORARY TABLES|G
+giesecke&amp;devrient|schema||admin||CREATE VIEW|G
+giesecke&amp;devrient|schema||admin||DELETE|G
+giesecke&amp;devrient|schema||admin||DROP|G
+giesecke&amp;devrient|schema||admin||EVENT|G
+giesecke&amp;devrient|schema||admin||EXECUTE|G
+giesecke&amp;devrient|schema||admin||INDEX|G
+giesecke&amp;devrient|schema||admin||INSERT|G
+giesecke&amp;devrient|schema||admin||LOCK TABLES|G
+giesecke&amp;devrient|schema||admin||REFERENCES|G
+giesecke&amp;devrient|schema||admin||SELECT|G
+giesecke&amp;devrient|schema||admin||SHOW VIEW|G
+giesecke&amp;devrient|schema||admin||TRIGGER|G
+giesecke&amp;devrient|schema||admin||UPDATE|G</Grants>
+      <ServerVersion>8.0.29</ServerVersion>
     </root>
     <collation id="2" parent="1" name="armscii8_bin">
       <Charset>armscii8</Charset>
@@ -699,89 +572,89 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Charset>utf32</Charset>
     </collation>
     <collation id="171" parent="1" name="utf8_bin">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="172" parent="1" name="utf8_croatian_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="173" parent="1" name="utf8_czech_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="174" parent="1" name="utf8_danish_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="175" parent="1" name="utf8_esperanto_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="176" parent="1" name="utf8_estonian_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="177" parent="1" name="utf8_general_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
       <DefaultForCharset>1</DefaultForCharset>
     </collation>
     <collation id="178" parent="1" name="utf8_general_mysql500_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="179" parent="1" name="utf8_german2_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="180" parent="1" name="utf8_hungarian_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="181" parent="1" name="utf8_icelandic_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="182" parent="1" name="utf8_latvian_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="183" parent="1" name="utf8_lithuanian_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="184" parent="1" name="utf8_persian_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="185" parent="1" name="utf8_polish_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="186" parent="1" name="utf8_roman_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="187" parent="1" name="utf8_romanian_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="188" parent="1" name="utf8_sinhala_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="189" parent="1" name="utf8_slovak_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="190" parent="1" name="utf8_slovenian_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="191" parent="1" name="utf8_spanish2_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="192" parent="1" name="utf8_spanish_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="193" parent="1" name="utf8_swedish_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="194" parent="1" name="utf8_tolower_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="195" parent="1" name="utf8_turkish_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="196" parent="1" name="utf8_unicode_520_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="197" parent="1" name="utf8_unicode_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="198" parent="1" name="utf8_vietnamese_ci">
-      <Charset>utf8</Charset>
+      <Charset>utf8mb3</Charset>
     </collation>
     <collation id="199" parent="1" name="utf8mb4_0900_ai_ci">
       <Charset>utf8mb4</Charset>
@@ -1009,458 +882,386 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <collation id="273" parent="1" name="utf8mb4_zh_0900_as_cs">
       <Charset>utf8mb4</Charset>
     </collation>
-    <schema id="274" parent="1" name="BooksDB">
+    <schema id="274" parent="1" name="giesecke&amp;devrient">
       <Current>1</Current>
-      <Grants>author|||Thomas|localhost|DELETE|G
-author|||Thomas|localhost|INSERT|G
-author|||Guest|localhost|SELECT|G
-author|||Redve|localhost|SELECT|G
-author|||Thomas|localhost|SELECT|G
-book|||Thomas|localhost|DELETE|G
-book|||Thomas|localhost|INSERT|G
-book|||Guest|localhost|SELECT|G
-book|||Redve|localhost|SELECT|G
-book|||Thomas|localhost|SELECT|G
-bookauthor|||Thomas|localhost|DELETE|G
-bookauthor|||Thomas|localhost|INSERT|G
-bookauthor|||Guest|localhost|SELECT|G
-bookauthor|||Redve|localhost|SELECT|G
-bookauthor|||Thomas|localhost|SELECT|G
-genre|||Thomas|localhost|DELETE|G
-genre|||Thomas|localhost|INSERT|G
-genre|||Guest|localhost|SELECT|G
-genre|||Redve|localhost|SELECT|G
-genre|||Thomas|localhost|SELECT|G
-rating|||Thomas|localhost|DELETE|G
-rating|||Thomas|localhost|INSERT|G
-rating|||Guest|localhost|SELECT|G
-rating|||Redve|localhost|SELECT|G
-rating|||Thomas|localhost|SELECT|G
-user|||Redve|localhost|SELECT|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
-    <schema id="275" parent="1" name="giesecke&amp;devrient">
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </schema>
-    <schema id="276" parent="1" name="information_schema">
+    <schema id="275" parent="1" name="information_schema">
       <CollationName>utf8_general_ci</CollationName>
     </schema>
-    <schema id="277" parent="1" name="mysql">
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </schema>
-    <schema id="278" parent="1" name="performance_schema">
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </schema>
-    <schema id="279" parent="1" name="sys">
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </schema>
-    <user id="280" parent="1" name="Admin">
-      <Plugin>caching_sha2_password</Plugin>
-    </user>
-    <user id="281" parent="1" name="Admin">
-      <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
-    </user>
-    <user id="282" parent="1" name="Guest">
-      <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
-    </user>
-    <user id="283" parent="1" name="Redve">
-      <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
-    </user>
-    <user id="284" parent="1" name="Thomas">
-      <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
-    </user>
-    <user id="285" parent="1" name="mysql.infoschema">
-      <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
-    </user>
-    <user id="286" parent="1" name="mysql.session">
-      <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
-    </user>
-    <user id="287" parent="1" name="mysql.sys">
-      <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
-    </user>
-    <user id="288" parent="1" name="root">
-      <Host>localhost</Host>
-      <Plugin>caching_sha2_password</Plugin>
-    </user>
-    <table id="289" parent="275" name="daily">
+    <user id="276" parent="1" name="admin"/>
+    <table id="277" parent="274" name="daily">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="290" parent="275" name="hibernate_sequence">
+    <table id="278" parent="274" name="hibernate_sequence">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="291" parent="275" name="monthly">
+    <table id="279" parent="274" name="monthly">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="292" parent="275" name="refreshtoken">
+    <table id="280" parent="274" name="refreshtoken">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="293" parent="275" name="roles">
+    <table id="281" parent="274" name="roles">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="294" parent="275" name="scoreboard">
+    <table id="282" parent="274" name="scoreboard">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="295" parent="275" name="user">
+    <table id="283" parent="274" name="user">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="296" parent="275" name="user_answer">
+    <table id="284" parent="274" name="user_answer">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="297" parent="275" name="user_roles">
+    <table id="285" parent="274" name="user_roles">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="298" parent="275" name="weekly">
+    <table id="286" parent="274" name="weekly">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="299" parent="289" name="dailyid">
+    <column id="287" parent="277" name="dailyid">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="300" parent="289" name="alternative1">
+    <column id="288" parent="277" name="alternative1">
       <DataType>varchar(512)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="301" parent="289" name="alternative2">
+    <column id="289" parent="277" name="alternative2">
       <DataType>varchar(512)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="302" parent="289" name="alternative3">
+    <column id="290" parent="277" name="alternative3">
       <DataType>varchar(512)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="303" parent="289" name="date_to_publish">
+    <column id="291" parent="277" name="date_to_publish">
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="304" parent="289" name="question">
+    <column id="292" parent="277" name="question">
       <DataType>varchar(512)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="305" parent="289" name="right_alternative">
+    <column id="293" parent="277" name="right_alternative">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <key id="306" parent="289" name="PRIMARY">
+    <key id="294" parent="277" name="PRIMARY">
       <ColNames>dailyid</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="307" parent="290" name="next_val">
+    <column id="295" parent="278" name="next_val">
       <DataType>bigint|0s</DataType>
       <Position>1</Position>
     </column>
-    <column id="308" parent="291" name="monthlyid">
+    <column id="296" parent="279" name="monthlyid">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="309" parent="291" name="answer">
+    <column id="297" parent="279" name="answer">
       <DataType>varchar(512)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="310" parent="291" name="date_to_publish">
+    <column id="298" parent="279" name="date_to_publish">
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="311" parent="291" name="hint1">
+    <column id="299" parent="279" name="hint1">
       <DataType>varchar(512)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="312" parent="291" name="hint2">
+    <column id="300" parent="279" name="hint2">
       <DataType>varchar(512)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <column id="313" parent="291" name="hint3">
+    <column id="301" parent="279" name="hint3">
       <DataType>varchar(512)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="314" parent="291" name="question">
+    <column id="302" parent="279" name="question">
       <DataType>varchar(512)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <key id="315" parent="291" name="PRIMARY">
+    <key id="303" parent="279" name="PRIMARY">
       <ColNames>monthlyid</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="316" parent="292" name="id">
+    <column id="304" parent="280" name="id">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="317" parent="292" name="expiry_date">
+    <column id="305" parent="280" name="expiry_date">
       <DataType>datetime(6)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="318" parent="292" name="token">
+    <column id="306" parent="280" name="token">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="319" parent="292" name="user_id">
+    <column id="307" parent="280" name="user_id">
       <DataType>bigint|0s</DataType>
       <Position>4</Position>
     </column>
-    <foreign-key id="320" parent="292" name="FKfr75ge3iecdx26qe8afh1srf6">
+    <foreign-key id="308" parent="280" name="FKfr75ge3iecdx26qe8afh1srf6">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <index id="321" parent="292" name="UK_or156wbneyk8noo4jstv55ii3">
+    <index id="309" parent="280" name="UK_or156wbneyk8noo4jstv55ii3">
       <ColNames>token</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="322" parent="292" name="FKfr75ge3iecdx26qe8afh1srf6">
+    <index id="310" parent="280" name="FKfr75ge3iecdx26qe8afh1srf6">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="323" parent="292" name="PRIMARY">
+    <key id="311" parent="280" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <key id="324" parent="292" name="UK_or156wbneyk8noo4jstv55ii3">
+    <key id="312" parent="280" name="UK_or156wbneyk8noo4jstv55ii3">
       <ColNames>token</ColNames>
       <UnderlyingIndexName>UK_or156wbneyk8noo4jstv55ii3</UnderlyingIndexName>
     </key>
-    <column id="325" parent="293" name="id">
+    <column id="313" parent="281" name="id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="326" parent="293" name="name">
+    <column id="314" parent="281" name="name">
       <DataType>varchar(20)|0s</DataType>
       <Position>2</Position>
     </column>
-    <index id="327" parent="293" name="UK_ofx66keruapi6vyqpv6f2or37">
+    <index id="315" parent="281" name="UK_ofx66keruapi6vyqpv6f2or37">
       <ColNames>name</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="328" parent="293" name="PRIMARY">
+    <key id="316" parent="281" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <key id="329" parent="293" name="UK_ofx66keruapi6vyqpv6f2or37">
+    <key id="317" parent="281" name="UK_ofx66keruapi6vyqpv6f2or37">
       <ColNames>name</ColNames>
       <UnderlyingIndexName>UK_ofx66keruapi6vyqpv6f2or37</UnderlyingIndexName>
     </key>
-    <column id="330" parent="294" name="scoreid">
+    <column id="318" parent="282" name="scoreid">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="331" parent="294" name="daily_score">
+    <column id="319" parent="282" name="daily_score">
       <DataType>int|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="332" parent="294" name="monthly_score">
+    <column id="320" parent="282" name="monthly_score">
       <DataType>int|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="333" parent="294" name="weekly_score">
+    <column id="321" parent="282" name="weekly_score">
       <DataType>int|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="334" parent="294" name="user_id">
+    <column id="322" parent="282" name="user_id">
       <DataType>bigint|0s</DataType>
       <Position>5</Position>
     </column>
-    <foreign-key id="335" parent="294" name="FKrfucy0c3rwjnc9p8t3ktedkjs">
+    <foreign-key id="323" parent="282" name="FKrfucy0c3rwjnc9p8t3ktedkjs">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <index id="336" parent="294" name="FKrfucy0c3rwjnc9p8t3ktedkjs">
+    <index id="324" parent="282" name="FKrfucy0c3rwjnc9p8t3ktedkjs">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="337" parent="294" name="PRIMARY">
+    <key id="325" parent="282" name="PRIMARY">
       <ColNames>scoreid</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="338" parent="295" name="id">
+    <column id="326" parent="283" name="id">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="339" parent="295" name="email">
+    <column id="327" parent="283" name="email">
       <DataType>varchar(50)|0s</DataType>
       <Position>2</Position>
     </column>
-    <column id="340" parent="295" name="password">
+    <column id="328" parent="283" name="password">
       <DataType>varchar(120)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="341" parent="295" name="username">
+    <column id="329" parent="283" name="username">
       <DataType>varchar(20)|0s</DataType>
       <Position>4</Position>
     </column>
-    <index id="342" parent="295" name="UKob8kqyqqgmefl0aco34akdtpe">
+    <index id="330" parent="283" name="UKob8kqyqqgmefl0aco34akdtpe">
       <ColNames>email</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="343" parent="295" name="UKsb8bbouer5wak8vyiiy4pf2bx">
+    <index id="331" parent="283" name="UKsb8bbouer5wak8vyiiy4pf2bx">
       <ColNames>username</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="344" parent="295" name="PRIMARY">
+    <key id="332" parent="283" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <key id="345" parent="295" name="UKob8kqyqqgmefl0aco34akdtpe">
+    <key id="333" parent="283" name="UKob8kqyqqgmefl0aco34akdtpe">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>UKob8kqyqqgmefl0aco34akdtpe</UnderlyingIndexName>
     </key>
-    <key id="346" parent="295" name="UKsb8bbouer5wak8vyiiy4pf2bx">
+    <key id="334" parent="283" name="UKsb8bbouer5wak8vyiiy4pf2bx">
       <ColNames>username</ColNames>
       <UnderlyingIndexName>UKsb8bbouer5wak8vyiiy4pf2bx</UnderlyingIndexName>
     </key>
-    <column id="347" parent="296" name="user_answerid">
+    <column id="335" parent="284" name="user_answerid">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="348" parent="296" name="answer">
+    <column id="336" parent="284" name="answer">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="349" parent="296" name="corrected">
+    <column id="337" parent="284" name="corrected">
       <DataType>varchar(255)|0s</DataType>
       <Position>3</Position>
     </column>
-    <column id="350" parent="296" name="date_submited">
+    <column id="338" parent="284" name="date_submited">
       <DataType>date|0s</DataType>
       <Position>4</Position>
     </column>
-    <column id="351" parent="296" name="question_id">
+    <column id="339" parent="284" name="question_id">
       <DataType>bigint|0s</DataType>
       <Position>5</Position>
     </column>
-    <column id="352" parent="296" name="type_of_question">
+    <column id="340" parent="284" name="type_of_question">
       <DataType>varchar(255)|0s</DataType>
       <Position>6</Position>
     </column>
-    <column id="353" parent="296" name="user_id">
+    <column id="341" parent="284" name="user_id">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>7</Position>
     </column>
-    <foreign-key id="354" parent="296" name="FK7kw17ur9w2egkc51xua3yh0ux">
+    <foreign-key id="342" parent="284" name="FK7kw17ur9w2egkc51xua3yh0ux">
       <ColNames>user_id</ColNames>
       <OnDelete>cascade</OnDelete>
       <RefColNames>id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <index id="355" parent="296" name="UniqueAnswers">
+    <index id="343" parent="284" name="UniqueAnswers">
       <ColNames>user_id
 type_of_question
 question_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="356" parent="296" name="PRIMARY">
+    <key id="344" parent="284" name="PRIMARY">
       <ColNames>user_answerid</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <key id="357" parent="296" name="UniqueAnswers">
+    <key id="345" parent="284" name="UniqueAnswers">
       <ColNames>user_id
 type_of_question
 question_id</ColNames>
       <UnderlyingIndexName>UniqueAnswers</UnderlyingIndexName>
     </key>
-    <column id="358" parent="297" name="user_username">
+    <column id="346" parent="285" name="user_username">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="359" parent="297" name="role_id">
+    <column id="347" parent="285" name="role_id">
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="360" parent="297" name="FK1misndtpfm9hx3ttvixdus8d1">
+    <foreign-key id="348" parent="285" name="FK1misndtpfm9hx3ttvixdus8d1">
       <ColNames>user_username</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>user</RefTableName>
     </foreign-key>
-    <foreign-key id="361" parent="297" name="FKh8ciramu9cc9q3qcqiv4ue8a6">
+    <foreign-key id="349" parent="285" name="FKh8ciramu9cc9q3qcqiv4ue8a6">
       <ColNames>role_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>roles</RefTableName>
     </foreign-key>
-    <index id="362" parent="297" name="FKh8ciramu9cc9q3qcqiv4ue8a6">
+    <index id="350" parent="285" name="FKh8ciramu9cc9q3qcqiv4ue8a6">
       <ColNames>role_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="363" parent="297" name="PRIMARY">
+    <key id="351" parent="285" name="PRIMARY">
       <ColNames>user_username
 role_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="364" parent="298" name="weeklyid">
+    <column id="352" parent="286" name="weeklyid">
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="365" parent="298" name="answer">
+    <column id="353" parent="286" name="answer">
       <DataType>varchar(512)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="366" parent="298" name="date_to_publish">
+    <column id="354" parent="286" name="date_to_publish">
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="367" parent="298" name="question">
+    <column id="355" parent="286" name="question">
       <DataType>varchar(512)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <key id="368" parent="298" name="PRIMARY">
+    <key id="356" parent="286" name="PRIMARY">
       <ColNames>weeklyid</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>

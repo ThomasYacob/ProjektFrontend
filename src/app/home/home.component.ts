@@ -12,9 +12,6 @@ import { data } from 'jquery';
 import { UseranswerService } from '../_services/useranswer.service';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
-
-
-
   enum typeOfQuestion {
   Daily = 1 ,Weekly = 2,Monthly = 3
 }

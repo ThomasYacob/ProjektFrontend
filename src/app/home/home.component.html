@@ -29,9 +29,6 @@
 		<tr *ngIf="dailysActive != undefined">
 			<th class="dailyc">{{ dailysActive.question }}</th>
 			<th>{{ dailysActive.date }}</th>
-			<th class="dailyAlt1">{{ dailysActive.alternative1 }}</th>
-			<th class="dailyAlt2">{{ dailysActive.alternative2 }}</th>
-			<th class="dailyAlt3">{{ dailysActive.alternative3 }}</th>
 			<td>
 				<form [formGroup]="myForm">
 					<mat-form-field class="dailyform" appearance="fill">

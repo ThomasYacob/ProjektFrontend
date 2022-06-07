@@ -1,4 +1,4 @@
-import { User } from "../register/user";
+import { User } from "../user";
 import { UserUserName } from "../register/userUserName";
 
 export class Scoreboard {

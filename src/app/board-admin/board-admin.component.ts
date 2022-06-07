@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { UserService } from '../_services/user.service';
 import { EventBusService } from '../_shared/event-bus.service';
-import {User} from "../register/user";
+import {User} from "../user";
 import {TokenStorageService} from "../_services/token-storage.service";
 import {Router} from "@angular/router";
 
@@ -54,6 +54,6 @@ export class BoardAdminComponent implements OnInit {
             }, (error: string) => {
                 this.deleteMsg = error;
             });
-        // window.location.reload();
+        window.location.reload();
     }
 }

@@ -5,7 +5,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from "rxjs/operators";
 import { Scoreboard } from '../score-board/scoreboard';
 import { TokenStorageService } from './token-storage.service';
-import { User } from '../register/user';
+import { User } from '../user';
 const API_BASE_URL = 'http://localhost:8081/api/';
 
 

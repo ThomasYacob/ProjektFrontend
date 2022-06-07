@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {User} from "../register/user";
+import {User} from "../user";
 import {catchError} from "rxjs/operators";
-import { UserUserName } from '../register/userUserName';
 const API_BASE_URL = 'http://localhost:8081/api/';
 @Injectable({
   providedIn: 'root'
@@ -38,7 +37,7 @@ export class UserService {
   }
 
   deleteUser(id: number):Observable<{}> {
-    return this.http.delete(API_BASE_URL +'user/'+id)
+    return this.http.delete(`${API_BASE_URL}user/${id}`)
         .pipe(catchError(this.handleError));
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ScoreboardService } from '../_services/scoreboard.service';
 import { Scoreboard } from './scoreboard';
 import { UserService } from '../_services/user.service';
-import { User } from '../register/user';
+import { User } from '../user';
 import {TokenStorageService} from "../_services/token-storage.service";
 import { UserUserName } from '../register/userUserName';
 

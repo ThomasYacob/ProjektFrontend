@@ -34,7 +34,7 @@ export class AssignmentModeratorComponent implements OnInit {
     })
     this.monthlyService.getAllMonthly().subscribe(data =>{
       console.log(data + 'monthly')
-      this.monthly = this.monthly;
+      this.monthly = data;
     })    
   }
 
@@ -44,6 +44,7 @@ export class AssignmentModeratorComponent implements OnInit {
       case 1:this.monthlyService.deleteMonthly(id)
             .subscribe(responseData => {
                 this.deleteMsg = 'Successfully deleted';
+                    window.location.reload();
             }, (error: string) => {
                 this.deleteMsg = error;
             });
@@ -51,6 +52,7 @@ export class AssignmentModeratorComponent implements OnInit {
        case 2:this.dailyService.deleteDaily(id)
             .subscribe(responseData => {
                 this.deleteMsg = 'Successfully deleted';
+                    window.location.reload();
             }, (error: string) => {
                 this.deleteMsg = error;
             });
@@ -58,13 +60,12 @@ export class AssignmentModeratorComponent implements OnInit {
         case 3:this.weeklyService.deleteWeekly(id)
             .subscribe(responseData => {
                 this.deleteMsg = 'Successfully deleted';
+                    window.location.reload();
             }, (error: string) => {
                 this.deleteMsg = error;
             });
         break;
-
     }
-        
     }
 
 }
