@@ -8,9 +8,11 @@ services:
     
     # Configuration for building the docker image for the backend service
     build:
-      context: ./ProjektBackend # Use an image built from the specified dockerfile in the `ProjektBackend` directory.
+      context: ../ProjektBackend # Use an image built from the specified dockerfile in the `ProjektBackend` directory.
       dockerfile: Dockerfile
     hostname: serverJavaSpring
+    ports:
+      - "8080:8080"
     restart: always
     depends_on:
       - db # This service depends on mysql. Start that first.
@@ -28,7 +30,7 @@ services:
   app-client:
     hostname: clientProjekt
     build:
-      context: ./ProjektFrontend # Use an image built from the specified dockerfile in the `ProjektFrontend` directory.
+      context: ../ProjektFrontend # Use an image built from the specified dockerfile in the `ProjektFrontend` directory.
       dockerfile: Dockerfile
     ports:
       - "8081:80" # Map the exposed port 80 on the container to port 8081 on the host machine
