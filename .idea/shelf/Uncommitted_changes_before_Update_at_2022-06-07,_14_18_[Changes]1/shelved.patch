@@ -1,0 +1,25 @@
+Index: src/app/home/home.component.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!--<h1>Hi {{currenUser.username}}!</h1>-->\n<!--<h3>All registered users:</h3>-->\n\n<!--<ul>-->\n<!--        <li *ngFor=\"let user of users\">-->\n<!--                {{user.username}}-->\n<!--                - <a (click)=\"deleteUser(user.username)\"-->\n<!--                     class=\"text-danger\">Delete</a>-->\n<!--        </li>-->\n<!--</ul>-->\n\n<div class=\"wrapper\">\n\t<p class=\"targe-date\">\n\t\tCountdown to {{ months[month] + \" \" + day + \", \" + year }}\n\t</p>\n\t<div class=\"description\">\n\t\t<p>Days</p>\n\t\t<p>Hours</p>\n\t\t<p>Minutes</p>\n\t\t<p>Seconds</p>\n\t</div>\n\t<div class=\"times\">\n\t\t<p id=\"days\"></p>\n\t\t<p id=\"hours\"></p>\n\t\t<p id=\"mins\"></p>\n\t\t<p id=\"seconds\"></p>\n\t</div>\n\n\t<div class=\"dailyActive\">\n\t\t<h3>Daily Active</h3>\n\t\t<tr *ngFor=\"let daily of dailysActive\">\n\t\t\t<th class=\"dailyc\">{{ daily.question }}</th>\n\t\t\t<th>{{ daily.date }}</th>\n\t\t\t<th class=\"dailyAlt1\">{{ daily.alternative1 }}</th>\n\t\t\t<th class=\"dailyAlt2\">{{ daily.alternative2 }}</th>\n\t\t\t<th class=\"dailyAlt3\">{{ daily.alternative3 }}</th>\n\t\t\t<td>\n\t\t\t\t<form [formGroup]=\"myForm\">\n\t\t\t\t\t<mat-form-field class=\"dailyform\" appearance=\"fill\">\n\t\t\t\t\t\t<mat-label>Answer daily</mat-label>\n\t\t\t\t\t\t<mat-select formControlName=\"rightAlternative\" required>\n\t\t\t\t\t\t\t<mat-option [value]=\"alternative1\">\n\t\t\t\t\t\t\t\t{{ daily.alternative1 }}\n\t\t\t\t\t\t\t</mat-option>\n\t\t\t\t\t\t\t<mat-option [value]=\"alternative2\">\n\t\t\t\t\t\t\t\t{{ daily.alternative2 }}\n\t\t\t\t\t\t\t</mat-option>\n\t\t\t\t\t\t\t<mat-option [value]=\"alternative3\">\n\t\t\t\t\t\t\t\t{{ daily.alternative3 }}\n\t\t\t\t\t\t\t</mat-option>\n\t\t\t\t\t\t</mat-select>\n\t\t\t\t\t</mat-form-field>\n\t\t\t\t</form>\n\t\t\t</td>\n\t\t\t<td>\n\t\t\t\t<button class=\"btn btn-success btn-d\" (click)=\"dailySubmit(daily.id)\">\n\t\t\t\t\tSubmit\n\t\t\t\t</button>\n\t\t\t</td>\n\t\t</tr>\n\t</div>\n\n\t<div class=\"dailyActive\">\n\t\t<h3>Daily Active</h3>\n\t\t<tr *ngFor=\"let daily of dailysNotActive\">\n\t\t\t<th class=\"dailyc\">{{ daily.question }}</th>\n\t\t\t<th>{{ daily.date }}</th>\n\t\t\t<th class=\"dailyAlt1\">{{ daily.alternative1 }}</th>\n\t\t\t<th class=\"dailyAlt2\">{{ daily.alternative2 }}</th>\n\t\t\t<th class=\"dailyAlt3\">{{ daily.alternative3 }}</th>\n\t\t</tr>\n\t</div>\n\n\t<div class=\"weekly\">\n\t\t<h3>Weekly questions</h3>\n\t\t<tr *ngFor=\"let weekly of weeklys\">\n\t\t\t<th class=\"weeklyc\">\n\t\t\t\t{{ weekly.question }}\n\t\t\t</th>\n\t\t\t<!--\t\t\t<td>{{ weekly.date }}</td>-->\n\t\t\t<td>\n\t\t\t\t<mat-form-field class=\"weeklyform\" appearance=\"fill\">\n\t\t\t\t\t<mat-label>Answer weekly</mat-label>\n\t\t\t\t\t<input\n\t\t\t\t\t\ttype=\"text\"\n\t\t\t\t\t\t[(ngModel)]=\"weeklyAnswer\"\n\t\t\t\t\t\tmatInput\n\t\t\t\t\t\tplaceholder=\"\"\n\t\t\t\t\t/>\n\t\t\t\t</mat-form-field>\n\t\t\t</td>\n\n\t\t\t<td>\n\t\t\t\t<button class=\"btn btn-success btn-w\" (click)=\"dailySubmit(weekly.id)\">\n\t\t\t\t\tSubmit\n\t\t\t\t</button>\n\t\t\t</td>\n\t\t</tr>\n\t</div>\n\n\t<div class=\"monthly\">\n\t\t<h3>Monthly questions</h3>\n\t\t<tr *ngFor=\"let monthly of monthlys\">\n\t\t\t<th class=\"monthlyc\">{{ monthly.question }}</th>\n\t\t\t<!--\t\t\t<td>{{ monthly.hint1 }}</td>-->\n\t\t\t<!--\t\t\t<td>{{ monthly.hint2 }}</td>-->\n\t\t\t<!--\t\t\t<td>{{ monthly.hint3 }}</td>-->\n\t\t\t<!--\t\t\t\t<td>{{ monthly.date }}</td>-->\n\t\t\t<td>\n\t\t\t\t<mat-form-field appearance=\"fill\">\n\t\t\t\t\t<mat-label>Answer Monthly</mat-label>\n\t\t\t\t\t<input\n\t\t\t\t\t\ttype=\"text\"\n\t\t\t\t\t\t[(ngModel)]=\"Monthlyanswer\"\n\t\t\t\t\t\tmatInput\n\t\t\t\t\t\tplaceholder=\"\"\n\t\t\t\t\t/>\n\t\t\t\t</mat-form-field>\n\t\t\t</td>\n\t\t\t<td>\n\t\t\t\t<button class=\"btn btn-success btn-m\" (click)=\"dailySubmit(monthly.id)\">\n\t\t\t\t\tSubmit\n\t\t\t\t</button>\n\t\t\t</td>\n\t\t</tr>\n\t</div>\n</div>\n<!--</div>-->\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/home/home.component.html b/src/app/home/home.component.html
+--- a/src/app/home/home.component.html	
++++ b/src/app/home/home.component.html	
+@@ -1,14 +1,3 @@
+-<!--<h1>Hi {{currenUser.username}}!</h1>-->
+-<!--<h3>All registered users:</h3>-->
+-
+-<!--<ul>-->
+-<!--        <li *ngFor="let user of users">-->
+-<!--                {{user.username}}-->
+-<!--                - <a (click)="deleteUser(user.username)"-->
+-<!--                     class="text-danger">Delete</a>-->
+-<!--        </li>-->
+-<!--</ul>-->
+-
+ <div class="wrapper">
+ 	<p class="targe-date">
+ 		Countdown to {{ months[month] + " " + day + ", " + year }}

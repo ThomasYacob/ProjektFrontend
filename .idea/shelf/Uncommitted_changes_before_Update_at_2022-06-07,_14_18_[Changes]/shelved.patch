@@ -1,0 +1,531 @@
+Index: docker-compose.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>##version: '3'\n##\n##services:\n##  db:\n##    image: 'mysql/mysql-server:5.7'\n##    ports:\n##      - \"3306:3306\"\n##    environment:\n##      - MYSQL_ROOT_PASSWORD=Root123.\n##      - MYSQL_DATABASE=CRUD\n##      - MYSQL_USER=root\n##      - MYSQL_PASSWORD=Root123.\n##      - MYSQL_ROOT_HOST=%\n##    volumes:\n##      - ./my-datavolume:/var/lib/mysql\n##    healthcheck:\n##      test: [\"CMD\",\"mysqladmin\",\"ping\",\"-h\",\"localhost\"]\n##      timeout: 20s\n##      retries: 10\n##    restart: always\n##  backendserver:\n##    build: ./crud-backend/\n##    ports:\n##      - \"8080\"\n##    links:\n##      - \"db\"\n##    depends_on:\n##      - \"db\"\n##    restart: always\n##  frontend:\n##    build: ./CRUD/\n##    links:\n##      - \"backendserver\"\n##    depends_on:\n##      - \"backendserver\"\n##    ports:\n##      - \"80:80\"\n##\n#\n#\n#version: '3'\n#\n#services:\n#  db:\n#    image: 'mysql/mysql-server:5.7'\n#    ports:\n#      - \"3306:3306\"\n#    environment:\n#      - MYSQL_ROOT_PASSWORD=Root123.\n#      - MYSQL_DATABASE=CRUD\n#      - MYSQL_USER=root\n#      - MYSQL_PASSWORD=Root123.\n#      - MYSQL_ROOT_HOST=%\n#    volumes:\n#      - ./my-datavolume:/var/lib/mysql\n#    healthcheck:\n#      test: [\"CMD\",\"mysqladmin\",\"ping\",\"-h\",\"localhost\"]\n#      timeout: 20s\n#      retries: 10\n#    restart: always\n#  backendserver:\n#    build: ./crud-backend/\n#    ports:\n#      - \"8080\"\n#    links:\n#      - \"db\"\n#    depends_on:\n#      - \"db\"\n#    restart: always\n#  frontend:\n#    build: ./CRUD/\n#    links:\n#      - \"backendserver\"\n#    depends_on:\n#      - \"backendserver\"\n#    ports:\n#      - \"80:80\"\n#\n\n# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)\nversion: '3.7'\n\n# Define services\nservices:\n  # # App backend service\n  app-server:\n    \n    # Configuration for building the docker image for the backend service\n    build:\n      context: ./ProjektBackend # Use an image built from the specified dockerfile in the `ProjektBackend` directory.\n      dockerfile: Dockerfile\n    ports:\n      - \"8080:8080\" # Forward the exposed port 8080 on the container to port 8080 on the host machine\n    restart: always\n    depends_on:\n      - db # This service depends on mysql. Start that first.\n    environment:\n      # Pass environment variables to the service\n      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/giesecke&devrient?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true\n      SPRING_DATASOURCE_USERNAME: admin\n      SPRING_DATASOURCE_PASSWORD: Admin123.\n    networks:\n      # Networks to join (Services on the same network can communicate with each other using their name)\n      - backend\n      - frontend\n\n  # Frontend Service\n  app-client:\n    container_name: app-client\n    build:\n      context: ./ProjektFrontend # Use an image built from the specified dockerfile in the `ProjektFrontend` directory.\n      dockerfile: Dockerfile\n      args:\n        API_BASE_URL: http://localhost:8081/api/\n    ports:\n      - \"8081:80\" # Map the exposed port 80 on the container to port 8081 on the host machine\n    restart: always\n    depends_on:\n      - app-server\n    networks:\n      - frontend\n      - backend\n\n  # Database Service (Mysql)\n  db:\n    image: mysql:8.0\n    container_name: db\n    cap_add:\n      - SYS_NICE  # CAP_SYS_NICE\n    restart: always\n    volumes:\n      - \"sqlData:/var/lib/mysql\"\n    ports:\n      - \"3306:3306\"\n    environment:\n      MYSQL_DATABASE: giesecke&devrient\n      MYSQL_USER: admin\n      MYSQL_PASSWORD: Admin123.\n      MYSQL_ROOT_PASSWORD: root\n    networks:\n      - backend\n\n# Networks to be created to facilitate communication between containers\nnetworks:\n  backend:\n  frontend:\nvolumes:\n  sqlData:\n\n    #version: '3'\n    #\n    #services:\n    #  database:\n    #    image: mysql\n    #    container_name: database\n    #    environment:\n    #      MYSQL_ROOT_PASSWORD: root\n    #      MYSQL_DATABASE: Giesecke&Devrient\n    #      MYSQL_USER: root\n    #      MYSQL_PASSWORD: Root123.\n    #    ports:\n    #      - 3306:3306\n    #    volumes:\n    #      - dockerAngularSpringDatabaseData:/var/lib/mysql\n    #    networks:\n    #      - backendNetwork\n    #\n    #  spring-boot-ems:\n    #    image: openjdk:12\n    #    container_name: spring-boot-ems\n    #    ports:\n    #      - 8080:8080\n    #    depends_on:\n    #      - database\n    #    volumes:\n    #      - ./spring-boot-ems/target/backend-0.0.1-SNAPSHOT.jar\n    #    command: [\"java\", \"-jar\", \"backend-0.0.1-SNAPSHOT.jar\"]\n    #    networks:\n    #      - backendNetwork\n    #      - frontendNetwork\n    #\n    #  angular:\n    #    image: nginx:alpine\n    #    container_name: angular\n    #    ports:\n    #      - 4200:80\n    #    depends_on:\n    #      - spring-boot-ems\n    #    volumes:\n    #      - ./nginx.conf:/etc/nginx/nginx.conf\n    #      - ./angular/dist/angular/:/usr/share/nginx/html\n    #    networks:\n    #      - frontendNetwork\n    #\n    #volumes:\n    #  dockerAngularSpringDatabaseData:\n    #\n    #networks:\n    #  backendNetwork:\n    #  frontendNetwork:\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/docker-compose.yml b/docker-compose.yml
+--- a/docker-compose.yml	
++++ b/docker-compose.yml	
+@@ -1,82 +1,3 @@
+-##version: '3'
+-##
+-##services:
+-##  db:
+-##    image: 'mysql/mysql-server:5.7'
+-##    ports:
+-##      - "3306:3306"
+-##    environment:
+-##      - MYSQL_ROOT_PASSWORD=Root123.
+-##      - MYSQL_DATABASE=CRUD
+-##      - MYSQL_USER=root
+-##      - MYSQL_PASSWORD=Root123.
+-##      - MYSQL_ROOT_HOST=%
+-##    volumes:
+-##      - ./my-datavolume:/var/lib/mysql
+-##    healthcheck:
+-##      test: ["CMD","mysqladmin","ping","-h","localhost"]
+-##      timeout: 20s
+-##      retries: 10
+-##    restart: always
+-##  backendserver:
+-##    build: ./crud-backend/
+-##    ports:
+-##      - "8080"
+-##    links:
+-##      - "db"
+-##    depends_on:
+-##      - "db"
+-##    restart: always
+-##  frontend:
+-##    build: ./CRUD/
+-##    links:
+-##      - "backendserver"
+-##    depends_on:
+-##      - "backendserver"
+-##    ports:
+-##      - "80:80"
+-##
+-#
+-#
+-#version: '3'
+-#
+-#services:
+-#  db:
+-#    image: 'mysql/mysql-server:5.7'
+-#    ports:
+-#      - "3306:3306"
+-#    environment:
+-#      - MYSQL_ROOT_PASSWORD=Root123.
+-#      - MYSQL_DATABASE=CRUD
+-#      - MYSQL_USER=root
+-#      - MYSQL_PASSWORD=Root123.
+-#      - MYSQL_ROOT_HOST=%
+-#    volumes:
+-#      - ./my-datavolume:/var/lib/mysql
+-#    healthcheck:
+-#      test: ["CMD","mysqladmin","ping","-h","localhost"]
+-#      timeout: 20s
+-#      retries: 10
+-#    restart: always
+-#  backendserver:
+-#    build: ./crud-backend/
+-#    ports:
+-#      - "8080"
+-#    links:
+-#      - "db"
+-#    depends_on:
+-#      - "db"
+-#    restart: always
+-#  frontend:
+-#    build: ./CRUD/
+-#    links:
+-#      - "backendserver"
+-#    depends_on:
+-#      - "backendserver"
+-#    ports:
+-#      - "80:80"
+-#
+-
+ # Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+ version: '3.7'
+ 
+@@ -145,56 +66,4 @@
+   backend:
+   frontend:
+ volumes:
+-  sqlData:
+-
+-    #version: '3'
+-    #
+-    #services:
+-    #  database:
+-    #    image: mysql
+-    #    container_name: database
+-    #    environment:
+-    #      MYSQL_ROOT_PASSWORD: root
+-    #      MYSQL_DATABASE: Giesecke&Devrient
+-    #      MYSQL_USER: root
+-    #      MYSQL_PASSWORD: Root123.
+-    #    ports:
+-    #      - 3306:3306
+-    #    volumes:
+-    #      - dockerAngularSpringDatabaseData:/var/lib/mysql
+-    #    networks:
+-    #      - backendNetwork
+-    #
+-    #  spring-boot-ems:
+-    #    image: openjdk:12
+-    #    container_name: spring-boot-ems
+-    #    ports:
+-    #      - 8080:8080
+-    #    depends_on:
+-    #      - database
+-    #    volumes:
+-    #      - ./spring-boot-ems/target/backend-0.0.1-SNAPSHOT.jar
+-    #    command: ["java", "-jar", "backend-0.0.1-SNAPSHOT.jar"]
+-    #    networks:
+-    #      - backendNetwork
+-    #      - frontendNetwork
+-    #
+-    #  angular:
+-    #    image: nginx:alpine
+-    #    container_name: angular
+-    #    ports:
+-    #      - 4200:80
+-    #    depends_on:
+-    #      - spring-boot-ems
+-    #    volumes:
+-    #      - ./nginx.conf:/etc/nginx/nginx.conf
+-    #      - ./angular/dist/angular/:/usr/share/nginx/html
+-    #    networks:
+-    #      - frontendNetwork
+-    #
+-    #volumes:
+-    #  dockerAngularSpringDatabaseData:
+-    #
+-    #networks:
+-    #  backendNetwork:
+-    #  frontendNetwork:
++  sqlData:
+\ No newline at end of file
+Index: .idea/dataSources/a169b5d8-5dee-4b24-9be2-fa4b2402edf0.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<dataSource name=\"@localhost\">\n  <database-model serializer=\"dbm\" dbms=\"MYSQL\" family-id=\"MYSQL\" format-version=\"4.32\">\n    <root id=\"1\">\n      <DefaultCasing>mixed/mixed</DefaultCasing>\n      <DefaultEngine>InnoDB</DefaultEngine>\n      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>\n      <Grants>|root||Admin||ALTER|G\n|root||root|localhost|ALTER|G\n|root||Admin||ALTER ROUTINE|G\n|root||root|localhost|ALTER ROUTINE|G\n|root||Admin||APPLICATION_PASSWORD_ADMIN|G\n|root||root|localhost|APPLICATION_PASSWORD_ADMIN|G\n|root||Admin||AUDIT_ABORT_EXEMPT|G\n|root||mysql.infoschema|localhost|AUDIT_ABORT_EXEMPT|G\n|root||mysql.session|localhost|AUDIT_ABORT_EXEMPT|G\n|root||mysql.sys|localhost|AUDIT_ABORT_EXEMPT|G\n|root||root|localhost|AUDIT_ABORT_EXEMPT|G\n|root||Admin||AUDIT_ADMIN|G\n|root||root|localhost|AUDIT_ADMIN|G\n|root||Admin||AUTHENTICATION_POLICY_ADMIN|G\n|root||root|localhost|AUTHENTICATION_POLICY_ADMIN|G\n|root||Admin||BACKUP_ADMIN|G\n|root||mysql.session|localhost|BACKUP_ADMIN|G\n|root||root|localhost|BACKUP_ADMIN|G\n|root||Admin||BINLOG_ADMIN|G\n|root||root|localhost|BINLOG_ADMIN|G\n|root||Admin||BINLOG_ENCRYPTION_ADMIN|G\n|root||root|localhost|BINLOG_ENCRYPTION_ADMIN|G\n|root||Admin||CLONE_ADMIN|G\n|root||mysql.session|localhost|CLONE_ADMIN|G\n|root||root|localhost|CLONE_ADMIN|G\n|root||Admin||CONNECTION_ADMIN|G\n|root||mysql.session|localhost|CONNECTION_ADMIN|G\n|root||root|localhost|CONNECTION_ADMIN|G\n|root||Admin||CREATE|G\n|root||root|localhost|CREATE|G\n|root||Admin||CREATE ROLE|G\n|root||root|localhost|CREATE ROLE|G\n|root||Admin||CREATE ROUTINE|G\n|root||root|localhost|CREATE ROUTINE|G\n|root||Admin||CREATE TABLESPACE|G\n|root||root|localhost|CREATE TABLESPACE|G\n|root||Admin||CREATE TEMPORARY TABLES|G\n|root||root|localhost|CREATE TEMPORARY TABLES|G\n|root||Admin||CREATE USER|G\n|root||root|localhost|CREATE USER|G\n|root||Admin||CREATE VIEW|G\n|root||root|localhost|CREATE VIEW|G\n|root||Admin||DELETE|G\n|root||root|localhost|DELETE|G\n|root||Admin||DROP|G\n|root||root|localhost|DROP|G\n|root||Admin||DROP ROLE|G\n|root||root|localhost|DROP ROLE|G\n|root||Admin||ENCRYPTION_KEY_ADMIN|G\n|root||root|localhost|ENCRYPTION_KEY_ADMIN|G\n|root||Admin||EVENT|G\n|root||root|localhost|EVENT|G\n|root||Admin||EXECUTE|G\n|root||root|localhost|EXECUTE|G\n|root||Admin||FILE|G\n|root||root|localhost|FILE|G\n|root||Admin||FLUSH_OPTIMIZER_COSTS|G\n|root||root|localhost|FLUSH_OPTIMIZER_COSTS|G\n|root||Admin||FLUSH_STATUS|G\n|root||root|localhost|FLUSH_STATUS|G\n|root||Admin||FLUSH_TABLES|G\n|root||root|localhost|FLUSH_TABLES|G\n|root||Admin||FLUSH_USER_RESOURCES|G\n|root||root|localhost|FLUSH_USER_RESOURCES|G\n|root||Admin||GROUP_REPLICATION_ADMIN|G\n|root||root|localhost|GROUP_REPLICATION_ADMIN|G\n|root||Admin||GROUP_REPLICATION_STREAM|G\n|root||root|localhost|GROUP_REPLICATION_STREAM|G\n|root||Admin||INDEX|G\n|root||root|localhost|INDEX|G\n|root||Admin||INNODB_REDO_LOG_ARCHIVE|G\n|root||root|localhost|INNODB_REDO_LOG_ARCHIVE|G\n|root||Admin||INNODB_REDO_LOG_ENABLE|G\n|root||root|localhost|INNODB_REDO_LOG_ENABLE|G\n|root||Admin||INSERT|G\n|root||root|localhost|INSERT|G\n|root||Admin||LOCK TABLES|G\n|root||root|localhost|LOCK TABLES|G\n|root||Admin||PASSWORDLESS_USER_ADMIN|G\n|root||root|localhost|PASSWORDLESS_USER_ADMIN|G\n|root||Admin||PERSIST_RO_VARIABLES_ADMIN|G\n|root||mysql.session|localhost|PERSIST_RO_VARIABLES_ADMIN|G\n|root||root|localhost|PERSIST_RO_VARIABLES_ADMIN|G\n|root||Admin||PROCESS|G\n|root||root|localhost|PROCESS|G\n|root||Admin||REFERENCES|G\n|root||root|localhost|REFERENCES|G\n|root||Admin||RELOAD|G\n|root||root|localhost|RELOAD|G\n|root||Admin||REPLICATION CLIENT|G\n|root||root|localhost|REPLICATION CLIENT|G\n|root||Admin||REPLICATION SLAVE|G\n|root||root|localhost|REPLICATION SLAVE|G\n|root||Admin||REPLICATION_APPLIER|G\n|root||root|localhost|REPLICATION_APPLIER|G\n|root||Admin||REPLICATION_SLAVE_ADMIN|G\n|root||root|localhost|REPLICATION_SLAVE_ADMIN|G\n|root||Admin||RESOURCE_GROUP_ADMIN|G\n|root||root|localhost|RESOURCE_GROUP_ADMIN|G\n|root||Admin||RESOURCE_GROUP_USER|G\n|root||root|localhost|RESOURCE_GROUP_USER|G\n|root||Admin||ROLE_ADMIN|G\n|root||root|localhost|ROLE_ADMIN|G\n|root||Admin||SELECT|G\n|root||mysql.infoschema|localhost|SELECT|G\n|root||root|localhost|SELECT|G\n|root||Admin||SERVICE_CONNECTION_ADMIN|G\n|root||root|localhost|SERVICE_CONNECTION_ADMIN|G\n|root||Admin||SESSION_VARIABLES_ADMIN|G\n|root||mysql.session|localhost|SESSION_VARIABLES_ADMIN|G\n|root||root|localhost|SESSION_VARIABLES_ADMIN|G\n|root||Admin||SET_USER_ID|G\n|root||root|localhost|SET_USER_ID|G\n|root||Admin||SHOW DATABASES|G\n|root||root|localhost|SHOW DATABASES|G\n|root||Admin||SHOW VIEW|G\n|root||root|localhost|SHOW VIEW|G\n|root||Admin||SHOW_ROUTINE|G\n|root||root|localhost|SHOW_ROUTINE|G\n|root||Admin||SHUTDOWN|G\n|root||mysql.session|localhost|SHUTDOWN|G\n|root||root|localhost|SHUTDOWN|G\n|root||Admin||SUPER|G\n|root||mysql.session|localhost|SUPER|G\n|root||root|localhost|SUPER|G\n|root||Admin||SYSTEM_USER|G\n|root||mysql.infoschema|localhost|SYSTEM_USER|G\n|root||mysql.session|localhost|SYSTEM_USER|G\n|root||mysql.sys|localhost|SYSTEM_USER|G\n|root||root|localhost|SYSTEM_USER|G\n|root||Admin||SYSTEM_VARIABLES_ADMIN|G\n|root||mysql.session|localhost|SYSTEM_VARIABLES_ADMIN|G\n|root||root|localhost|SYSTEM_VARIABLES_ADMIN|G\n|root||Admin||TABLE_ENCRYPTION_ADMIN|G\n|root||root|localhost|TABLE_ENCRYPTION_ADMIN|G\n|root||Admin||TRIGGER|G\n|root||root|localhost|TRIGGER|G\n|root||Admin||UPDATE|G\n|root||root|localhost|UPDATE|G\n|root||Admin||XA_RECOVER_ADMIN|G\n|root||root|localhost|XA_RECOVER_ADMIN|G\n|root||Admin||grant option|G\n|root||root|localhost|grant option|G\nperformance_schema|schema||mysql.session|localhost|SELECT|G\nsys|schema||mysql.sys|localhost|TRIGGER|G</Grants>\n      <ServerVersion>8.0.28</ServerVersion>\n    </root>\n    <collation id=\"2\" parent=\"1\" name=\"armscii8_general_ci\">\n      <Charset>armscii8</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"3\" parent=\"1\" name=\"armscii8_bin\">\n      <Charset>armscii8</Charset>\n    </collation>\n    <collation id=\"4\" parent=\"1\" name=\"ascii_general_ci\">\n      <Charset>ascii</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"5\" parent=\"1\" name=\"ascii_bin\">\n      <Charset>ascii</Charset>\n    </collation>\n    <collation id=\"6\" parent=\"1\" name=\"big5_chinese_ci\">\n      <Charset>big5</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"7\" parent=\"1\" name=\"big5_bin\">\n      <Charset>big5</Charset>\n    </collation>\n    <collation id=\"8\" parent=\"1\" name=\"binary\">\n      <Charset>binary</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"9\" parent=\"1\" name=\"cp1250_general_ci\">\n      <Charset>cp1250</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"10\" parent=\"1\" name=\"cp1250_czech_cs\">\n      <Charset>cp1250</Charset>\n    </collation>\n    <collation id=\"11\" parent=\"1\" name=\"cp1250_croatian_ci\">\n      <Charset>cp1250</Charset>\n    </collation>\n    <collation id=\"12\" parent=\"1\" name=\"cp1250_bin\">\n      <Charset>cp1250</Charset>\n    </collation>\n    <collation id=\"13\" parent=\"1\" name=\"cp1250_polish_ci\">\n      <Charset>cp1250</Charset>\n    </collation>\n    <collation id=\"14\" parent=\"1\" name=\"cp1251_bulgarian_ci\">\n      <Charset>cp1251</Charset>\n    </collation>\n    <collation id=\"15\" parent=\"1\" name=\"cp1251_ukrainian_ci\">\n      <Charset>cp1251</Charset>\n    </collation>\n    <collation id=\"16\" parent=\"1\" name=\"cp1251_bin\">\n      <Charset>cp1251</Charset>\n    </collation>\n    <collation id=\"17\" parent=\"1\" name=\"cp1251_general_ci\">\n      <Charset>cp1251</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"18\" parent=\"1\" name=\"cp1251_general_cs\">\n      <Charset>cp1251</Charset>\n    </collation>\n    <collation id=\"19\" parent=\"1\" name=\"cp1256_general_ci\">\n      <Charset>cp1256</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"20\" parent=\"1\" name=\"cp1256_bin\">\n      <Charset>cp1256</Charset>\n    </collation>\n    <collation id=\"21\" parent=\"1\" name=\"cp1257_lithuanian_ci\">\n      <Charset>cp1257</Charset>\n    </collation>\n    <collation id=\"22\" parent=\"1\" name=\"cp1257_bin\">\n      <Charset>cp1257</Charset>\n    </collation>\n    <collation id=\"23\" parent=\"1\" name=\"cp1257_general_ci\">\n      <Charset>cp1257</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"24\" parent=\"1\" name=\"cp850_general_ci\">\n      <Charset>cp850</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"25\" parent=\"1\" name=\"cp850_bin\">\n      <Charset>cp850</Charset>\n    </collation>\n    <collation id=\"26\" parent=\"1\" name=\"cp852_general_ci\">\n      <Charset>cp852</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"27\" parent=\"1\" name=\"cp852_bin\">\n      <Charset>cp852</Charset>\n    </collation>\n    <collation id=\"28\" parent=\"1\" name=\"cp866_general_ci\">\n      <Charset>cp866</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"29\" parent=\"1\" name=\"cp866_bin\">\n      <Charset>cp866</Charset>\n    </collation>\n    <collation id=\"30\" parent=\"1\" name=\"cp932_japanese_ci\">\n      <Charset>cp932</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"31\" parent=\"1\" name=\"cp932_bin\">\n      <Charset>cp932</Charset>\n    </collation>\n    <collation id=\"32\" parent=\"1\" name=\"dec8_swedish_ci\">\n      <Charset>dec8</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"33\" parent=\"1\" name=\"dec8_bin\">\n      <Charset>dec8</Charset>\n    </collation>\n    <collation id=\"34\" parent=\"1\" name=\"eucjpms_japanese_ci\">\n      <Charset>eucjpms</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"35\" parent=\"1\" name=\"eucjpms_bin\">\n      <Charset>eucjpms</Charset>\n    </collation>\n    <collation id=\"36\" parent=\"1\" name=\"euckr_korean_ci\">\n      <Charset>euckr</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"37\" parent=\"1\" name=\"euckr_bin\">\n      <Charset>euckr</Charset>\n    </collation>\n    <collation id=\"38\" parent=\"1\" name=\"gb18030_chinese_ci\">\n      <Charset>gb18030</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"39\" parent=\"1\" name=\"gb18030_bin\">\n      <Charset>gb18030</Charset>\n    </collation>\n    <collation id=\"40\" parent=\"1\" name=\"gb18030_unicode_520_ci\">\n      <Charset>gb18030</Charset>\n    </collation>\n    <collation id=\"41\" parent=\"1\" name=\"gb2312_chinese_ci\">\n      <Charset>gb2312</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"42\" parent=\"1\" name=\"gb2312_bin\">\n      <Charset>gb2312</Charset>\n    </collation>\n    <collation id=\"43\" parent=\"1\" name=\"gbk_chinese_ci\">\n      <Charset>gbk</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"44\" parent=\"1\" name=\"gbk_bin\">\n      <Charset>gbk</Charset>\n    </collation>\n    <collation id=\"45\" parent=\"1\" name=\"geostd8_general_ci\">\n      <Charset>geostd8</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"46\" parent=\"1\" name=\"geostd8_bin\">\n      <Charset>geostd8</Charset>\n    </collation>\n    <collation id=\"47\" parent=\"1\" name=\"greek_general_ci\">\n      <Charset>greek</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"48\" parent=\"1\" name=\"greek_bin\">\n      <Charset>greek</Charset>\n    </collation>\n    <collation id=\"49\" parent=\"1\" name=\"hebrew_general_ci\">\n      <Charset>hebrew</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"50\" parent=\"1\" name=\"hebrew_bin\">\n      <Charset>hebrew</Charset>\n    </collation>\n    <collation id=\"51\" parent=\"1\" name=\"hp8_english_ci\">\n      <Charset>hp8</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"52\" parent=\"1\" name=\"hp8_bin\">\n      <Charset>hp8</Charset>\n    </collation>\n    <collation id=\"53\" parent=\"1\" name=\"keybcs2_general_ci\">\n      <Charset>keybcs2</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"54\" parent=\"1\" name=\"keybcs2_bin\">\n      <Charset>keybcs2</Charset>\n    </collation>\n    <collation id=\"55\" parent=\"1\" name=\"koi8r_general_ci\">\n      <Charset>koi8r</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"56\" parent=\"1\" name=\"koi8r_bin\">\n      <Charset>koi8r</Charset>\n    </collation>\n    <collation id=\"57\" parent=\"1\" name=\"koi8u_general_ci\">\n      <Charset>koi8u</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"58\" parent=\"1\" name=\"koi8u_bin\">\n      <Charset>koi8u</Charset>\n    </collation>\n    <collation id=\"59\" parent=\"1\" name=\"latin1_german1_ci\">\n      <Charset>latin1</Charset>\n    </collation>\n    <collation id=\"60\" parent=\"1\" name=\"latin1_swedish_ci\">\n      <Charset>latin1</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"61\" parent=\"1\" name=\"latin1_danish_ci\">\n      <Charset>latin1</Charset>\n    </collation>\n    <collation id=\"62\" parent=\"1\" name=\"latin1_german2_ci\">\n      <Charset>latin1</Charset>\n    </collation>\n    <collation id=\"63\" parent=\"1\" name=\"latin1_bin\">\n      <Charset>latin1</Charset>\n    </collation>\n    <collation id=\"64\" parent=\"1\" name=\"latin1_general_ci\">\n      <Charset>latin1</Charset>\n    </collation>\n    <collation id=\"65\" parent=\"1\" name=\"latin1_general_cs\">\n      <Charset>latin1</Charset>\n    </collation>\n    <collation id=\"66\" parent=\"1\" name=\"latin1_spanish_ci\">\n      <Charset>latin1</Charset>\n    </collation>\n    <collation id=\"67\" parent=\"1\" name=\"latin2_czech_cs\">\n      <Charset>latin2</Charset>\n    </collation>\n    <collation id=\"68\" parent=\"1\" name=\"latin2_general_ci\">\n      <Charset>latin2</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"69\" parent=\"1\" name=\"latin2_hungarian_ci\">\n      <Charset>latin2</Charset>\n    </collation>\n    <collation id=\"70\" parent=\"1\" name=\"latin2_croatian_ci\">\n      <Charset>latin2</Charset>\n    </collation>\n    <collation id=\"71\" parent=\"1\" name=\"latin2_bin\">\n      <Charset>latin2</Charset>\n    </collation>\n    <collation id=\"72\" parent=\"1\" name=\"latin5_turkish_ci\">\n      <Charset>latin5</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"73\" parent=\"1\" name=\"latin5_bin\">\n      <Charset>latin5</Charset>\n    </collation>\n    <collation id=\"74\" parent=\"1\" name=\"latin7_estonian_cs\">\n      <Charset>latin7</Charset>\n    </collation>\n    <collation id=\"75\" parent=\"1\" name=\"latin7_general_ci\">\n      <Charset>latin7</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"76\" parent=\"1\" name=\"latin7_general_cs\">\n      <Charset>latin7</Charset>\n    </collation>\n    <collation id=\"77\" parent=\"1\" name=\"latin7_bin\">\n      <Charset>latin7</Charset>\n    </collation>\n    <collation id=\"78\" parent=\"1\" name=\"macce_general_ci\">\n      <Charset>macce</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"79\" parent=\"1\" name=\"macce_bin\">\n      <Charset>macce</Charset>\n    </collation>\n    <collation id=\"80\" parent=\"1\" name=\"macroman_general_ci\">\n      <Charset>macroman</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"81\" parent=\"1\" name=\"macroman_bin\">\n      <Charset>macroman</Charset>\n    </collation>\n    <collation id=\"82\" parent=\"1\" name=\"sjis_japanese_ci\">\n      <Charset>sjis</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"83\" parent=\"1\" name=\"sjis_bin\">\n      <Charset>sjis</Charset>\n    </collation>\n    <collation id=\"84\" parent=\"1\" name=\"swe7_swedish_ci\">\n      <Charset>swe7</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"85\" parent=\"1\" name=\"swe7_bin\">\n      <Charset>swe7</Charset>\n    </collation>\n    <collation id=\"86\" parent=\"1\" name=\"tis620_thai_ci\">\n      <Charset>tis620</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"87\" parent=\"1\" name=\"tis620_bin\">\n      <Charset>tis620</Charset>\n    </collation>\n    <collation id=\"88\" parent=\"1\" name=\"ucs2_general_ci\">\n      <Charset>ucs2</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"89\" parent=\"1\" name=\"ucs2_bin\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"90\" parent=\"1\" name=\"ucs2_unicode_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"91\" parent=\"1\" name=\"ucs2_icelandic_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"92\" parent=\"1\" name=\"ucs2_latvian_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"93\" parent=\"1\" name=\"ucs2_romanian_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"94\" parent=\"1\" name=\"ucs2_slovenian_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"95\" parent=\"1\" name=\"ucs2_polish_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"96\" parent=\"1\" name=\"ucs2_estonian_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"97\" parent=\"1\" name=\"ucs2_spanish_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"98\" parent=\"1\" name=\"ucs2_swedish_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"99\" parent=\"1\" name=\"ucs2_turkish_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"100\" parent=\"1\" name=\"ucs2_czech_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"101\" parent=\"1\" name=\"ucs2_danish_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"102\" parent=\"1\" name=\"ucs2_lithuanian_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"103\" parent=\"1\" name=\"ucs2_slovak_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"104\" parent=\"1\" name=\"ucs2_spanish2_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"105\" parent=\"1\" name=\"ucs2_roman_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"106\" parent=\"1\" name=\"ucs2_persian_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"107\" parent=\"1\" name=\"ucs2_esperanto_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"108\" parent=\"1\" name=\"ucs2_hungarian_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"109\" parent=\"1\" name=\"ucs2_sinhala_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"110\" parent=\"1\" name=\"ucs2_german2_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"111\" parent=\"1\" name=\"ucs2_croatian_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"112\" parent=\"1\" name=\"ucs2_unicode_520_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"113\" parent=\"1\" name=\"ucs2_vietnamese_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"114\" parent=\"1\" name=\"ucs2_general_mysql500_ci\">\n      <Charset>ucs2</Charset>\n    </collation>\n    <collation id=\"115\" parent=\"1\" name=\"ujis_japanese_ci\">\n      <Charset>ujis</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"116\" parent=\"1\" name=\"ujis_bin\">\n      <Charset>ujis</Charset>\n    </collation>\n    <collation id=\"117\" parent=\"1\" name=\"utf16_general_ci\">\n      <Charset>utf16</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"118\" parent=\"1\" name=\"utf16_bin\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"119\" parent=\"1\" name=\"utf16_unicode_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"120\" parent=\"1\" name=\"utf16_icelandic_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"121\" parent=\"1\" name=\"utf16_latvian_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"122\" parent=\"1\" name=\"utf16_romanian_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"123\" parent=\"1\" name=\"utf16_slovenian_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"124\" parent=\"1\" name=\"utf16_polish_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"125\" parent=\"1\" name=\"utf16_estonian_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"126\" parent=\"1\" name=\"utf16_spanish_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"127\" parent=\"1\" name=\"utf16_swedish_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"128\" parent=\"1\" name=\"utf16_turkish_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"129\" parent=\"1\" name=\"utf16_czech_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"130\" parent=\"1\" name=\"utf16_danish_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"131\" parent=\"1\" name=\"utf16_lithuanian_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"132\" parent=\"1\" name=\"utf16_slovak_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"133\" parent=\"1\" name=\"utf16_spanish2_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"134\" parent=\"1\" name=\"utf16_roman_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"135\" parent=\"1\" name=\"utf16_persian_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"136\" parent=\"1\" name=\"utf16_esperanto_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"137\" parent=\"1\" name=\"utf16_hungarian_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"138\" parent=\"1\" name=\"utf16_sinhala_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"139\" parent=\"1\" name=\"utf16_german2_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"140\" parent=\"1\" name=\"utf16_croatian_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"141\" parent=\"1\" name=\"utf16_unicode_520_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"142\" parent=\"1\" name=\"utf16_vietnamese_ci\">\n      <Charset>utf16</Charset>\n    </collation>\n    <collation id=\"143\" parent=\"1\" name=\"utf16le_general_ci\">\n      <Charset>utf16le</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"144\" parent=\"1\" name=\"utf16le_bin\">\n      <Charset>utf16le</Charset>\n    </collation>\n    <collation id=\"145\" parent=\"1\" name=\"utf32_general_ci\">\n      <Charset>utf32</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"146\" parent=\"1\" name=\"utf32_bin\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"147\" parent=\"1\" name=\"utf32_unicode_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"148\" parent=\"1\" name=\"utf32_icelandic_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"149\" parent=\"1\" name=\"utf32_latvian_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"150\" parent=\"1\" name=\"utf32_romanian_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"151\" parent=\"1\" name=\"utf32_slovenian_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"152\" parent=\"1\" name=\"utf32_polish_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"153\" parent=\"1\" name=\"utf32_estonian_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"154\" parent=\"1\" name=\"utf32_spanish_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"155\" parent=\"1\" name=\"utf32_swedish_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"156\" parent=\"1\" name=\"utf32_turkish_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"157\" parent=\"1\" name=\"utf32_czech_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"158\" parent=\"1\" name=\"utf32_danish_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"159\" parent=\"1\" name=\"utf32_lithuanian_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"160\" parent=\"1\" name=\"utf32_slovak_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"161\" parent=\"1\" name=\"utf32_spanish2_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"162\" parent=\"1\" name=\"utf32_roman_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"163\" parent=\"1\" name=\"utf32_persian_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"164\" parent=\"1\" name=\"utf32_esperanto_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"165\" parent=\"1\" name=\"utf32_hungarian_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"166\" parent=\"1\" name=\"utf32_sinhala_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"167\" parent=\"1\" name=\"utf32_german2_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"168\" parent=\"1\" name=\"utf32_croatian_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"169\" parent=\"1\" name=\"utf32_unicode_520_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"170\" parent=\"1\" name=\"utf32_vietnamese_ci\">\n      <Charset>utf32</Charset>\n    </collation>\n    <collation id=\"171\" parent=\"1\" name=\"utf8_general_ci\">\n      <Charset>utf8</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"172\" parent=\"1\" name=\"utf8_tolower_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"173\" parent=\"1\" name=\"utf8_bin\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"174\" parent=\"1\" name=\"utf8_unicode_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"175\" parent=\"1\" name=\"utf8_icelandic_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"176\" parent=\"1\" name=\"utf8_latvian_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"177\" parent=\"1\" name=\"utf8_romanian_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"178\" parent=\"1\" name=\"utf8_slovenian_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"179\" parent=\"1\" name=\"utf8_polish_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"180\" parent=\"1\" name=\"utf8_estonian_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"181\" parent=\"1\" name=\"utf8_spanish_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"182\" parent=\"1\" name=\"utf8_swedish_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"183\" parent=\"1\" name=\"utf8_turkish_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"184\" parent=\"1\" name=\"utf8_czech_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"185\" parent=\"1\" name=\"utf8_danish_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"186\" parent=\"1\" name=\"utf8_lithuanian_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"187\" parent=\"1\" name=\"utf8_slovak_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"188\" parent=\"1\" name=\"utf8_spanish2_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"189\" parent=\"1\" name=\"utf8_roman_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"190\" parent=\"1\" name=\"utf8_persian_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"191\" parent=\"1\" name=\"utf8_esperanto_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"192\" parent=\"1\" name=\"utf8_hungarian_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"193\" parent=\"1\" name=\"utf8_sinhala_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"194\" parent=\"1\" name=\"utf8_german2_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"195\" parent=\"1\" name=\"utf8_croatian_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"196\" parent=\"1\" name=\"utf8_unicode_520_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"197\" parent=\"1\" name=\"utf8_vietnamese_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"198\" parent=\"1\" name=\"utf8_general_mysql500_ci\">\n      <Charset>utf8</Charset>\n    </collation>\n    <collation id=\"199\" parent=\"1\" name=\"utf8mb4_general_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"200\" parent=\"1\" name=\"utf8mb4_bin\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"201\" parent=\"1\" name=\"utf8mb4_unicode_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"202\" parent=\"1\" name=\"utf8mb4_icelandic_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"203\" parent=\"1\" name=\"utf8mb4_latvian_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"204\" parent=\"1\" name=\"utf8mb4_romanian_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"205\" parent=\"1\" name=\"utf8mb4_slovenian_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"206\" parent=\"1\" name=\"utf8mb4_polish_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"207\" parent=\"1\" name=\"utf8mb4_estonian_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"208\" parent=\"1\" name=\"utf8mb4_spanish_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"209\" parent=\"1\" name=\"utf8mb4_swedish_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"210\" parent=\"1\" name=\"utf8mb4_turkish_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"211\" parent=\"1\" name=\"utf8mb4_czech_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"212\" parent=\"1\" name=\"utf8mb4_danish_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"213\" parent=\"1\" name=\"utf8mb4_lithuanian_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"214\" parent=\"1\" name=\"utf8mb4_slovak_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"215\" parent=\"1\" name=\"utf8mb4_spanish2_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"216\" parent=\"1\" name=\"utf8mb4_roman_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"217\" parent=\"1\" name=\"utf8mb4_persian_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"218\" parent=\"1\" name=\"utf8mb4_esperanto_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"219\" parent=\"1\" name=\"utf8mb4_hungarian_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"220\" parent=\"1\" name=\"utf8mb4_sinhala_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"221\" parent=\"1\" name=\"utf8mb4_german2_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"222\" parent=\"1\" name=\"utf8mb4_croatian_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"223\" parent=\"1\" name=\"utf8mb4_unicode_520_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"224\" parent=\"1\" name=\"utf8mb4_vietnamese_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"225\" parent=\"1\" name=\"utf8mb4_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n      <DefaultForCharset>1</DefaultForCharset>\n    </collation>\n    <collation id=\"226\" parent=\"1\" name=\"utf8mb4_de_pb_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"227\" parent=\"1\" name=\"utf8mb4_is_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"228\" parent=\"1\" name=\"utf8mb4_lv_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"229\" parent=\"1\" name=\"utf8mb4_ro_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"230\" parent=\"1\" name=\"utf8mb4_sl_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"231\" parent=\"1\" name=\"utf8mb4_pl_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"232\" parent=\"1\" name=\"utf8mb4_et_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"233\" parent=\"1\" name=\"utf8mb4_es_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"234\" parent=\"1\" name=\"utf8mb4_sv_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"235\" parent=\"1\" name=\"utf8mb4_tr_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"236\" parent=\"1\" name=\"utf8mb4_cs_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"237\" parent=\"1\" name=\"utf8mb4_da_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"238\" parent=\"1\" name=\"utf8mb4_lt_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"239\" parent=\"1\" name=\"utf8mb4_sk_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"240\" parent=\"1\" name=\"utf8mb4_es_trad_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"241\" parent=\"1\" name=\"utf8mb4_la_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"242\" parent=\"1\" name=\"utf8mb4_eo_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"243\" parent=\"1\" name=\"utf8mb4_hu_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"244\" parent=\"1\" name=\"utf8mb4_hr_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"245\" parent=\"1\" name=\"utf8mb4_vi_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"246\" parent=\"1\" name=\"utf8mb4_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"247\" parent=\"1\" name=\"utf8mb4_de_pb_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"248\" parent=\"1\" name=\"utf8mb4_is_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"249\" parent=\"1\" name=\"utf8mb4_lv_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"250\" parent=\"1\" name=\"utf8mb4_ro_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"251\" parent=\"1\" name=\"utf8mb4_sl_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"252\" parent=\"1\" name=\"utf8mb4_pl_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"253\" parent=\"1\" name=\"utf8mb4_et_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"254\" parent=\"1\" name=\"utf8mb4_es_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"255\" parent=\"1\" name=\"utf8mb4_sv_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"256\" parent=\"1\" name=\"utf8mb4_tr_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"257\" parent=\"1\" name=\"utf8mb4_cs_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"258\" parent=\"1\" name=\"utf8mb4_da_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"259\" parent=\"1\" name=\"utf8mb4_lt_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"260\" parent=\"1\" name=\"utf8mb4_sk_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"261\" parent=\"1\" name=\"utf8mb4_es_trad_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"262\" parent=\"1\" name=\"utf8mb4_la_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"263\" parent=\"1\" name=\"utf8mb4_eo_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"264\" parent=\"1\" name=\"utf8mb4_hu_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"265\" parent=\"1\" name=\"utf8mb4_hr_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"266\" parent=\"1\" name=\"utf8mb4_vi_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"267\" parent=\"1\" name=\"utf8mb4_ja_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"268\" parent=\"1\" name=\"utf8mb4_ja_0900_as_cs_ks\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"269\" parent=\"1\" name=\"utf8mb4_0900_as_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"270\" parent=\"1\" name=\"utf8mb4_ru_0900_ai_ci\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"271\" parent=\"1\" name=\"utf8mb4_ru_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"272\" parent=\"1\" name=\"utf8mb4_zh_0900_as_cs\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <collation id=\"273\" parent=\"1\" name=\"utf8mb4_0900_bin\">\n      <Charset>utf8mb4</Charset>\n    </collation>\n    <schema id=\"274\" parent=\"1\" name=\"BooksDB\">\n      <Current>1</Current>\n      <Grants>author|||Thomas|localhost|DELETE|G\nauthor|||Thomas|localhost|INSERT|G\nauthor|||Guest|localhost|SELECT|G\nauthor|||Redve|localhost|SELECT|G\nauthor|||Thomas|localhost|SELECT|G\nbook|||Thomas|localhost|DELETE|G\nbook|||Thomas|localhost|INSERT|G\nbook|||Guest|localhost|SELECT|G\nbook|||Redve|localhost|SELECT|G\nbook|||Thomas|localhost|SELECT|G\nbookauthor|||Thomas|localhost|DELETE|G\nbookauthor|||Thomas|localhost|INSERT|G\nbookauthor|||Guest|localhost|SELECT|G\nbookauthor|||Redve|localhost|SELECT|G\nbookauthor|||Thomas|localhost|SELECT|G\ngenre|||Thomas|localhost|DELETE|G\ngenre|||Thomas|localhost|INSERT|G\ngenre|||Guest|localhost|SELECT|G\ngenre|||Redve|localhost|SELECT|G\ngenre|||Thomas|localhost|SELECT|G\nrating|||Thomas|localhost|DELETE|G\nrating|||Thomas|localhost|INSERT|G\nrating|||Guest|localhost|SELECT|G\nrating|||Redve|localhost|SELECT|G\nrating|||Thomas|localhost|SELECT|G\nuser|||Redve|localhost|SELECT|G</Grants>\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </schema>\n    <schema id=\"275\" parent=\"1\" name=\"Giesecke&amp;Devrient\">\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </schema>\n    <schema id=\"276\" parent=\"1\" name=\"information_schema\">\n      <CollationName>utf8_general_ci</CollationName>\n    </schema>\n    <schema id=\"277\" parent=\"1\" name=\"mysql\">\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </schema>\n    <schema id=\"278\" parent=\"1\" name=\"performance_schema\">\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </schema>\n    <schema id=\"279\" parent=\"1\" name=\"sys\">\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </schema>\n    <user id=\"280\" parent=\"1\" name=\"Guest\">\n      <Host>localhost</Host>\n      <Plugin>caching_sha2_password</Plugin>\n    </user>\n    <user id=\"281\" parent=\"1\" name=\"Redve\">\n      <Host>localhost</Host>\n      <Plugin>caching_sha2_password</Plugin>\n    </user>\n    <user id=\"282\" parent=\"1\" name=\"Thomas\">\n      <Host>localhost</Host>\n      <Plugin>caching_sha2_password</Plugin>\n    </user>\n    <user id=\"283\" parent=\"1\" name=\"mysql.infoschema\">\n      <Host>localhost</Host>\n      <Plugin>caching_sha2_password</Plugin>\n    </user>\n    <user id=\"284\" parent=\"1\" name=\"mysql.session\">\n      <Host>localhost</Host>\n      <Plugin>caching_sha2_password</Plugin>\n    </user>\n    <user id=\"285\" parent=\"1\" name=\"mysql.sys\">\n      <Host>localhost</Host>\n      <Plugin>caching_sha2_password</Plugin>\n    </user>\n    <user id=\"286\" parent=\"1\" name=\"root\">\n      <Host>localhost</Host>\n      <Plugin>caching_sha2_password</Plugin>\n    </user>\n    <user id=\"287\" parent=\"1\" name=\"Admin\">\n      <Host>localhost</Host>\n      <Plugin>caching_sha2_password</Plugin>\n    </user>\n    <user id=\"288\" parent=\"1\" name=\"Admin\">\n      <Plugin>caching_sha2_password</Plugin>\n    </user>\n    <table id=\"289\" parent=\"275\" name=\"daily\">\n      <Engine>InnoDB</Engine>\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </table>\n    <table id=\"290\" parent=\"275\" name=\"hibernate_sequence\">\n      <Engine>InnoDB</Engine>\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </table>\n    <table id=\"291\" parent=\"275\" name=\"monthly\">\n      <Engine>InnoDB</Engine>\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </table>\n    <table id=\"292\" parent=\"275\" name=\"refreshtoken\">\n      <Engine>InnoDB</Engine>\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </table>\n    <table id=\"293\" parent=\"275\" name=\"roles\">\n      <Engine>InnoDB</Engine>\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </table>\n    <table id=\"294\" parent=\"275\" name=\"scoreboard\">\n      <Engine>InnoDB</Engine>\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </table>\n    <table id=\"295\" parent=\"275\" name=\"user\">\n      <Engine>InnoDB</Engine>\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </table>\n    <table id=\"296\" parent=\"275\" name=\"user_answer\">\n      <Engine>InnoDB</Engine>\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </table>\n    <table id=\"297\" parent=\"275\" name=\"user_roles\">\n      <Engine>InnoDB</Engine>\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </table>\n    <table id=\"298\" parent=\"275\" name=\"weekly\">\n      <Engine>InnoDB</Engine>\n      <CollationName>utf8mb4_0900_ai_ci</CollationName>\n    </table>\n    <column id=\"299\" parent=\"289\" name=\"dailyid\">\n      <DataType>bigint|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>1</Position>\n    </column>\n    <column id=\"300\" parent=\"289\" name=\"alternative1\">\n      <DataType>varchar(512)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>2</Position>\n    </column>\n    <column id=\"301\" parent=\"289\" name=\"alternative2\">\n      <DataType>varchar(512)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>3</Position>\n    </column>\n    <column id=\"302\" parent=\"289\" name=\"alternative3\">\n      <DataType>varchar(512)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>4</Position>\n    </column>\n    <column id=\"303\" parent=\"289\" name=\"date_to_publish\">\n      <DataType>date|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>5</Position>\n    </column>\n    <column id=\"304\" parent=\"289\" name=\"question\">\n      <DataType>varchar(512)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>6</Position>\n    </column>\n    <column id=\"305\" parent=\"289\" name=\"right_alternative\">\n      <DataType>int|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>7</Position>\n    </column>\n    <key id=\"306\" parent=\"289\" name=\"PRIMARY\">\n      <ColNames>dailyid</ColNames>\n      <NameSurrogate>1</NameSurrogate>\n      <Primary>1</Primary>\n    </key>\n    <column id=\"307\" parent=\"290\" name=\"next_val\">\n      <DataType>bigint|0s</DataType>\n      <Position>1</Position>\n    </column>\n    <column id=\"308\" parent=\"291\" name=\"monthlyid\">\n      <DataType>bigint|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>1</Position>\n    </column>\n    <column id=\"309\" parent=\"291\" name=\"answer\">\n      <DataType>varchar(512)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>2</Position>\n    </column>\n    <column id=\"310\" parent=\"291\" name=\"date_to_publish\">\n      <DataType>date|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>3</Position>\n    </column>\n    <column id=\"311\" parent=\"291\" name=\"hint1\">\n      <DataType>varchar(512)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>4</Position>\n    </column>\n    <column id=\"312\" parent=\"291\" name=\"hint2\">\n      <DataType>varchar(512)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>5</Position>\n    </column>\n    <column id=\"313\" parent=\"291\" name=\"hint3\">\n      <DataType>varchar(512)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>6</Position>\n    </column>\n    <column id=\"314\" parent=\"291\" name=\"question\">\n      <DataType>varchar(512)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>7</Position>\n    </column>\n    <key id=\"315\" parent=\"291\" name=\"PRIMARY\">\n      <ColNames>monthlyid</ColNames>\n      <NameSurrogate>1</NameSurrogate>\n      <Primary>1</Primary>\n    </key>\n    <column id=\"316\" parent=\"292\" name=\"id\">\n      <DataType>bigint|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>1</Position>\n    </column>\n    <column id=\"317\" parent=\"292\" name=\"expiry_date\">\n      <DataType>datetime(6)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>2</Position>\n    </column>\n    <column id=\"318\" parent=\"292\" name=\"token\">\n      <DataType>varchar(255)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>3</Position>\n    </column>\n    <column id=\"319\" parent=\"292\" name=\"user_id\">\n      <DataType>bigint|0s</DataType>\n      <Position>4</Position>\n    </column>\n    <foreign-key id=\"320\" parent=\"292\" name=\"FKfr75ge3iecdx26qe8afh1srf6\">\n      <ColNames>user_id</ColNames>\n      <RefColNames>id</RefColNames>\n      <RefTableName>user</RefTableName>\n    </foreign-key>\n    <index id=\"321\" parent=\"292\" name=\"UK_or156wbneyk8noo4jstv55ii3\">\n      <ColNames>token</ColNames>\n      <Type>btree</Type>\n      <Unique>1</Unique>\n    </index>\n    <index id=\"322\" parent=\"292\" name=\"FKfr75ge3iecdx26qe8afh1srf6\">\n      <ColNames>user_id</ColNames>\n      <Type>btree</Type>\n    </index>\n    <key id=\"323\" parent=\"292\" name=\"PRIMARY\">\n      <ColNames>id</ColNames>\n      <NameSurrogate>1</NameSurrogate>\n      <Primary>1</Primary>\n    </key>\n    <key id=\"324\" parent=\"292\" name=\"UK_or156wbneyk8noo4jstv55ii3\">\n      <ColNames>token</ColNames>\n      <UnderlyingIndexName>UK_or156wbneyk8noo4jstv55ii3</UnderlyingIndexName>\n    </key>\n    <column id=\"325\" parent=\"293\" name=\"id\">\n      <DataType>int|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>1</Position>\n      <SequenceIdentity>null</SequenceIdentity>\n    </column>\n    <column id=\"326\" parent=\"293\" name=\"name\">\n      <DataType>varchar(20)|0s</DataType>\n      <Position>2</Position>\n    </column>\n    <key id=\"327\" parent=\"293\" name=\"PRIMARY\">\n      <ColNames>id</ColNames>\n      <NameSurrogate>1</NameSurrogate>\n      <Primary>1</Primary>\n    </key>\n    <column id=\"328\" parent=\"294\" name=\"scoreid\">\n      <DataType>bigint|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>1</Position>\n    </column>\n    <column id=\"329\" parent=\"294\" name=\"daily_score\">\n      <DataType>int|0s</DataType>\n      <Position>2</Position>\n    </column>\n    <column id=\"330\" parent=\"294\" name=\"monthly_score\">\n      <DataType>int|0s</DataType>\n      <Position>3</Position>\n    </column>\n    <column id=\"331\" parent=\"294\" name=\"weekly_score\">\n      <DataType>int|0s</DataType>\n      <Position>4</Position>\n    </column>\n    <column id=\"332\" parent=\"294\" name=\"user_id\">\n      <DataType>bigint|0s</DataType>\n      <Position>5</Position>\n    </column>\n    <foreign-key id=\"333\" parent=\"294\" name=\"FKrfucy0c3rwjnc9p8t3ktedkjs\">\n      <ColNames>user_id</ColNames>\n      <RefColNames>id</RefColNames>\n      <RefTableName>user</RefTableName>\n    </foreign-key>\n    <index id=\"334\" parent=\"294\" name=\"FKrfucy0c3rwjnc9p8t3ktedkjs\">\n      <ColNames>user_id</ColNames>\n      <Type>btree</Type>\n    </index>\n    <key id=\"335\" parent=\"294\" name=\"PRIMARY\">\n      <ColNames>scoreid</ColNames>\n      <NameSurrogate>1</NameSurrogate>\n      <Primary>1</Primary>\n    </key>\n    <column id=\"336\" parent=\"295\" name=\"id\">\n      <DataType>bigint|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>1</Position>\n      <SequenceIdentity>null</SequenceIdentity>\n    </column>\n    <column id=\"337\" parent=\"295\" name=\"email\">\n      <DataType>varchar(50)|0s</DataType>\n      <Position>2</Position>\n    </column>\n    <column id=\"338\" parent=\"295\" name=\"password\">\n      <DataType>varchar(120)|0s</DataType>\n      <Position>3</Position>\n    </column>\n    <column id=\"339\" parent=\"295\" name=\"username\">\n      <DataType>varchar(20)|0s</DataType>\n      <Position>4</Position>\n    </column>\n    <index id=\"340\" parent=\"295\" name=\"UKob8kqyqqgmefl0aco34akdtpe\">\n      <ColNames>email</ColNames>\n      <Type>btree</Type>\n      <Unique>1</Unique>\n    </index>\n    <index id=\"341\" parent=\"295\" name=\"UKsb8bbouer5wak8vyiiy4pf2bx\">\n      <ColNames>username</ColNames>\n      <Type>btree</Type>\n      <Unique>1</Unique>\n    </index>\n    <key id=\"342\" parent=\"295\" name=\"PRIMARY\">\n      <ColNames>id</ColNames>\n      <NameSurrogate>1</NameSurrogate>\n      <Primary>1</Primary>\n    </key>\n    <key id=\"343\" parent=\"295\" name=\"UKob8kqyqqgmefl0aco34akdtpe\">\n      <ColNames>email</ColNames>\n      <UnderlyingIndexName>UKob8kqyqqgmefl0aco34akdtpe</UnderlyingIndexName>\n    </key>\n    <key id=\"344\" parent=\"295\" name=\"UKsb8bbouer5wak8vyiiy4pf2bx\">\n      <ColNames>username</ColNames>\n      <UnderlyingIndexName>UKsb8bbouer5wak8vyiiy4pf2bx</UnderlyingIndexName>\n    </key>\n    <column id=\"345\" parent=\"296\" name=\"user_answerid\">\n      <DataType>bigint|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>1</Position>\n    </column>\n    <column id=\"346\" parent=\"296\" name=\"answer\">\n      <DataType>varchar(255)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>2</Position>\n    </column>\n    <column id=\"347\" parent=\"296\" name=\"corrected\">\n      <DataType>varchar(255)|0s</DataType>\n      <Position>3</Position>\n    </column>\n    <column id=\"348\" parent=\"296\" name=\"date_submited\">\n      <DataType>date|0s</DataType>\n      <Position>4</Position>\n    </column>\n    <column id=\"349\" parent=\"296\" name=\"question_id\">\n      <DataType>bigint|0s</DataType>\n      <Position>5</Position>\n    </column>\n    <column id=\"350\" parent=\"296\" name=\"type_of_question\">\n      <DataType>varchar(255)|0s</DataType>\n      <Position>6</Position>\n    </column>\n    <column id=\"351\" parent=\"296\" name=\"user_id\">\n      <DataType>bigint|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>7</Position>\n    </column>\n    <foreign-key id=\"352\" parent=\"296\" name=\"FK7kw17ur9w2egkc51xua3yh0ux\">\n      <ColNames>user_id</ColNames>\n      <OnDelete>cascade</OnDelete>\n      <RefColNames>id</RefColNames>\n      <RefTableName>user</RefTableName>\n    </foreign-key>\n    <index id=\"353\" parent=\"296\" name=\"FK7kw17ur9w2egkc51xua3yh0ux\">\n      <ColNames>user_id</ColNames>\n      <Type>btree</Type>\n    </index>\n    <key id=\"354\" parent=\"296\" name=\"PRIMARY\">\n      <ColNames>user_answerid</ColNames>\n      <NameSurrogate>1</NameSurrogate>\n      <Primary>1</Primary>\n    </key>\n    <column id=\"355\" parent=\"297\" name=\"user_username\">\n      <DataType>bigint|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>1</Position>\n    </column>\n    <column id=\"356\" parent=\"297\" name=\"role_id\">\n      <DataType>int|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>2</Position>\n    </column>\n    <foreign-key id=\"357\" parent=\"297\" name=\"FK1misndtpfm9hx3ttvixdus8d1\">\n      <ColNames>user_username</ColNames>\n      <RefColNames>id</RefColNames>\n      <RefTableName>user</RefTableName>\n    </foreign-key>\n    <foreign-key id=\"358\" parent=\"297\" name=\"FKh8ciramu9cc9q3qcqiv4ue8a6\">\n      <ColNames>role_id</ColNames>\n      <RefColNames>id</RefColNames>\n      <RefTableName>roles</RefTableName>\n    </foreign-key>\n    <index id=\"359\" parent=\"297\" name=\"FKh8ciramu9cc9q3qcqiv4ue8a6\">\n      <ColNames>role_id</ColNames>\n      <Type>btree</Type>\n    </index>\n    <key id=\"360\" parent=\"297\" name=\"PRIMARY\">\n      <ColNames>user_username\nrole_id</ColNames>\n      <NameSurrogate>1</NameSurrogate>\n      <Primary>1</Primary>\n    </key>\n    <column id=\"361\" parent=\"298\" name=\"weeklyid\">\n      <DataType>bigint|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>1</Position>\n    </column>\n    <column id=\"362\" parent=\"298\" name=\"answer\">\n      <DataType>varchar(512)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>2</Position>\n    </column>\n    <column id=\"363\" parent=\"298\" name=\"date_to_publish\">\n      <DataType>date|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>3</Position>\n    </column>\n    <column id=\"364\" parent=\"298\" name=\"question\">\n      <DataType>varchar(512)|0s</DataType>\n      <NotNull>1</NotNull>\n      <Position>4</Position>\n    </column>\n    <key id=\"365\" parent=\"298\" name=\"PRIMARY\">\n      <ColNames>weeklyid</ColNames>\n      <NameSurrogate>1</NameSurrogate>\n      <Primary>1</Primary>\n    </key>\n  </database-model>\n</dataSource>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources/a169b5d8-5dee-4b24-9be2-fa4b2402edf0.xml b/.idea/dataSources/a169b5d8-5dee-4b24-9be2-fa4b2402edf0.xml
+--- a/.idea/dataSources/a169b5d8-5dee-4b24-9be2-fa4b2402edf0.xml	
++++ b/.idea/dataSources/a169b5d8-5dee-4b24-9be2-fa4b2402edf0.xml	
+@@ -1039,19 +1039,19 @@
+ user|||Redve|localhost|SELECT|G</Grants>
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </schema>
+-    <schema id="275" parent="1" name="Giesecke&amp;Devrient">
+-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
++    <schema id="275" parent="1" name="information_schema">
++      <CollationName>utf8_general_ci</CollationName>
+     </schema>
+-    <schema id="276" parent="1" name="information_schema">
+-      <CollationName>utf8_general_ci</CollationName>
++    <schema id="276" parent="1" name="mysql">
++      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </schema>
+-    <schema id="277" parent="1" name="mysql">
++    <schema id="277" parent="1" name="performance_schema">
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </schema>
+-    <schema id="278" parent="1" name="performance_schema">
++    <schema id="278" parent="1" name="sys">
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </schema>
+-    <schema id="279" parent="1" name="sys">
++    <schema id="279" parent="1" name="giesecke&amp;devrient">
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </schema>
+     <user id="280" parent="1" name="Guest">
+@@ -1089,43 +1089,43 @@
+     <user id="288" parent="1" name="Admin">
+       <Plugin>caching_sha2_password</Plugin>
+     </user>
+-    <table id="289" parent="275" name="daily">
++    <table id="289" parent="279" name="daily">
+       <Engine>InnoDB</Engine>
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </table>
+-    <table id="290" parent="275" name="hibernate_sequence">
++    <table id="290" parent="279" name="hibernate_sequence">
+       <Engine>InnoDB</Engine>
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </table>
+-    <table id="291" parent="275" name="monthly">
++    <table id="291" parent="279" name="monthly">
+       <Engine>InnoDB</Engine>
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </table>
+-    <table id="292" parent="275" name="refreshtoken">
++    <table id="292" parent="279" name="refreshtoken">
+       <Engine>InnoDB</Engine>
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </table>
+-    <table id="293" parent="275" name="roles">
++    <table id="293" parent="279" name="roles">
+       <Engine>InnoDB</Engine>
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </table>
+-    <table id="294" parent="275" name="scoreboard">
++    <table id="294" parent="279" name="scoreboard">
+       <Engine>InnoDB</Engine>
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </table>
+-    <table id="295" parent="275" name="user">
++    <table id="295" parent="279" name="user">
+       <Engine>InnoDB</Engine>
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </table>
+-    <table id="296" parent="275" name="user_answer">
++    <table id="296" parent="279" name="user_answer">
+       <Engine>InnoDB</Engine>
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </table>
+-    <table id="297" parent="275" name="user_roles">
++    <table id="297" parent="279" name="user_roles">
+       <Engine>InnoDB</Engine>
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </table>
+-    <table id="298" parent="275" name="weekly">
++    <table id="298" parent="279" name="weekly">
+       <Engine>InnoDB</Engine>
+       <CollationName>utf8mb4_0900_ai_ci</CollationName>
+     </table>
+@@ -1265,184 +1265,202 @@
+       <DataType>varchar(20)|0s</DataType>
+       <Position>2</Position>
+     </column>
+-    <key id="327" parent="293" name="PRIMARY">
++    <index id="327" parent="293" name="UK_ofx66keruapi6vyqpv6f2or37">
++      <ColNames>name</ColNames>
++      <Type>btree</Type>
++      <Unique>1</Unique>
++    </index>
++    <key id="328" parent="293" name="PRIMARY">
+       <ColNames>id</ColNames>
+       <NameSurrogate>1</NameSurrogate>
+       <Primary>1</Primary>
+     </key>
+-    <column id="328" parent="294" name="scoreid">
++    <key id="329" parent="293" name="UK_ofx66keruapi6vyqpv6f2or37">
++      <ColNames>name</ColNames>
++      <UnderlyingIndexName>UK_ofx66keruapi6vyqpv6f2or37</UnderlyingIndexName>
++    </key>
++    <column id="330" parent="294" name="scoreid">
+       <DataType>bigint|0s</DataType>
+       <NotNull>1</NotNull>
+       <Position>1</Position>
+     </column>
+-    <column id="329" parent="294" name="daily_score">
++    <column id="331" parent="294" name="daily_score">
+       <DataType>int|0s</DataType>
+       <Position>2</Position>
+     </column>
+-    <column id="330" parent="294" name="monthly_score">
++    <column id="332" parent="294" name="monthly_score">
+       <DataType>int|0s</DataType>
+       <Position>3</Position>
+     </column>
+-    <column id="331" parent="294" name="weekly_score">
++    <column id="333" parent="294" name="weekly_score">
+       <DataType>int|0s</DataType>
+       <Position>4</Position>
+     </column>
+-    <column id="332" parent="294" name="user_id">
++    <column id="334" parent="294" name="user_id">
+       <DataType>bigint|0s</DataType>
+       <Position>5</Position>
+     </column>
+-    <foreign-key id="333" parent="294" name="FKrfucy0c3rwjnc9p8t3ktedkjs">
++    <foreign-key id="335" parent="294" name="FKrfucy0c3rwjnc9p8t3ktedkjs">
+       <ColNames>user_id</ColNames>
+       <RefColNames>id</RefColNames>
+       <RefTableName>user</RefTableName>
+     </foreign-key>
+-    <index id="334" parent="294" name="FKrfucy0c3rwjnc9p8t3ktedkjs">
++    <index id="336" parent="294" name="FKrfucy0c3rwjnc9p8t3ktedkjs">
+       <ColNames>user_id</ColNames>
+       <Type>btree</Type>
+     </index>
+-    <key id="335" parent="294" name="PRIMARY">
++    <key id="337" parent="294" name="PRIMARY">
+       <ColNames>scoreid</ColNames>
+       <NameSurrogate>1</NameSurrogate>
+       <Primary>1</Primary>
+     </key>
+-    <column id="336" parent="295" name="id">
++    <column id="338" parent="295" name="id">
+       <DataType>bigint|0s</DataType>
+       <NotNull>1</NotNull>
+       <Position>1</Position>
+       <SequenceIdentity>null</SequenceIdentity>
+     </column>
+-    <column id="337" parent="295" name="email">
++    <column id="339" parent="295" name="email">
+       <DataType>varchar(50)|0s</DataType>
+       <Position>2</Position>
+     </column>
+-    <column id="338" parent="295" name="password">
++    <column id="340" parent="295" name="password">
+       <DataType>varchar(120)|0s</DataType>
+       <Position>3</Position>
+     </column>
+-    <column id="339" parent="295" name="username">
++    <column id="341" parent="295" name="username">
+       <DataType>varchar(20)|0s</DataType>
+       <Position>4</Position>
+     </column>
+-    <index id="340" parent="295" name="UKob8kqyqqgmefl0aco34akdtpe">
++    <index id="342" parent="295" name="UKob8kqyqqgmefl0aco34akdtpe">
+       <ColNames>email</ColNames>
+       <Type>btree</Type>
+       <Unique>1</Unique>
+     </index>
+-    <index id="341" parent="295" name="UKsb8bbouer5wak8vyiiy4pf2bx">
++    <index id="343" parent="295" name="UKsb8bbouer5wak8vyiiy4pf2bx">
+       <ColNames>username</ColNames>
+       <Type>btree</Type>
+       <Unique>1</Unique>
+     </index>
+-    <key id="342" parent="295" name="PRIMARY">
++    <key id="344" parent="295" name="PRIMARY">
+       <ColNames>id</ColNames>
+       <NameSurrogate>1</NameSurrogate>
+       <Primary>1</Primary>
+     </key>
+-    <key id="343" parent="295" name="UKob8kqyqqgmefl0aco34akdtpe">
++    <key id="345" parent="295" name="UKob8kqyqqgmefl0aco34akdtpe">
+       <ColNames>email</ColNames>
+       <UnderlyingIndexName>UKob8kqyqqgmefl0aco34akdtpe</UnderlyingIndexName>
+     </key>
+-    <key id="344" parent="295" name="UKsb8bbouer5wak8vyiiy4pf2bx">
++    <key id="346" parent="295" name="UKsb8bbouer5wak8vyiiy4pf2bx">
+       <ColNames>username</ColNames>
+       <UnderlyingIndexName>UKsb8bbouer5wak8vyiiy4pf2bx</UnderlyingIndexName>
+     </key>
+-    <column id="345" parent="296" name="user_answerid">
++    <column id="347" parent="296" name="user_answerid">
+       <DataType>bigint|0s</DataType>
+       <NotNull>1</NotNull>
+       <Position>1</Position>
+     </column>
+-    <column id="346" parent="296" name="answer">
++    <column id="348" parent="296" name="answer">
+       <DataType>varchar(255)|0s</DataType>
+       <NotNull>1</NotNull>
+       <Position>2</Position>
+     </column>
+-    <column id="347" parent="296" name="corrected">
++    <column id="349" parent="296" name="corrected">
+       <DataType>varchar(255)|0s</DataType>
+       <Position>3</Position>
+     </column>
+-    <column id="348" parent="296" name="date_submited">
++    <column id="350" parent="296" name="date_submited">
+       <DataType>date|0s</DataType>
+       <Position>4</Position>
+     </column>
+-    <column id="349" parent="296" name="question_id">
++    <column id="351" parent="296" name="question_id">
+       <DataType>bigint|0s</DataType>
+       <Position>5</Position>
+     </column>
+-    <column id="350" parent="296" name="type_of_question">
++    <column id="352" parent="296" name="type_of_question">
+       <DataType>varchar(255)|0s</DataType>
+       <Position>6</Position>
+     </column>
+-    <column id="351" parent="296" name="user_id">
++    <column id="353" parent="296" name="user_id">
+       <DataType>bigint|0s</DataType>
+       <NotNull>1</NotNull>
+       <Position>7</Position>
+     </column>
+-    <foreign-key id="352" parent="296" name="FK7kw17ur9w2egkc51xua3yh0ux">
++    <foreign-key id="354" parent="296" name="FK7kw17ur9w2egkc51xua3yh0ux">
+       <ColNames>user_id</ColNames>
+       <OnDelete>cascade</OnDelete>
+       <RefColNames>id</RefColNames>
+       <RefTableName>user</RefTableName>
+     </foreign-key>
+-    <index id="353" parent="296" name="FK7kw17ur9w2egkc51xua3yh0ux">
+-      <ColNames>user_id</ColNames>
++    <index id="355" parent="296" name="UniqueAnswers">
++      <ColNames>user_id
++type_of_question
++question_id</ColNames>
+       <Type>btree</Type>
++      <Unique>1</Unique>
+     </index>
+-    <key id="354" parent="296" name="PRIMARY">
++    <key id="356" parent="296" name="PRIMARY">
+       <ColNames>user_answerid</ColNames>
+       <NameSurrogate>1</NameSurrogate>
+       <Primary>1</Primary>
+     </key>
+-    <column id="355" parent="297" name="user_username">
++    <key id="357" parent="296" name="UniqueAnswers">
++      <ColNames>user_id
++type_of_question
++question_id</ColNames>
++      <UnderlyingIndexName>UniqueAnswers</UnderlyingIndexName>
++    </key>
++    <column id="358" parent="297" name="user_username">
+       <DataType>bigint|0s</DataType>
+       <NotNull>1</NotNull>
+       <Position>1</Position>
+     </column>
+-    <column id="356" parent="297" name="role_id">
++    <column id="359" parent="297" name="role_id">
+       <DataType>int|0s</DataType>
+       <NotNull>1</NotNull>
+       <Position>2</Position>
+     </column>
+-    <foreign-key id="357" parent="297" name="FK1misndtpfm9hx3ttvixdus8d1">
++    <foreign-key id="360" parent="297" name="FK1misndtpfm9hx3ttvixdus8d1">
+       <ColNames>user_username</ColNames>
+       <RefColNames>id</RefColNames>
+       <RefTableName>user</RefTableName>
+     </foreign-key>
+-    <foreign-key id="358" parent="297" name="FKh8ciramu9cc9q3qcqiv4ue8a6">
++    <foreign-key id="361" parent="297" name="FKh8ciramu9cc9q3qcqiv4ue8a6">
+       <ColNames>role_id</ColNames>
+       <RefColNames>id</RefColNames>
+       <RefTableName>roles</RefTableName>
+     </foreign-key>
+-    <index id="359" parent="297" name="FKh8ciramu9cc9q3qcqiv4ue8a6">
++    <index id="362" parent="297" name="FKh8ciramu9cc9q3qcqiv4ue8a6">
+       <ColNames>role_id</ColNames>
+       <Type>btree</Type>
+     </index>
+-    <key id="360" parent="297" name="PRIMARY">
++    <key id="363" parent="297" name="PRIMARY">
+       <ColNames>user_username
+ role_id</ColNames>
+       <NameSurrogate>1</NameSurrogate>
+       <Primary>1</Primary>
+     </key>
+-    <column id="361" parent="298" name="weeklyid">
++    <column id="364" parent="298" name="weeklyid">
+       <DataType>bigint|0s</DataType>
+       <NotNull>1</NotNull>
+       <Position>1</Position>
+     </column>
+-    <column id="362" parent="298" name="answer">
++    <column id="365" parent="298" name="answer">
+       <DataType>varchar(512)|0s</DataType>
+       <NotNull>1</NotNull>
+       <Position>2</Position>
+     </column>
+-    <column id="363" parent="298" name="date_to_publish">
++    <column id="366" parent="298" name="date_to_publish">
+       <DataType>date|0s</DataType>
+       <NotNull>1</NotNull>
+       <Position>3</Position>
+     </column>
+-    <column id="364" parent="298" name="question">
++    <column id="367" parent="298" name="question">
+       <DataType>varchar(512)|0s</DataType>
+       <NotNull>1</NotNull>
+       <Position>4</Position>
+     </column>
+-    <key id="365" parent="298" name="PRIMARY">
++    <key id="368" parent="298" name="PRIMARY">
+       <ColNames>weeklyid</ColNames>
+       <NameSurrogate>1</NameSurrogate>
+       <Primary>1</Primary>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"a935b846-48fc-4243-8bd8-7022252bfcd7\" name=\"Changes\" comment=\"fixes\">\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/0.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/0.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/1.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/1.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/10.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/10.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/11.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/11.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/12.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/12.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/13.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/13.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/14.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/14.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/15.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/15.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/2.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/2.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/3.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/3.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/5.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/5.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/6.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/6.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/7.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/7.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/8.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/8.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/9.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/9.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack.old\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack.old\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/dataSources/a169b5d8-5dee-4b24-9be2-fa4b2402edf0.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/dataSources/a169b5d8-5dee-4b24-9be2-fa4b2402edf0.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/app/app.module.ts\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/app/app.module.ts\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/app/board-admin/board-admin.component.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/app/board-admin/board-admin.component.html\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/app/board-admin/board-admin.component.ts\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/app/board-admin/board-admin.component.ts\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/app/home/home.component.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/app/home/home.component.css\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/app/home/home.component.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/app/home/home.component.html\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/app/home/home.component.ts\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/app/home/home.component.ts\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/app/score-board/score-board.component.html\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/app/score-board/score-board.component.html\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/app/score-board/score-board.component.ts\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/app/score-board/score-board.component.ts\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"package.json\" />\n        <option value=\"JavaScript File\" />\n        <option value=\"TypeScript File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitSEFilterConfiguration\">\n    <file-type-list>\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\n      <filtered-out-file-type name=\"TAG\" />\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\n    </file-type-list>\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"27h5bhpMIg7rYBRnuakRiriO0f7\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n    <option name=\"showMembers\" value=\"true\" />\n    <option name=\"showVisibilityIcons\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"DatabaseDriversLRU\" value=\"mysql\" />\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"nodejs_package_manager_path\" value=\"npm\" />\n    <property name=\"ts.external.directory.path\" value=\"$PROJECT_DIR$/node_modules/typescript/lib\" />\n  </component>\n  <component name=\"RunManager\" selected=\"npm.Angular CLI Server\">\n    <configuration name=\"Angular Application\" type=\"JavascriptDebugType\" uri=\"http://localhost:4200\">\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"Angular CLI Server\" type=\"js.build_tools.npm\">\n      <package-json value=\"$PROJECT_DIR$/package.json\" />\n      <command value=\"run\" />\n      <scripts>\n        <script value=\"start\" />\n      </scripts>\n      <node-interpreter value=\"project\" />\n      <envs />\n      <method v=\"2\" />\n    </configuration>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"a935b846-48fc-4243-8bd8-7022252bfcd7\" name=\"Changes\" comment=\"\" />\n      <created>1649760450872</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1649760450872</updated>\n      <workItem from=\"1649760453484\" duration=\"302000\" />\n      <workItem from=\"1649761221003\" duration=\"4101000\" />\n      <workItem from=\"1651075116110\" duration=\"769000\" />\n      <workItem from=\"1651076256472\" duration=\"7622000\" />\n      <workItem from=\"1651399781756\" duration=\"7270000\" />\n      <workItem from=\"1651606468493\" duration=\"1809000\" />\n      <workItem from=\"1652733670289\" duration=\"318000\" />\n      <workItem from=\"1652886310106\" duration=\"4340000\" />\n      <workItem from=\"1652968139564\" duration=\"8865000\" />\n      <workItem from=\"1653033312128\" duration=\"15601000\" />\n      <workItem from=\"1653122591570\" duration=\"598000\" />\n      <workItem from=\"1653242398189\" duration=\"13950000\" />\n      <workItem from=\"1653298741622\" duration=\"9752000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"progress\">\n      <created>1650718001343</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1650718001343</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Login page fixes\">\n      <created>1650980998762</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1650980998762</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Frontend fixes\">\n      <created>1650987036190</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1650987036190</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"create dropdown button done\">\n      <created>1651065185931</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1651065185931</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"bug fixes\">\n      <created>1651065544136</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1651065544136</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"bug fixes\">\n      <created>1651065680349</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1651065680349</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"login page fixes\">\n      <created>1651079208613</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1651079208613</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"fixes\">\n      <created>1651353238137</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1651353238137</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"different authorization per role\">\n      <created>1651783748811</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1651783748813</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"login page fix\">\n      <created>1651784845422</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1651784845422</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"fixes\">\n      <created>1652721526580</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652721526580</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"JWT WORKS\">\n      <created>1652724630464</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652724630464</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"Frontend fixes\">\n      <created>1652733440483</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652733440483</updated>\n    </task>\n    <task id=\"LOCAL-00014\" summary=\"administration fixes\">\n      <created>1652981298879</created>\n      <option name=\"number\" value=\"00014\" />\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652981298879</updated>\n    </task>\n    <task id=\"LOCAL-00015\" summary=\"administration fixes\">\n      <created>1653055499156</created>\n      <option name=\"number\" value=\"00015\" />\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1653055499156</updated>\n    </task>\n    <task id=\"LOCAL-00016\" summary=\"docker\">\n      <created>1653247888072</created>\n      <option name=\"number\" value=\"00016\" />\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1653247888073</updated>\n    </task>\n    <task id=\"LOCAL-00017\" summary=\"fixes\">\n      <created>1653257957458</created>\n      <option name=\"number\" value=\"00017\" />\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1653257957458</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"18\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"progress\" />\n    <MESSAGE value=\"TDF done\" />\n    <MESSAGE value=\"Login page fixes\" />\n    <MESSAGE value=\"create dropdown button done\" />\n    <MESSAGE value=\"bug fixes\" />\n    <MESSAGE value=\"login page fixes\" />\n    <MESSAGE value=\"home component timer\" />\n    <MESSAGE value=\"different authorization per role\" />\n    <MESSAGE value=\"login page fix\" />\n    <MESSAGE value=\"JWT WORKS\" />\n    <MESSAGE value=\"Frontend fixes\" />\n    <MESSAGE value=\"administration fixes\" />\n    <MESSAGE value=\"docker\" />\n    <MESSAGE value=\"fixes\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"fixes\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -2,33 +2,9 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="a935b846-48fc-4243-8bd8-7022252bfcd7" name="Changes" comment="fixes">
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/0.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/0.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/1.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/1.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/10.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/10.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/11.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/11.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/12.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/12.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/13.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/13.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/14.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/14.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/15.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/15.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/2.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/2.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/3.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/3.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/5.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/5.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/6.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/6.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/7.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/7.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/8.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/8.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/9.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/9.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack.old" beforeDir="false" afterPath="$PROJECT_DIR$/.angular/cache/13.3.1/angular-webpack/46a7ac21488f024dfaf94791886331f2bea2174c/index.pack.old" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/dataSources/a169b5d8-5dee-4b24-9be2-fa4b2402edf0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a169b5d8-5dee-4b24-9be2-fa4b2402edf0.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/app/board-admin/board-admin.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/board-admin/board-admin.component.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/app/board-admin/board-admin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/board-admin/board-admin.component.ts" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/app/home/home.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.css" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/app/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/app/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/home/home.component.ts" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/app/score-board/score-board.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/score-board/score-board.component.html" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/app/score-board/score-board.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/score-board/score-board.component.ts" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
