@@ -1,0 +1,199 @@
+##version: '3'
+##
+##services:
+##  db:
+##    image: 'mysql/mysql-server:5.7'
+##    ports:
+##      - "3306:3306"
+##    environment:
+##      - MYSQL_ROOT_PASSWORD=Root123.
+##      - MYSQL_DATABASE=CRUD
+##      - MYSQL_USER=root
+##      - MYSQL_PASSWORD=Root123.
+##      - MYSQL_ROOT_HOST=%
+##    volumes:
+##      - ./my-datavolume:/var/lib/mysql
+##    healthcheck:
+##      test: ["CMD","mysqladmin","ping","-h","localhost"]
+##      timeout: 20s
+##      retries: 10
+##    restart: always
+##  backendserver:
+##    build: ./crud-backend/
+##    ports:
+##      - "8080"
+##    links:
+##      - "db"
+##    depends_on:
+##      - "db"
+##    restart: always
+##  frontend:
+##    build: ./CRUD/
+##    links:
+##      - "backendserver"
+##    depends_on:
+##      - "backendserver"
+##    ports:
+##      - "80:80"
+##
+#
+#
+#version: '3'
+#
+#services:
+#  db:
+#    image: 'mysql/mysql-server:5.7'
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=Root123.
+#      - MYSQL_DATABASE=CRUD
+#      - MYSQL_USER=root
+#      - MYSQL_PASSWORD=Root123.
+#      - MYSQL_ROOT_HOST=%
+#    volumes:
+#      - ./my-datavolume:/var/lib/mysql
+#    healthcheck:
+#      test: ["CMD","mysqladmin","ping","-h","localhost"]
+#      timeout: 20s
+#      retries: 10
+#    restart: always
+#  backendserver:
+#    build: ./crud-backend/
+#    ports:
+#      - "8080"
+#    links:
+#      - "db"
+#    depends_on:
+#      - "db"
+#    restart: always
+#  frontend:
+#    build: ./CRUD/
+#    links:
+#      - "backendserver"
+#    depends_on:
+#      - "backendserver"
+#    ports:
+#      - "80:80"
+#
+
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+version: '3.7'
+
+# Define services
+services:
+  # # App backend service
+  app-server:
+    
+    # Configuration for building the docker image for the backend service
+    build:
+      context: ./ProjektBackend # Use an image built from the specified dockerfile in the `ProjektBackend` directory.
+      dockerfile: Dockerfile
+    hostname: serverJavaSpring
+    restart: always
+    depends_on:
+      - db # This service depends on mysql. Start that first.
+    environment:
+      # Pass environment variables to the service
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/giesecke&devrient?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: Admin123.
+    networks:
+      # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
+      - frontend
+
+  # Frontend Service
+  app-client:
+    hostname: clientProjekt
+    build:
+      context: ./ProjektFrontend # Use an image built from the specified dockerfile in the `ProjektFrontend` directory.
+      dockerfile: Dockerfile
+      args:
+        API_BASE_URL: http://192.168.0.43:8081/api/
+    ports:
+      - "8081:80" # Map the exposed port 80 on the container to port 8081 on the host machine
+    restart: always
+    depends_on:
+      - app-server
+    networks:
+      - frontend
+      - backend
+
+  # Database Service (Mysql)
+  db:
+    image: mysql:8.0
+    container_name: db
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
+    restart: always
+    volumes:
+      - "sqlData:/var/lib/mysql"
+    ports:
+      - "3346:3306"
+    environment:
+      MYSQL_DATABASE: giesecke&devrient
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: Admin123.
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - backend
+
+# Networks to be created to facilitate communication between containers
+networks:
+  backend:
+  frontend:
+volumes:
+  sqlData:
+
+    #version: '3'
+    #
+    #services:
+    #  database:
+    #    image: mysql
+    #    container_name: database
+    #    environment:
+    #      MYSQL_ROOT_PASSWORD: root
+    #      MYSQL_DATABASE: Giesecke&Devrient
+    #      MYSQL_USER: root
+    #      MYSQL_PASSWORD: Root123.
+    #    ports:
+    #      - 3306:3306
+    #    volumes:
+    #      - dockerAngularSpringDatabaseData:/var/lib/mysql
+    #    networks:
+    #      - backendNetwork
+    #
+    #  spring-boot-ems:
+    #    image: openjdk:12
+    #    container_name: spring-boot-ems
+    #    ports:
+    #      - 8080:8080
+    #    depends_on:
+    #      - database
+    #    volumes:
+    #      - ./spring-boot-ems/target/backend-0.0.1-SNAPSHOT.jar
+    #    command: ["java", "-jar", "backend-0.0.1-SNAPSHOT.jar"]
+    #    networks:
+    #      - backendNetwork
+    #      - frontendNetwork
+    #
+    #  angular:
+    #    image: nginx:alpine
+    #    container_name: angular
+    #    ports:
+    #      - 4200:80
+    #    depends_on:
+    #      - spring-boot-ems
+    #    volumes:
+    #      - ./nginx.conf:/etc/nginx/nginx.conf
+    #      - ./angular/dist/angular/:/usr/share/nginx/html
+    #    networks:
+    #      - frontendNetwork
+    #
+    #volumes:
+    #  dockerAngularSpringDatabaseData:
+    #
+    #networks:
+    #  backendNetwork:
+    #  frontendNetwork:
